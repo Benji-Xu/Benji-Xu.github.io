@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/call-outside-station-wordpress-latest-articles by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>站外调用 WordPress 站点文章方法 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="最近在帮一个朋友的 WordPress 站点改版，遇到了一个问题：需要在 A 网站的首页或者侧边栏引用 B 网站的最新文章，AB 网站都是 WordPress程序构建。本来打算用第三方服务，比如 wumii 的文章调用，但是还是忍不住去折腾了一堆代码。下面请看解决过程： 方法一： 这个方法不局限与最新文章，它几乎可以调用所有类型的文章，如最热文章，随机文章、最新评论等等，不过唯一的缺点就是速度可能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="站外调用 WordPress 站点文章方法">
+<meta property="og:url" content="call-outside-station-wordpress-latest-articles.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="最近在帮一个朋友的 WordPress 站点改版，遇到了一个问题：需要在 A 网站的首页或者侧边栏引用 B 网站的最新文章，AB 网站都是 WordPress程序构建。本来打算用第三方服务，比如 wumii 的文章调用，但是还是忍不住去折腾了一堆代码。下面请看解决过程： 方法一： 这个方法不局限与最新文章，它几乎可以调用所有类型的文章，如最热文章，随机文章、最新评论等等，不过唯一的缺点就是速度可能">
+<meta property="og:locale">
+<meta property="article:published_time" content="2013-06-13T14:32:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="call-outside-station-wordpress-latest-articles.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            站外调用 WordPress 站点文章方法
+        </div>
+        <div class="post-meta">
+            2013-06-13 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">方法二：</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>最近在帮一个朋友的 WordPress 站点改版，遇到了一个问题：需要在 A 网站的首页或者侧边栏引用 B 网站的最新文章，AB 网站都是 WordPress程序构建。本来打算用第三方服务，比如 wumii 的文章调用，但是还是忍不住去折腾了一堆代码。下面请看解决过程：</p>
+<h2 id="方法一：">方法一：</h2>
+<p>这个方法不局限与最新文章，它几乎可以调用所有类型的文章，如最热文章，随机文章、最新评论等等，不过唯一的缺点就是速度可能慢点。</p>
+<p>首先在你要被外部调用文章的网站根目录下建立一个 php 文件，命名为 <code>blog_call.php</code>。</p>
+<pre><code class="language-php">&lt;?php
+//该文件放置在你要调取的博客的主目录
+define(‘WP_USE_THEMES’, false);
+require(‘./wp-load.php’);
+query_posts(‘showposts=10′);
+//这里是调用最新文章，如果是热门文章的话则改为get_most_viewed(“post”,10);当然这得是你的主题安装了热门文章插件，而且这里可以接受几乎wp-kit-cn所有代码。非常方便
+?&gt;
+&lt;?php while (have_posts()): the_post(); ?&gt;
+&lt;li&gt;&lt;a href=”&lt;?php the_permalink(); ?&gt;” target=”_blank”&gt;&lt;?php echo mb_strimwidth(strip_tags(apply_filters(‘the_title’, $post-&gt;post_title)), 0, 50,” “); ?&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;?php endwhile; ?&gt;
+</code></pre>
+<p>如果你要输出文章摘要，可以使用下面的代码：</p>
+<pre><code class="language-php">&lt;?php
+//该文件放置在博客的主目录
+define(‘WP_USE_THEMES’, false);
+require(‘./wp-load.php’);
+query_posts(‘showposts=30′);
+?&gt;
+&lt;?php while (have_posts()): the_post(); ?&gt;
+&lt;h2&gt;&lt;a href=”&lt;?php the_permalink(); ?&gt;”&gt;&lt;?php the_title(); ?&gt;&lt;/a&gt;&lt;/h2&gt;
+&lt;?php the_excerpt(); ?&gt;
+&lt;?php endwhile; ?&gt;
+</code></pre>
+<p>最后在你需要调用网站文章的那个站点上面，加上如下代码：</p>
+<pre><code class="language-php">&lt;?php
+//该代码放置在需要调用文章内容和列表的地方
+$url=http://你的博客地址/blog_call.php;
+echo file_get_contents( $url );
+?&gt;
+</code></pre>
+<h2 id="方法二：">方法二：</h2>
+<p>这个方法是最通俗的思路，用 WordPress 的 RSS 功能实现。把下面的代码黏贴到相应地方，然后用 CSS 美化一下就搞定~</p>
+<pre><code class="language-php">&lt;?php // Get RSS Feed(s)
+include_once(ABSPATH . WPINC . ‘/rss.php’);
+$rss = fetch_rss(‘https://imzl.com/feed’);//在这添加所要调用网站的 Feed 地址
+$maxitems = 10;
+$items = array_slice($rss-&gt;items, 0, $maxitems);
+?&gt;
+&lt;ul&gt;
+&lt;?php if (empty($items)) echo ‘&lt;li&gt;No items&lt;/li&gt;’;
+else
+foreach ( $items as $item ) : ?&gt;
+&lt;li&gt;
+&lt;a href=’&lt;?php echo $item['link']; ?&gt;’
+title=’&lt;?php echo $item['title']; ?&gt;’ target=”_blank”&gt;
+&lt;?php echo mb_strimwidth($item['title'] , 0, 80, ‘…’) ; ?&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/ul&gt;
+</code></pre>
+<p>记得自己加 css 样式.</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/call-outside-station-wordpress-latest-articles by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:18 GMT -->
+</html>
+
+
+
+
+
+

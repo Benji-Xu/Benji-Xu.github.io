@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/sae-binding-domain-subdirectory by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>新浪 SAE 云平台如何绑定域名到子目录 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="有时候，我们会想在单个SAE应该里绑定多个域名，每个域名对应一个子目录。比如说 blog.imzl.com 绑定到「&#x2F;blog」目录，code.imzl.com 绑定到「&#x2F;code」目录。本文将介绍在 SAE 上绑定域名到子目录的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新浪 SAE 云平台如何绑定域名到子目录">
+<meta property="og:url" content="sae-binding-domain-subdirectory.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="有时候，我们会想在单个SAE应该里绑定多个域名，每个域名对应一个子目录。比如说 blog.imzl.com 绑定到「&#x2F;blog」目录，code.imzl.com 绑定到「&#x2F;code」目录。本文将介绍在 SAE 上绑定域名到子目录的方法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-01-03T14:31:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.523Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="折腾">
+<meta property="article:tag" content="新浪 SAE">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="sae-binding-domain-subdirectory.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            新浪 SAE 云平台如何绑定域名到子目录
+        </div>
+        <div class="post-meta">
+            2014-01-03 ｜ 
+            
+                <a href="../categories/experimentation/index.html"># 折腾</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>很早以前周良介绍过新浪的 <a href="sina-free-web-space.html">Sina App Engine</a>（新浪SAE云平台）服务，可以用于建设免费的 WordPress 等程序网站，也可以部署自己开发的程序。我曾经也在博客发布过<a href="sae-timing-mail-tips.html">《基于新浪SAE平台的定时手机短信提示功能》</a> 和<a href="sina-sae-website-monitoring-system.html">《基于新浪 SAE 平台的网站监控报警系统》</a>这些小应用，但是新浪 SAE 有个限制，就是普通用户只能创建 10 个独立的应用，如果超过十个，就需要付费购买更高的账户权限了。</p>
+<p>所以，周良给大家带来一个小技巧，可以绑定域名到应用的子目录。打个比方：<a href="../index.html">imzl.com</a> 这个域名我绑定到了一个应用，绑定的是根目录；<a target="_blank" rel="noopener" href="http://blog.imzl.com/">blog.imzl.com</a> 这个域名我可以绑定到这个应用的 [/blog] 目录下面（域名和目录可以自定义）。这样大家就可以在一个应用里面创建多个独立的网站了。</p>
+<p>首先，需要把你的域名绑定到 SAE 应用。SAE 绑定域名的方法有两种：</p>
+<ol>
+<li>
+<p>如果你的域名已经在其他服务器备案过，则可以向 SAE 官方申请绑定 <a target="_blank" rel="noopener" href="http://sae.sina.com.cn/?m=devcenter&amp;catId=9">http://sae.sina.com.cn/?m=devcenter&amp;catId=9</a></p>
+</li>
+<li>
+<p>自助绑定。请打开你的应用，进入「应用设置」，在「独立域名设置」便可以看到操作面板。按照提示一步步操作即可。（关于域名的绑定，可以查看<a href="sina-app-engine-binding-domain.html">《新浪SAE开放独立域名绑定功能》</a>这篇文章）</p>
+</li>
+</ol>
+<p>绑定域名后，就需要写 Appconfig 了。Appconfig 保存在代码目录的 config.yaml 文件。绑定域名到子目录的写法如下：</p>
+<pre><code class="language-json">name: Sub-domain binding
+handle:
+- rewrite:if ( in_header[&quot;host&quot;] ~ &quot;blog.imzl.com&quot; &amp;&amp; path ~ &quot;^(?!blog/)(.*)&quot; ) goto &quot;blog/$1?%&#123;QUERY_STRING&#125;&quot;
+- rewrite:if ( in_header[&quot;host&quot;] ~ &quot;code.imzl.com&quot; &amp;&amp; path ~ &quot;^(?!code/)(.*)&quot; ) goto &quot;code/$1?%&#123;QUERY_STRING&#125;&quot;
+- rewrite:if ( in_header[&quot;host&quot;] ~ &quot;www.imzl.com&quot;&amp;&amp; !is_file() &amp;&amp;path ~ &quot;^(?!www/)(.*)&quot; ) goto &quot;www/$1?%&#123;QUERY_STRING&#125;&quot;
+
+</code></pre>
+<p>解释一下这段代码的意思：</p>
+<p><a target="_blank" rel="noopener" href="http://blog.imzl.com/">blog.imzl.com</a> 绑定到「/blog」目录<br>
+<a target="_blank" rel="noopener" href="http://ceode.imzl.com/">ceode.imzl.com</a> 绑定到「/code」目录<br>
+<a target="_blank" rel="noopener" href="../index.html">www.imzl.com</a> 绑定到「/www」目录</p>
+<p>关于怎么搞定子目录安装程序，可以查看 SAE 的官方文档（无非就是用SVN上传程序文件，把文件传到你需要设定的子目录就可以了）。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/experimentation/index.html"> / 折腾</a>
+            
+                <a href="../tag/sae/index.html"> / 新浪 SAE</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/sae-binding-domain-subdirectory by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:13 GMT -->
+</html>
+
+
+
+
+
+

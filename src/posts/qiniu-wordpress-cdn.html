@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/qiniu-wordpress-cdn by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>七牛云储存：最好的 WordPress 静态文件 CDN 加速方案 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="曾几何时，周良为大家介绍过又拍云存储，也分享过用《W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速》。而周良今天所介绍的这一款静态文件存储服务：七牛云存储，他是由七牛提供的在线存储服务，通过云端接口向企业客户提供网上无限存储空间，和传统的云存储服务（如 Amazon S3、又拍云存储）不同，七牛云存储还增加了上传下载传输加速以及富媒体云端处理特性。 七牛云存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="七牛云储存：最好的 WordPress 静态文件 CDN 加速方案">
+<meta property="og:url" content="qiniu-wordpress-cdn.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="曾几何时，周良为大家介绍过又拍云存储，也分享过用《W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速》。而周良今天所介绍的这一款静态文件存储服务：七牛云存储，他是由七牛提供的在线存储服务，通过云端接口向企业客户提供网上无限存储空间，和传统的云存储服务（如 Amazon S3、又拍云存储）不同，七牛云存储还增加了上传下载传输加速以及富媒体云端处理特性。 七牛云存">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu.jpg">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu1.jpg">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu2.jpg">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu3.jpg">
+<meta property="article:published_time" content="2013-07-06T13:19:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta property="article:tag" content="CDN">
+<meta property="article:tag" content="七牛云存储">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="qiniu-wordpress-cdn.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            七牛云储存：最好的 WordPress 静态文件 CDN 加速方案
+        </div>
+        <div class="post-meta">
+            2013-07-06 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E7%89%9B%E4%BA%91%E5%AD%98%E5%82%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">七牛云存储的主要特点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0-WordPress-%E5%8D%9A%E5%AE%A2%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6-CDN-%E5%8A%A0%E9%80%9F"><span class="toc-number">2.</span> <span class="toc-text">非插件实现 WordPress 博客静态文件 CDN 加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%88%91%E7%88%B1%E6%B0%B4%E7%85%AE%E9%B1%BC%E7%9A%84%E6%8F%92%E4%BB%B6%E4%B8%BA-WordPress-%E5%8D%9A%E5%AE%A2%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6-CDN-%E5%8A%A0%E9%80%9F"><span class="toc-number">3.</span> <span class="toc-text">使用我爱水煮鱼的插件为 WordPress 博客静态文件 CDN 加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A9WordPress%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81%E4%B8%83%E7%89%9B%E4%BA%91%E5%AD%98%E5%82%A8CDN"><span class="toc-number">4.</span> <span class="toc-text">让WordPress插件支持七牛云存储CDN</span></a></li></ol>
+                </div>
+            </div>
+
+            <p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu.jpg" alt="七牛云储存：最好的 WordPress 静态文件 CDN 加速方案"></p>
+<p>曾几何时，周良为大家介绍过又拍云存储，也分享过用<a href="w3tc-upyun-wordpress-cnd.html">《W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速》</a>。而周良今天所介绍的这一款静态文件存储服务：七牛云存储，他是由七牛提供的在线存储服务，通过云端接口向企业客户提供网上无限存储空间，和传统的云存储服务（如 Amazon S3、又拍云存储）不同，七牛云存储还增加了上传下载传输加速以及富媒体云端处理特性。</p>
+<p>七牛云存储支持绑定独立域名（需要备案域名，没有备案的朋友可以用七牛提供的二级域名，照样可以使用七牛的服务哦），全网 CDN 加速（多数据中心+多加速节点，上传下载均加速）、持续在线，可以无限扩展、用户只需按需付费，无硬件投资，并且大家通过周良博客的注册链接申请使用七牛云存储服务，<strong>即可永久获得免费额度，存储空间 10 GB，每月下载流量 10 GB，每月 PUT/DELETE 10 万次请求，每月 GET 100 万次请求。超过这个用量之后才需要付费，而且价格很便宜</strong>，对于小型站点来说，一年也用不了几块钱。</p>
+<h2 id="七牛云存储的主要特点：">七牛云存储的主要特点：</h2>
+<ol>
+<li>
+<p>云存储：可以存储静态文件，包含：图片，音视频，甚至是 CSS，JS，还可以存储其他文件和非结构化数据。</p>
+</li>
+<li>
+<p>云处理：这是个人认为七牛最强地方，就是支持图片、音频、视频等资源在线压缩和转换处理，并且可以通过回调功能自定义数据处理。</p>
+</li>
+<li>
+<p>云加速：七牛支持上传/下载双向加速，并且单文件上传无大小限制，支持断点续传。分布各地的加速节点，自动选择离用户最近的节点，保证数据上传下载的速度。</p>
+</li>
+<li>
+<p>API 操作：七牛云存储提供了一系列 API 和 SDK 和示例教程教你接入使用。</p>
+</li>
+<li>
+<p>缩略图：七牛支持设置不同大小规格的图片，而且是可以自定义尺寸的，根据用户的显示分辨率不同使用不同的图片，达到下载速度和显示体验的最佳搭配，而七牛的缩略图定义非常方便，只需要在七牛的后台 Web 界面进行进行定义即可。</p>
+</li>
+<li>
+<p>支持域名绑定：只要你的域名已经通过备案，就可以使用子域名绑定你的存储空间，通过二级域名访问你的静态资源（详细过程我会在文章后面介绍）。</p>
+</li>
+<li>
+<p>CDN 镜像存储：七牛云存储相比 Amazon S3、又拍云存储等服务，他还支持传统 CDN 的镜像存储，有了这个功能，就无需将原来的图片上传到七牛的服务器上，只需要在你的网站上面进行一些处理，就可以搞定静态网站的静态文件加速！（其原理就是当云存储中不存在请求的文件时，云存储会到你指定的域名下寻找，并存储到云存储中。这样可以显著降低网站迁移成本，也免去了开发各程序相应插件的繁琐。只要你的资源文件使用独立域名，就可以非常简单地把资源文件迁移到七牛。）</p>
+</li>
+</ol>
+<h2 id="非插件实现-WordPress-博客静态文件-CDN-加速">非插件实现 WordPress 博客静态文件 CDN 加速</h2>
+<ol>
+<li>如果你不喜欢用插件，那么你可以使用本方法对 WordPress 进行七牛 CDN 静态服务加速。</li>
+<li>进入七牛云存储的管理后台：<a target="_blank" rel="noopener" href="https://portal.qiniu.com/">https://portal.qiniu.com/</a>，设置绑定域名，如下图：</li>
+</ol>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu1.jpg" alt="七牛云储存：最好的 WordPress 静态文件 CDN 加速方案"></p>
+<ol start="3">
+<li>
+<p>如果你的域名已经备案，那么就可以设置二级域名作为访问静态存储文件的地址。在七牛工作人员审核后即可启用。（使用方法：在DNS解析中，将设置的二级域名 CNAME 到你现在绑定的那个 <a target="_blank" rel="noopener" href="http://xxx.qiniudn.com/">xxx.qiniudn.com</a> 二级域名就可以了。）</p>
+</li>
+<li>
+<p>搞定域名后，我们就要对 WordPress 站点进行设置，开启七牛的加速服务。通过访问：<code>https://imzl.com/wp-admin/options.php</code> 这个地址，登入域名要换成你自己的， Ctrl+F 找到 <code>upload_url_path</code> 这个选项，将其改为七牛的域名或者是你自己绑定的二级域名，我绑定的是 <code>http://aipsme.qiniudn.com</code> 。（注意，一定要有<code>http://</code>，域名最后不能有<code>/</code>）。详细设置如下图：</p>
+</li>
+</ol>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu2.jpg" alt="七牛云储存：最好的 WordPress 静态文件 CDN 加速方案"></p>
+<h2 id="使用我爱水煮鱼的插件为-WordPress-博客静态文件-CDN-加速">使用我爱水煮鱼的插件为 WordPress 博客静态文件 CDN 加速</h2>
+<p>WordPress 知名博客，我爱水煮鱼特地为七牛云存储开发了一款简单而实用的插件，如果你觉得周良上面的非插件方法太麻烦了，那么你可以试试这款插件哦。</p>
+<ol>
+<li>同样的，我们需要到七牛后台绑定域名，如果你已经绑定了域名，那么直接进入第二步。</li>
+<li>下载<a target="_blank" rel="noopener" href="http://ikbear.qiniudn.com/wpjam-qiniutek.zip">七牛镜像存储 WordPress 插件</a>上传激活，然后在 WordPress 后台 &gt; 设置 &gt; 七牛镜像存储 输入你前面绑定的域名（<strong>注意输入的域名一定要加上 <code>http://</code></strong>），还可以设置是否将主题中的 JS，CSS 和背景图片也缓存到七牛：</li>
+</ol>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/qiniu3.jpg" alt="七牛云储存：最好的 WordPress 静态文件 CDN 加速方案"></p>
+<h2 id="让WordPress插件支持七牛云存储CDN">让WordPress插件支持七牛云存储CDN</h2>
+<p>做完本文上诉介绍的方法之后，你的 WordPress 站点就已经完成了大部分的CDN提速，但是你或许会发现有些插件加载 js 和 css 文件时并没应用七牛的 CND 静态文件，那么我们应该怎么办那？</p>
+<p>其实我们只需要在 <code>wp-congif.php</code> 里增加两个参数就可以搞定。打开 wp-config.php,增加下面的内容：</p>
+<pre><code class="language-php">define(“WP_CONTENT_URL”, “https://imzl.com/wp-content“);
+define(“COOKIE_DOMAIN”, “cdn.imzl.com”);
+</code></pre>
+<p>我的目的是把 wp-content 目录里的内容都通过 <a target="_blank" rel="noopener" href="http://cdn.imzl.com/">cdn.imzl.com</a> 这个域名来加载，同理你也可以把这个域名换成你设置的七牛静态文件域名。</p>
+<p>另外我通过 COOKIE_DOMAIN 常量来限制 cookie 的作用域，因此当浏览器加载 CDN里的内容时，request header里不会带有主域的 cookie，节约了传输带宽，达到提高加载速度的目的。（当然，如果你用了七牛，那么这一点完全不用担心，七牛的静态文件都是速度很快了，也不会有cookie）。</p>
+<p>如果你感觉这个方法不是很方便，或者说是你的 WordPress 用了 WP Super Cache 插件，那么你可以试试水煮鱼的 <a target="_blank" rel="noopener" href="http://blog.wpjam.com/m/wp-super-cache-4-qiniu-cdn/">WP Super Cache + 七牛镜像存储</a>实现站点CDN加速。</p>
+<p>OK，关于七牛云存储实现 WordPress 加速，周良的这篇文章应该已经包含了很多方法了，应该对你有点帮助。目前注册七牛即可<strong>永久获得免费额度</strong>，存储空间10GB，每月下载流量10GB，每月PUT/DELETE 10万次请求，每月GET 100万次请求。超过这个用量之后才需要付费，而且价格很便宜，对于小型站点来说，一年也用不了几块钱。超过了这个使用额度你再考虑是否付费也可以。既然如此，那你为什么不让你的 WordPress 提速一下那？</p>
+<p><strong>申请七牛云存储服务：</strong> <a href="go/qiniu/index.html">https://imzl.com/go/qiniu/</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+                <a href="../tag/cdn/index.html"> / CDN</a>
+            
+                <a href="../tag/qiniu/index.html"> / 七牛云存储</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/qiniu-wordpress-cdn by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:16 GMT -->
+</html>
+
+
+
+
+
+

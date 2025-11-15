@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-advertis-delayed-loading by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>让 WordPress 中的广告代码延迟加载 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="通过简单的修改 WordPress 主题，即可达到延迟广告代码加载的效果，有助于快速打开网站，对WordPress进行提速！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让 WordPress 中的广告代码延迟加载">
+<meta property="og:url" content="wordpress-advertis-delayed-loading.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="通过简单的修改 WordPress 主题，即可达到延迟广告代码加载的效果，有助于快速打开网站，对WordPress进行提速！">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-07-20T14:27:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-advertis-delayed-loading.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            让 WordPress 中的广告代码延迟加载
+        </div>
+        <div class="post-meta">
+            2012-07-20 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%B3%95%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">具体方法如下：</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>众多使用 WordPress 搭建的博客都会添加 Google、百度等网盟提供的广告，但是不知道大家注意到没有 WordPress 在引用站外的东西的时候，如果站外服务器响应过慢，会导致很长一段时间打不开网页，为了避免这个问题，我们可以让广告代码在 WordPress 中延迟加载，达到对 WordPress 提速的功能，目前这段代码根据周良的测试，可以对百度、Google、网易等知名广告联盟起到延迟加载的作用。</p>
+<h2 id="具体方法如下：">具体方法如下：</h2>
+<p>1、进入WordPress后台，选择外观下面的编辑选项，找到这么一条语句 <code>&lt;?php the_content(); ?&gt;</code> ，或许是相关的函数。然后在这条语句前面加入：</p>
+<pre><code class="language-html">&lt;div id=&quot;myad&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>2、打开你的 <code>footer.php</code> 文件，在 <code>&lt;/body&gt;</code> 之前加入如下代码：</p>
+<pre><code class="language-php">&lt;?php if (is_single()) : ?&gt;
+&lt;div id=”span_myads”&gt;
+	
+&lt;!– AD code –&gt;
+//这里插入你的广告代码
+&lt;!– AD coed end–&gt;
+	
+&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+document.getElementById(&quot;myad&quot;).innerHTML = document.getElementById(&quot;span_myads&quot;).innerHTML;
+document.getElementById(&quot;span_myads&quot;).innerHTML = “”;
+&lt;/script&gt;
+&lt;?php endif; ?&gt;
+&lt;/div&gt;
+</code></pre>
+<p>3、打开你的 <code>style.css</code> 文件，加入下面的 CSS 代码：</p>
+<pre><code class="language-css">#myad&#123;float:left;margin:20px 10px 10px 40px;&#125;
+</code></pre>
+<p>说一下代码的原理：一般来说网页元素加载是有顺序的，在广告的位置加一个空的div，然后在网页加载的最后的时候在去调用 google 的广告 JS，产生广告，同时替换掉之前那个 div 的内容。当然了，如果你直接使用周良所提供的代码，那么你会发现这是在文章页面加载广告（因为周良博客的广告都是出现在文章页面），并且 CSS 样式我是自己的。</p>
+<p>你需要按照你自己情况，修改一下代码，至于放到侧边栏或者首页的广告延迟加载方法我这里也就不多说什么了，方法都差不多，有了上面的代码，大家只需要稍微修改几个函数即可。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-advertis-delayed-loading by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:28 GMT -->
+</html>
+
+
+
+
+
+

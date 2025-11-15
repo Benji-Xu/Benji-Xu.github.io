@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-thumbnai-external-url by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>让 WordPress 缩略图机制支持 URL 外链图片 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress 的缩略图机制大家可能用的很多，但是默认的机制不能引用外链URL的图片哦，本机即为大家解决了这个问题，让 WordPress 缩略图机制支持外链 URL 图片。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让 WordPress 缩略图机制支持 URL 外链图片">
+<meta property="og:url" content="wordpress-thumbnai-external-url.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress 的缩略图机制大家可能用的很多，但是默认的机制不能引用外链URL的图片哦，本机即为大家解决了这个问题，让 WordPress 缩略图机制支持外链 URL 图片。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png">
+<meta property="article:published_time" content="2013-07-19T07:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.522Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-thumbnai-external-url.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            让 WordPress 缩略图机制支持 URL 外链图片
+        </div>
+        <div class="post-meta">
+            2013-07-19 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png" alt="让 WordPress 缩略图机制支持 URL 外链图片"></p>
+<p>最近为一位朋友定制一款图片主题，为其使用了<a href="qiniu-wordpress-cdn.html">七牛云存储</a>服务，但是想让缩略图支持 URL 外链引用图片，虽然说七牛有 api可以直接调用不同大小的图片，但是对于个人博客来说，或许是大材小用。这里周良为大家提供一个最简单的方法，不调用 API，而是所有的外链图片 Wordpress 都可以支持的方法，即使你不使用七牛也可以使用。</p>
+<p><strong>下面是本方法的特点：</strong></p>
+<ul>
+<li>支持手动上传缩略图</li>
+<li>支持缩略图外链引用</li>
+<li>如果文章内包含有图片，就用第一张图片做为缩略图</li>
+<li>如果文章内没有图片，则用默认的图片</li>
+</ul>
+<p>其实就是用 WordPress 提供的自定义栏目功能来解决。</p>
+<pre><code class="language-php">$postImageUrl = get_post_meta($post-&gt;ID, ‘thumbnail’, true); //设置自定义栏目名为“thumbnail”
+</code></pre>
+<ol>
+<li>在 <code>functions.php</code> 文件中添加下面代码：</li>
+</ol>
+<pre><code class="language-php">//缩略图获取
+add_theme_support( ‘post-thumbnails’ );
+set_post_thumbnail_size( 262, 114 ,true );//设置缩略图的尺寸
+function dm_the_thumbnail() &#123;
+global $post;
+$postImageUrl = get_post_meta($post-&gt;ID, ‘thumbnail’, true); //设置自定义栏目名为“thumbnail”
+// 判断该文章是否设置有缩略图，如果有则直接显示
+if ( has_post_thumbnail() ) &#123;
+echo ‘&lt;span class=”work-thumbnail”&gt;’;
+the_post_thumbnail();
+echo ‘&lt;/span&gt;’;
+&#125; elseif ($postImageUrl) &#123;
+echo ‘&lt;span class=”work-thumbnail”&gt;&lt;img alt=”” src=”‘.$postImageUrl.’” /&gt;&lt;/span&gt;’;
+&#125; else &#123; //如果文章没有设置缩略图，则查找文章内是否包含图片
+$content = $post-&gt;post_content;
+preg_match_all(‘/&lt;img.?(?: |\t|\r|\n)?src=[\’”]?(.+?)[\’”]?(?:(?: |\t|\r|\n)+.?)?&gt;/sim’, $content, $strResult, PREG_PATTERN_ORDER);
+$n = count($strResult[1]);
+if($n &gt; 0)&#123; // 如果文章内包含有图片，就用第一张图片做为缩略图
+echo ‘&lt;span class=”work-thumbnail”&gt;&lt;img alt=”” src=”‘.$strResult[1][0].’” /&gt;&lt;/span&gt;’;
+&#125;else &#123; // 如果文章内没有图片，则用默认的图片
+echo ‘&lt;span class=”work-thumbnail”&gt;&lt;img alt=”” src=”‘.get_bloginfo(‘template_url’).’/images/thumbnail.jpg” /&gt;&lt;/span&gt;’;
+&#125;
+&#125;
+&#125;
+</code></pre>
+<ol start="2">
+<li>
+<p>折腾完这些步骤以后，需要后台界面右上角点击显示选项，勾选自定义栏目。</p>
+</li>
+<li>
+<p>获取 <a target="_blank" rel="noopener" href="http://code.google.com/p/timthumb/">timthumb.php</a> 文件，放在主题根目录下，然后调整样式之类的，关于代码中的结构和类名可以修改为适合自己所使用的主题。</p>
+</li>
+</ol>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-thumbnai-external-url by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:15 GMT -->
+</html>
+
+
+
+
+
+

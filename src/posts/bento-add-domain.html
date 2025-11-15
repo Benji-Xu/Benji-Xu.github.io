@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/bento-add-domain by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>使用 Cloudflare Workers 为 Bento.me 设置自定义域名 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="Bento.me 是一个零代码创建个人主页的平台，以优雅美观的界面和使用简单而闻名。 但它唯一的缺点是：不支持自定义域名 但别担心，本文将用最简单、零成本的方式，帮助你为 Bento.me 绑定自定义域名。 1. 提前准备  你需要有一个 Bento.me 个人页面 注册&#x2F;准备一个 Cloudflare 账号 拥有独立域名，并将其转移至 Cloudflare 管理 DNS  2. 创建 cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Cloudflare Workers 为 Bento.me 设置自定义域名">
+<meta property="og:url" content="bento-add-domain.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="Bento.me 是一个零代码创建个人主页的平台，以优雅美观的界面和使用简单而闻名。 但它唯一的缺点是：不支持自定义域名 但别担心，本文将用最简单、零成本的方式，帮助你为 Bento.me 绑定自定义域名。 1. 提前准备  你需要有一个 Bento.me 个人页面 注册&#x2F;准备一个 Cloudflare 账号 拥有独立域名，并将其转移至 Cloudflare 管理 DNS  2. 创建 cloud">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2024/05/bento-add-domain.png">
+<meta property="article:published_time" content="2024-05-14T21:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.528Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="Cloudflare">
+<meta property="article:tag" content="Bento">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2024/05/bento-add-domain.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="bento-add-domain.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            使用 Cloudflare Workers 为 Bento.me 设置自定义域名
+        </div>
+        <div class="post-meta">
+            2024-05-15 ｜ 
+            
+                <a href="../categories/experimentation/index.html"># 折腾</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%90%E5%89%8D%E5%87%86%E5%A4%87"><span class="toc-text">1. 提前准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA-cloudflare-Worker-%E9%A1%B9%E7%9B%AE"><span class="toc-text">2. 创建 cloudflare Worker 项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">3. 设置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA-Worker"><span class="toc-text">4. 创建 Worker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%9C%A8-Cloudflare-%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">5. 在 Cloudflare 配置自定义域名</span></a></li></ol>
+                </div>
+            </div>
+
+            <p><a target="_blank" rel="noopener" href="http://bento.me/">Bento.me</a> 是一个零代码创建个人主页的平台，以优雅美观的界面和使用简单而闻名。</p>
+<p>但它唯一的缺点是：<strong>不支持自定义域名</strong></p>
+<p>但别担心，本文将用最简单、零成本的方式，帮助你为 <a target="_blank" rel="noopener" href="http://bento.me/">Bento.me</a> 绑定自定义域名。</p>
+<h2 id="1-提前准备">1. 提前准备</h2>
+<ol>
+<li>你需要有一个 <a target="_blank" rel="noopener" href="http://bento.me/">Bento.me</a> 个人页面</li>
+<li>注册/准备一个 Cloudflare 账号</li>
+<li>拥有独立域名，并将其转移至 Cloudflare 管理 DNS</li>
+</ol>
+<h2 id="2-创建-cloudflare-Worker-项目">2. 创建 cloudflare Worker 项目</h2>
+<p>在终端中输入以下命令，创建一个基础的 Cloudflare Worker：</p>
+<p><code>npm create cloudflare@latest</code></p>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2024/05/bento-add-domain.png" alt="终端操作"></p>
+<p>然后按照终端内说明进行操作：</p>
+<ul>
+<li>
+<p>In which directory do you want to create your application? 你现在哪个目录创建应用</p>
+<ul>
+<li><strong>默认或者自定义都可</strong></li>
+</ul>
+</li>
+<li>
+<p>What type of application do you want to create? 你想创建什么类型的应用？</p>
+<ul>
+<li><strong>选择 “Hello World” Worker 即可</strong></li>
+</ul>
+</li>
+<li>
+<p>Do you want to use TypeScript? 你想使用 TypeScript 吗？</p>
+<ul>
+<li><strong>选择 NO（用键盘→选择）</strong></li>
+</ul>
+</li>
+<li>
+<p>Do you want to use git for version control? 你想使用 Git 进行版本控制吗？</p>
+<ul>
+<li><strong>选择 Yes</strong></li>
+</ul>
+</li>
+<li>
+<p>Do you want to deploy your application? 你想部署应用么？</p>
+<ul>
+<li><strong>选择 Yes（如果你第一次使用，会自动打开网页要求登录）</strong></li>
+</ul>
+</li>
+</ul>
+<p>完成后对应目录会出现一个文件夹，使用 Visual Studio Code 等代码编辑工具打开这个文件夹。</p>
+<h2 id="3-设置环境变量">3. 设置环境变量</h2>
+<ol>
+<li>编辑 <code>wrangler.toml</code> 文件，在末尾添加下列内容：</li>
+</ol>
+<pre><code class="language-ini">[vars]
+BENTO_USERNAME = &quot;len&quot; # 替换为你的 Bento 页面 ID，我的是 bento.me/len
+BASE_URL = &quot;https://bento.imzl.com&quot; # 替换为你的自定义域名
+</code></pre>
+<ol start="2">
+<li>在文件夹根目录创建 <code>.dev.vars</code> 文件，黏贴下列内容：</li>
+</ol>
+<pre><code class="language-ini">BENTO_USERNAME=&quot;len&quot; # 替换为你的 Bento 页面 ID
+BASE_URL=&quot;http://127.0.0.1:8787&quot;
+</code></pre>
+<h2 id="4-创建-Worker">4. 创建 Worker</h2>
+<ol>
+<li>编辑 <code>/src/index.js</code> 文件，替换为下列内容：</li>
+</ol>
+<pre><code class="language-js">/*
+ * 为 Bento.me 设置自定义域名
+ * 作者：len
+ * 详情：https://imzl.com/bento-add-domain.html
+ * 源代码来源：https://jayfranco.hashnode.dev/
+ */
+
+// 事件监听
+addEventListener('fetch', event =&gt; &#123;
+  // 发生 fetch 事件时，用 handleRequest 函数结果做出响应
+  event.respondWith(handleRequest(event.request));
+&#125;);
+
+// 根据内容类型解析响应
+async function parseResponseByContentType(response, contentType) &#123;
+  // 如果没有内容类型，响应以文本形式返回
+  if (!contentType) return await response.text();
+
+  // 根据内容类型不同，采取不同的操作
+  switch (true) &#123;
+    case contentType.includes('application/json'):
+      // 如果是 JSON，以 JSON 字符串形式返回
+      return JSON.stringify(await response.json());
+    case contentType.includes('text/html'):
+      // 如果是 HTML，则使用 HTMLRewriter 对 response 进行转换
+      const transformedResponse = new HTMLRewriter()
+        .on('body', &#123;
+          element(element) &#123;
+            // 自定义 CSS 和 JS 可添加到 HTML 页面中
+            element.append(
+              `
+                &lt;style&gt;
+                  // 在这里输入你需要的自定义 CSS
+                &lt;/style&gt;
+                `,
+              &#123; html: true &#125;,
+            );
+            element.append(
+              `
+                &lt;script&gt;
+                  // 在这里输入你需要的自定义 JS
+                &lt;/script&gt;
+                `,
+              &#123; html: true &#125;,
+            );
+          &#125;,
+        &#125;)
+        .transform(response);
+      // 转换后的 response 以文本形式返回
+      return await transformedResponse.text();
+
+    case contentType.includes('font'):
+      // 如果内容类型是字体，响应将以 ArrayBuffer 形式返回
+      return await response.arrayBuffer();
+
+    case contentType.includes('image'):
+      // 如果内容类型是图片，响应将以 ArrayBuffer 形式返回
+      return await response.arrayBuffer()
+
+    default:
+      // 如果内容类型是其他类型，响应将以文本形式返回
+      return await response.text();
+  &#125;
+&#125;
+
+// 处理所有请求的函数
+async function handleRequest(request) &#123;
+  // 从请求 URL 中提取路径
+  const path = new URL(request.url).pathname;
+  // 默认情况下，URL 设置为 &quot;https://bento.me&quot; + 路径
+  let url = 'https://bento.me' + path;
+
+  // 如果路径包含'v1'，URL 将更改为 'https://api.bento.me' + 路径
+  if (path.includes('v1')) &#123;
+    url = 'https://api.bento.me' + path;
+  &#125;
+
+  // 如果 URL 为 &quot;https://bento.me/&quot;，URL 将更改为 https://bento.me/' 后加上 BENTO User ID
+  if (url === 'https://bento.me/') &#123;
+    url = 'https://bento.me/' + BENTO_USERNAME;
+  &#125;
+
+  // 为 fetch 请求定义基本的 headers
+  let headers = &#123;
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+  &#125;;
+
+  // 使用定义的 headers 获取 URL
+  const response = await fetch(url, &#123; headers &#125;);
+
+  // 从响应 headers 中提取内容类型
+  const contentType = response.headers.get('content-type');
+
+  // 根据内容类型解析响应
+  let results = await parseResponseByContentType(response, contentType);
+
+  // 如果结果不是 ArrayBuffer
+  // 将所有对 bento API 的调用替换为我们的 BASE_URL
+  // 这是解决 CORS 错误的临时方案
+  if (!(results instanceof ArrayBuffer)) &#123;
+    results = results.replaceAll('https://api.bento.me', BASE_URL);
+  &#125;
+
+  // 将内容类型添加到 headers
+  headers['content-type'] = contentType;
+
+  // 返回带有结果和 headers 的新响应
+  return new Response(results, &#123; headers &#125;);
+&#125;
+</code></pre>
+<ol start="2">
+<li>通过终端进入文件夹，运行代码查看页面：</li>
+</ol>
+<pre><code class="language-yaml">npm run dev
+</code></pre>
+<ol start="3">
+<li>查看无误后，部署到正式环境</li>
+</ol>
+<pre><code class="language-yaml">npm run deploy
+</code></pre>
+<h2 id="5-在-Cloudflare-配置自定义域名">5. 在 Cloudflare 配置自定义域名</h2>
+<ol>
+<li>先确保你需要绑定的域名 DNS 已经设置为 Cloudflare；</li>
+<li>进入「Workers 和 Pages」找到刚才 Push 的 Worker 项目；</li>
+<li>在「设置 - 触发器」中添加自定义域名并等待生效即可；</li>
+<li>现在，你可以访问 <a target="_blank" rel="noopener" href="https://bento.imzl.com/">bento.imzl.com</a> 查看我们的 Bento 页面了。</li>
+</ol>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/Cloudflare/index.html"> / Cloudflare</a>
+            
+                <a href="../tag/Bento/index.html"> / Bento</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/bento-add-domain by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:06 GMT -->
+</html>
+
+
+
+
+
+

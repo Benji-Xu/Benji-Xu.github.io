@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-plug-net-disk by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 网盘插件 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="所以今天给大家推荐一款插件，WordPress 网盘插件安装插件后，可以在编辑文章的时候，直接在 WordPress 后台上传文件，获得直链地址。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 网盘插件">
+<meta property="og:url" content="wordpress-plug-net-disk.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="所以今天给大家推荐一款插件，WordPress 网盘插件安装插件后，可以在编辑文章的时候，直接在 WordPress 后台上传文件，获得直链地址。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/2858/image/ce38707c98238f4a43a8161ce0116bb3.jpg">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/2858/image/9c0e5565641e0a80d92ebbd316caaf53.jpg">
+<meta property="article:published_time" content="2012-01-17T03:37:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/qiniu/2858/image/ce38707c98238f4a43a8161ce0116bb3.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-plug-net-disk.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 网盘插件
+        </div>
+        <div class="post-meta">
+            2012-01-17 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%83%E6%98%93%E7%BD%91%E7%9B%98%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">千易网盘介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">插件信息</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>最近更多的频率有点快，不过写的文章都是与 WordPress 无关的，所以今天给大家推荐一款插件，WordPress 网盘插件。此插件我是在八路那边看到的，嘿嘿，这算是版权说明吧！分享这个网盘插件主要是因为最近周良经常在 115 网盘和华为网盘下载东西，发现上传文件一定要跳转到网盘页面或者在本地使用客户端上传，不能在外链文章编辑后台直接上传，并且 115 网盘下载经常会是无法下载。</p>
+<p>说了这么多大家应该已经明白了，今天介绍的这款插件可以直接在 WordPress 文章编辑后台上传文件，并且管理。</p>
+<p>这次介绍的 WordPress 网盘插件是由千易网盘提供：</p>
+<h2 id="千易网盘介绍"><a target="_blank" rel="noopener" href="http://1000eb.com/">千易网盘</a>介绍</h2>
+<p>千易网盘，原 3721UP 网盘。1 EB=1024*1024 TB，「千易」以无限空间和极致简单的态度解决千亿网站及网民的文件分享需求。<br>
+支持您网站的用户在上传插件中登录千易网站，并可直接选择其已上传的历史文件作为帖子的附件，而无需重新上传。<br>
+通过您调用的上传接口上传的每一个文件将自动作上您的网站推广链接，为您的网站带去更多访问量。（升级前注册的站长如需启用此功能，<a target="_blank" rel="noopener" href="http://xn--1000eb-oz2li34mjo2b.net/">请登录1000eb.net</a>，点击「管理已验证域名」，设置推广网址。）<br>
+支持站长列表查看通过上传接口上传的所有文件及文件传播信息。</p>
+<h2 id="插件信息">插件信息</h2>
+<p>可以在可视化编辑器和纯代码模式下快速上传文件并将文件信息直接放回到编辑器中，可以在发布文章的时候直接在发布页面上传文件至千易网盘，并获得下载链接，以及保存链接。</p>
+<p><img src="../cdn.imzl.com/qiniu/2858/image/ce38707c98238f4a43a8161ce0116bb3.jpg" alt="WordPress 网盘插件"></p>
+<p><img src="../cdn.imzl.com/qiniu/2858/image/9c0e5565641e0a80d92ebbd316caaf53.jpg" alt="WordPress 网盘插件"></p>
+<p>好了，网盘插件介绍结束，本次教程图片来自：<a target="_blank" rel="noopener" href="http://8lu.org/">八路杂音</a></p>
+<p><strong>友情提示：虽然这款插件很不错，使用也很简单，并且是免费的。但希望大家上传网盘的时候在本地做好文件的备份，毕竟是免费的东西，谁也不能保证是永久使用的</strong></p>
+<p>WordPress 网盘插件下载：<a target="_blank" rel="noopener" href="http://wordpress.org/extend/plugins/1000eb" title="http://wordpress.org/extend/plugins/1000eb">http://wordpress.org/extend/plugins/1000eb</a></p>
+<p></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-plug-net-disk by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:40 GMT -->
+</html>
+
+
+
+
+
+

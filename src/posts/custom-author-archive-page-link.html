@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/custom-author-archive-page-link by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 技巧：自定义作者归档页面链接 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress 本身并没有提供修改作者归档链接的设置，但是我们可以通过编程来修改作者链接地址。通过几行简单的代码，就可以完全自定义 WordPress 作者链接页面的地址了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 技巧：自定义作者归档页面链接">
+<meta property="og:url" content="custom-author-archive-page-link.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress 本身并没有提供修改作者归档链接的设置，但是我们可以通过编程来修改作者链接地址。通过几行简单的代码，就可以完全自定义 WordPress 作者链接页面的地址了。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2013-02-13T09:21:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="custom-author-archive-page-link.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 技巧：自定义作者归档页面链接
+        </div>
+        <div class="post-meta">
+            2013-02-13 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>WordPress 默认的作者归档链接格式是 <code>https://imzl.com/author/%authorname%</code> 或 <code>https://imzl.com/?author=%user_id%</code> ，实际上对于一般的 WordPress 博客来说已经足够了。但是对于一些使用 WordPress 创建的 web2.0 站点的话，可能就存在一些问题了，这个链接地址看起来太变扭了。这是在修改我运营的设计教程网站时候遇到的问题。网站开通了用户注册功能，注册的用户可以自行发布文章，但是用户多了以后，这个用户作者归档页面的链接就必须修改一下了，不能用 WordPress 默认的格式了。</p>
+<p>但是 WordPress 本身并没有提供修改作者归档链接的设置，我们可以通过修改主题 <code>functions.php</code> 文件来达到我们的目的。通过几行简单的代码，就可以完全<a href="custom-author-archive-page-link.html">自定义 WordPress 作者链接页面</a>的地址了。</p>
+<pre><code class="language-php">add_action('init', 'set_new_author_base');
+function set_new_author_base()&#123;
+global $wp_rewrite;
+$wp_rewrite-&gt;author_base = 'aipsme';
+&#125;
+</code></pre>
+<p>把上面这段代码添加到主题的 <code>functions.php</code> 文件里，再到后台的固定链接设置页面更新一下（不用做任何修改），你就可以使用 <code>https://imzl.com/aipsme/%authorname%</code> 这样的链接来访问作者归档页面了。如果你感觉地址里面的aipsme不怎么适合你，你可以修改代码中的aipsme，改成你需要的。比如改成 u，那么你的地址就是 <code>httpa://imzl.com/u/%authorname%</code> 了。</p>
+<p>当然，修改以后不要忘记通过 <code>.htaccess</code> 对相应的 URL 进行 301 跳转。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/custom-author-archive-page-link by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:21 GMT -->
+</html>
+
+
+
+
+
+

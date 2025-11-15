@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/w3tc-upyun-wordpress-cnd by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress 提速一直是大家头痛的问题，现如今我们可以使用又拍云存储与 W3 Total Cache 插件搭建WP全站 CND 加速，并且方法还非常的简单！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速">
+<meta property="og:url" content="w3tc-upyun-wordpress-cnd.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress 提速一直是大家头痛的问题，现如今我们可以使用又拍云存储与 W3 Total Cache 插件搭建WP全站 CND 加速，并且方法还非常的简单！">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/3624/image/6d55833e1660dc803446e6e0b1c6ce68.jpg">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/3624/image/25d4edc2380096eac3873011cb20553b.jpg">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/3624/image/8e155d057e3773ddbf3ab5d230869b86.jpg">
+<meta property="article:published_time" content="2012-04-24T23:30:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta property="article:tag" content="又拍云">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/qiniu/3624/image/6d55833e1660dc803446e6e0b1c6ce68.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="w3tc-upyun-wordpress-cnd.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速
+        </div>
+        <div class="post-meta">
+            2012-04-25 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>上一篇文章介绍了国内首家类似于 Amazon 的 S3 服务<a href="upyun-evaluation-coupon.html">又拍云</a>，文章我介绍了使用 Hacklog Remote Attachment 插件来讲图片远程上传到又拍云，也说了，周良博客是把 JS/CSS/背景图片等静态资源存储到又拍云的（方法很简单，把主题文件的CSS、JS、背景图上传到又拍云，然后修改主题 header.php 文件中的 CSS 和 JS 路径即可）。今天周良给大家分享一个整个 WordPress 站点的静态文件推送至又拍云存储。主要使用到了 WordPress 经典缓存插件 W3 Total Cache 搭配又拍云实现 WordPress 全站 CDN 加速。</p>
+<p>具体方法：</p>
+<ol>
+<li>
+<p>安装好 <a target="_blank" rel="noopener" href="https://wordpress.org/extend/plugins/w3-total-cache/">W3 Total Cache 插件</a>，并在后台启用。</p>
+</li>
+<li>
+<p>在 W3 Total Cache的General Setting 中启用 CDN，并将类型选择为 Self-hosted。</p>
+</li>
+</ol>
+<p><img src="../cdn.imzl.com/qiniu/3624/image/6d55833e1660dc803446e6e0b1c6ce68.jpg" alt="W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速"></p>
+<ol start="3">
+<li>在插件的CDN选项中，按照我的截图所示勾选。其他的选项可以根据自己的实际情况选择。</li>
+</ol>
+<p><img src="../cdn.imzl.com/qiniu/3624/image/25d4edc2380096eac3873011cb20553b.jpg" alt="W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速"></p>
+<ol start="4">
+<li>在配置中，填入又拍后台中设定的FTP用户名、密码等信息，<a target="_blank" rel="noopener" href="http://xn--ftpv0-mq1hs9ewx2e9yg6t1b6s6a.ftp.upyun.com/">FTP主机推荐使用v0.ftp.upyun.com</a>。FTP路径建议根据自己域名下的实际路径填写；如果网站中的子站为二级域名，最好每个单独创建又拍存储空间。主机名中，可根据自己的情况填写，如果在又拍上绑定过独立域名（需要备案），那么就填写独立域名；记得填写完毕后点击Add CNAME。</li>
+</ol>
+<p><img src="../cdn.imzl.com/qiniu/3624/image/8e155d057e3773ddbf3ab5d230869b86.jpg" alt="W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速"></p>
+<ol start="5">
+<li>这些都设置好了之后，最后一步就是将当前空间中的附件、JS、CSS、背景图片以及 wp-includes 等静态文件都用 FTP 上传至又拍空间即可。</li>
+</ol>
+<p>说一下这样做的好处：</p>
+<ul>
+<li>可以将WordPress整站的静态文件都推送到又拍云的CDN服务中，提升网站整体访问速度；</li>
+<li>在后台上传的附件，会正常存储在当前WordPress所在的服务器和又拍云存储空间，访客浏览时会自动请求又拍云（会显示又拍云的资源），数据双保险并且操作简单；</li>
+<li>在WordPress后台修改主题模板等，会被同步到又拍云；</li>
+<li>如果以后需要更换CDN加速服务，更新期间网站访问基本不会受到影响。</li>
+</ul>
+<p>如果您对又拍云存储感兴趣，可以到这里<a href="upyun-evaluation-coupon.html">获取优惠码</a>，续费/购买95折。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+                <a href="../tag/upyun/index.html"> / 又拍云</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/w3tc-upyun-wordpress-cnd by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:35 GMT -->
+</html>
+
+
+
+
+
+

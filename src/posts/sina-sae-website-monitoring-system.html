@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/sina-sae-website-monitoring-system by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>基于新浪 SAE 平台的网站监控报警系统 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="这是一款基于新浪SAE平台开发的网站监控报警系统，支持邮件与短信提示，并且提供免费源码下载与详细的设置教程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于新浪 SAE 平台的网站监控报警系统">
+<meta property="og:url" content="sina-sae-website-monitoring-system.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="这是一款基于新浪SAE平台开发的网站监控报警系统，支持邮件与短信提示，并且提供免费源码下载与详细的设置教程。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-07-17T10:18:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="折腾">
+<meta property="article:tag" content="短信提醒">
+<meta property="article:tag" content="新浪 SAE">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="sina-sae-website-monitoring-system.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            基于新浪 SAE 平台的网站监控报警系统
+        </div>
+        <div class="post-meta">
+            2012-07-17 ｜ 
+            
+                <a href="../categories/experimentation/index.html"># 折腾</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>前期为大家介绍过一款<a href="sae-timing-mail-tips.html">《基于新浪SAE平台的定时手机短信提示功能》</a>，非常的实用，但对互联网从业人员来说价值不是非常高。今天周良再次为大家介绍一款同样是基于新浪 SAE 平台的网站监控报警系统。对于网站监控大家一定不是很陌生，国内的监控宝和DNSpod的嗝机检测应该是大家用的最多的吧。这个应用的原理很简单，就是每间隔一段时间，抓取监控网站上的内容并进行分析，一旦抓取出现错误，则判定为网站出现错误。</p>
+<p>如果错误次数超过设定值，该应用就调用短信和邮件发送 API，向指定的手机和电子邮箱发送报警信息。待网站恢复正常后，系统依旧会向用户发送信息，告诉用户「你的网站已经恢复正常了」。这款应用是周良前期为大家介绍的短信提示功能的升级版本，特别适合小型网站站长和独立博客博主使用。</p>
+<p>说明一下使用的具体方法：<br>
+1、打开<code>config.php</code>文件，填写监控的URL、最大尝试次数及短信、邮件的一些配置信息，具体代码如下：</p>
+<pre><code class="language-php">//受监控的url
+define('MONITOR_URL',' https://imzl.com/ ');
+define('TRY_TIMES',1); //失败尝试次数
+define('MAX_TRY_TIMES',1); //最多信息发送次数
+
+//EMAIL告警服务
+define('EMAIL_ENABLED',FALSE); //是否启用
+define('EMAIL_DEST','邮箱'); //告警邮件发送目标地址
+define('SMTP_SERVER','SMTP服务器地址');
+define('SMTP_USERNAME','发送邮箱的用户名');
+define('SMTP_PASSWORD','密码');
+
+//短信告警服务
+define('SMS_ENABLED',TRUE); //是否启用
+define('SMS_APID','天翼应用工场的APID'); //apid号码
+define('SMS_PRODUCTID',' 产品号码 '); //产品号码
+define('SMS_APKEY',' 产品密钥 '); //产品密钥
+define('SMS_DEST',' 告警短信发送目标地址 '); //告警短信发送目标地址
+</code></pre>
+<p>2、打开 <code>config.yaml</code>，配置你的应用的名称和版本，其余不用改动，代码如下：</p>
+<pre><code class="language-php">name: 改为你的应用名称
+version: 你的应用的版本号
+cron:
+    - description: 网站监控
+	  url: monitor/index.php
+	  schedule: every 15 mins
+	  timezone: Beijing
+</code></pre>
+<p>需要注意的是，需要把该版本设置为应用的默认代码版本，Cron才可以自动执行。</p>
+<p>3、这款系统使用了 SAE 的 Counter 服务作为抓取计数器，所以请在 SAE 后台启用「<strong>计数器服务</strong>」，并新建四个名称分别为 <code>SuccessNum、FailNum、ErrorNum、SendNum</code> 的计数器，当前计数都设为 0。</p>
+<p>4、这款系统的具体代码周良已经上传到了115网盘，大家可以去下载，然后上传到新浪SAE。<a target="_blank" rel="noopener" href="http://115.com/file/anzzp7xp#SAEwebMonitor.rar">这里下载</a></p>
+<p>这款基于新浪  SAE平台的网站监控报警系统，非常实用并且支持短信与邮件双重提醒。由于 SAE 服务的在线率极高，国内顶级机房和线路，这样才能保证监控的准确性，而不至于出现由于监控系统本身在线率不高，而导致得出的数据不准确。同样的，大家也可以在这个系统的基础上进行深入，可以为网站增加敏感字检测功能、不良信息等功能，都是非常实用的。</p>
+<p>短信发送一般不会出现什么问题，但需要天翼手机的 APID，如果没有可以参考我以前写的<a href="sae-timing-mail-tips.html">《基于新浪SAE平台的手机短信提示功能》</a>自行修改一下代码，邮件方面可能会出现一下小问题，因为 SAE 邮件发送 API 的原因。</p>
+<p>另外的话，新浪 SAE 属于免费使用，就算你把云豆都用完了，你也可以通过周良下面的链接再注册一个帐号，送云豆的哦！</p>
+<p>新浪 SAE 邀请注册链接：<a href="imzl.com/go/sae/index.html">https:/imzl.com/go/sae/</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/experimentation/index.html"> / 折腾</a>
+            
+                <a href="../tag/sms-reminder/index.html"> / 短信提醒</a>
+            
+                <a href="../tag/sae/index.html"> / 新浪 SAE</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/sina-sae-website-monitoring-system by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:28 GMT -->
+</html>
+
+
+
+
+
+

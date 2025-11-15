@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-image-independent-domain-name by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>为 WordPress 图片等静态文件开启独立 Cookie-free 域名 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress 的图片存储会产生 Cookie，不利于提速，我们可以为图片等静态文件开启Cookie-free域名，加快WordPress站点的访问速度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为 WordPress 图片等静态文件开启独立 Cookie-free 域名">
+<meta property="og:url" content="wordpress-image-independent-domain-name.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress 的图片存储会产生 Cookie，不利于提速，我们可以为图片等静态文件开启Cookie-free域名，加快WordPress站点的访问速度。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2012/07/duliyumimg.jpg">
+<meta property="article:published_time" content="2012-07-15T04:24:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2012/07/duliyumimg.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-image-independent-domain-name.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            为 WordPress 图片等静态文件开启独立 Cookie-free 域名
+        </div>
+        <div class="post-meta">
+            2012-07-15 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>WordPress图片地址默认是 <code>https://imzl.com/wp-content/uploads/2012/07/1.png</code> 这样的格式，但是使用这样的地址，对 WordPress 提速是很不利的。周良建议大家将 WordPress 站点中的图片或者JS、CSS存储到 Cookie-free 域名下（使用 Cookie-free 域名不会产生cookie），如果没有Cookie-free 域名，可以用博客的子域名，不过需要设置一下不传递 cookie，具体的设置方法在文章下面周良写有说名。Cookie-free 域名可以到一些域名服务商那边购买，使用 Cookie-free 域名一定会比子域名效果更好，因为 Cookie-free 域名不会产生 cookie，而子域名会产生。</p>
+<p>1、图片用单独的域名储存很简单，懒人可以在 WordPress 后台的「媒体」设置上传目录，然后在空间控制面板里绑定域名即可（把域名绑定到 <code>/wp-content/uploads</code> 目录）。之后后台上传图片，前台展示的图片都是你自己的域名了。</p>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2012/07/duliyumimg.jpg" alt="WordPress 后台绑定独立域名设置"></p>
+<p>2、CSS 和 JS 启用单独的域名，这个不需要什么设置，就是有点麻烦，需要把 WordPress 主题的 image 文件夹和所有 JS、CSS 文件上传到独立域名所绑定的空间，然后修改一下 CSS 里面的路径即可，</p>
+<p>3、如果你没有其他的域名，可以在空间绑定一个二级域名，然后在 <code>wp-config.php</code> 里写入：</p>
+<p><code>define('COOKIE_DOMAIN', 'cdn.imzl.com');</code></p>
+<p>这一行，就能让你的 WordPress 的 cookie 不传递给二级域名，记得把上面代码改成你的博客主域名，这个就可以定义 cookie 只传递给主域名，而子域名不传递 cookie。</p>
+<p>4、上面的方法都最普通的加速方法，不过你可以使用<a href="upyun-evaluation-coupon.html">又拍云文件存储</a>，又拍云同样支持独立域名绑定（需要备案），对比未备案用户，也会提供免费的 Cookie-free 域名，并且又拍云存储本身带有文件加速功能，如果你感觉这样的速度还不够快，可以使用&lt;a <a href="w3tc-upyun-wordpress-cnd.html">W3 Total Cache 插件与又拍云搭建 WordPress 全站 CDN 加速</a>，把所有的 WordPress 文件全部缓存到又拍云，网站速度提升绝对不是一个档次！</p>
+<p></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-image-independent-domain-name by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:29 GMT -->
+</html>
+
+
+
+
+
+

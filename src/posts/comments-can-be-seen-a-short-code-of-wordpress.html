@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/comments-can-be-seen-a-short-code-of-wordpress by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>为 WordPress 站点添加评论后可见短代码 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="在论坛中最常见的就是评论后可见的这种功能，那么在WordPress是否也可以实现这种评论后可见的功能那？对，本篇文章就是叫你如何实现为WordPress添加评论后可见短代码的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为 WordPress 站点添加评论后可见短代码">
+<meta property="og:url" content="comments-can-be-seen-a-short-code-of-wordpress.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="在论坛中最常见的就是评论后可见的这种功能，那么在WordPress是否也可以实现这种评论后可见的功能那？对，本篇文章就是叫你如何实现为WordPress添加评论后可见短代码的。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-10-15T09:24:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.519Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="shortcode">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="comments-can-be-seen-a-short-code-of-wordpress.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            为 WordPress 站点添加评论后可见短代码
+        </div>
+        <div class="post-meta">
+            2011-10-15 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E5%B0%86%E4%B8%8B%E9%9D%A2%E7%BB%99%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%8C%E5%8A%A0%E5%88%B0%E4%BD%A0%E7%9A%84%E4%B8%BB%E9%A2%98%E7%9A%84-functions-php-%E4%B8%AD"><span class="toc-number">1.</span> <span class="toc-text">首先将下面给的代码，加到你的主题的 functions.php 中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E5%B0%B1%E6%98%AF%E7%9F%AD%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86%E4%BA%86%EF%BC%8C%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E6%8F%92%E5%85%A5%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">然后就是短代码部分了，在文章中插入：</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>经常去论坛朋友可能都会遇到一些帖子，一定要恢复后才可以看到里面的部分内容吧。个人感觉这个功能不错，既可以增加文章的评论数，也可以防治文章被恶意采集。</p>
+<p>如今这个实用的功能在 WordPress 也里可以实现，至于代码我是直接从老杨博客复制过来的，关于这个代码我看到了3个版本吧，选了一个相对较少的，呵呵。如果你的博客经常分享下载链接又不希望看文章的人直接去下载了而不对文章发表评论，那么请回复此文……</p>
+<h3 id="首先将下面给的代码，加到你的主题的-functions-php-中">首先将下面给的代码，加到你的主题的 functions.php 中</h3>
+<pre><code class="language-php">&lt; ?php
+/**
+* 短代码之评论可见
+* @xiaowu 周良博客(https://imzl.com)
+*/
+function reply_to_read($atts, $content = null) &#123;
+    extract(shortcode_atts(array(&quot;notice&quot; = &gt;'&lt;p class=&quot;reply-to-read&quot;&gt;温馨提示: 此处内容需要&lt;a href=&quot;#respond&quot; title=&quot;评论本文&quot;&gt;评论本文&lt;/a&gt;后才能查看.&lt;/p&gt;'), $atts));
+    $email = null;
+    $user_ID = (int) wp_get_current_user() - &gt;ID;
+    if ($user_ID &gt; 0) &#123;
+        $email = get_userdata($user_ID) - &gt;user_email;
+        //对博主直接显示内容
+        $admin_email = &quot;xxx@aaa.com&quot;; //博主Email
+        if ($email == $admin_email) &#123;
+            return $content;
+        &#125;
+    &#125; else if (isset($_COOKIE['comment_author_email_'.COOKIEHASH])) &#123;
+        $email = str_replace('%40', '@', $_COOKIE['comment_author_email_'.COOKIEHASH]);
+    &#125; else &#123;
+        return $notice;
+    &#125;
+    if (empty($email)) &#123;
+        return $notice;
+    &#125;
+    global $wpdb;
+    $post_id = get_the_ID();
+    $query = &quot;SELECT `comment_ID` FROM &#123;$wpdb-&gt;comments&#125; WHERE `comment_post_ID`=&#123;$post_id&#125; and `comment_approved`='1' and `comment_author_email`='&#123;$email&#125;' LIMIT 1&quot;;
+    if ($wpdb - &gt;get_results($query)) &#123;
+        return do_shortcode($content);
+    &#125; else &#123;
+        return $notice;
+    &#125;
+&#125;
+
+add_shortcode('reply', 'reply_to_read'); ? &gt;
+</code></pre>
+<h3 id="然后就是短代码部分了，在文章中插入：">然后就是短代码部分了，在文章中插入：</h3>
+<p><code>[reply]评论可见的内容[/reply]</code></p>
+<p>提醒内容也可以自定义，代码如下：</p>
+<p><code>[reply notice=&quot;自定义提醒回复内容&quot;]回复后可见的内容[/reply]</code><br>
+PS：我附上的代码，博主不需要评论也可以看到的哦~</p>
+<p>OK，论后可见短代码就完成了，还不去试试？</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/shortcode/index.html"> / shortcode</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/comments-can-be-seen-a-short-code-of-wordpress by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:50 GMT -->
+</html>
+
+
+
+
+
+

@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/qiniu-wordpress-ajax-fail-solve by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>启用七牛云存储/又拍云后 WordPress Ajax 评论失效解决方法 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="部分 WordPress 博客使用七牛云和又拍云的 CND 存储服务后，博客就无法提交评论了。其实是因为 WordPress Ajax 评论失效而已，本文即为你解决这个问题，让你既可以使用 CND，又可以使用 Ajax 提交评论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="启用七牛云存储&#x2F;又拍云后 WordPress Ajax 评论失效解决方法">
+<meta property="og:url" content="qiniu-wordpress-ajax-fail-solve.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="部分 WordPress 博客使用七牛云和又拍云的 CND 存储服务后，博客就无法提交评论了。其实是因为 WordPress Ajax 评论失效而已，本文即为你解决这个问题，让你既可以使用 CND，又可以使用 Ajax 提交评论">
+<meta property="og:locale">
+<meta property="article:published_time" content="2013-07-29T02:04:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="七牛云存储">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="qiniu-wordpress-ajax-fail-solve.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            启用七牛云存储/又拍云后 WordPress Ajax 评论失效解决方法
+        </div>
+        <div class="post-meta">
+            2013-07-29 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>前面为大家介绍了<a href="qiniu-wordpress-cdn.html">《七牛云存储为 WordPress 站点进行CDN加速的几种方法》</a>，有很多朋友都给周良发了私信询问七牛的一些使用注意事项。其中一位朋友聊到了用<a href="../tag/qiniu/index.html">七牛</a>、<a href="../tag/upyun/index.html">又拍云</a>以后，博客的评论就不正常了，只能启用<a href="add-third-party-review-system-for-the-wordpress.html">第三方的 WordPress 评论系统</a>。关于这个问题，周良觉得可能是由于某些 WordPress 站点使用的是 Ajax 评论效果，而 comments-ajax.js 文件被缓存在七牛服务器上，从而导致 ajax 评论无法成功实现。</p>
+<p>实际上解决办法也很简单：<br>
+在 <code>comments-ajax.js</code> 文件中找到下面这一段代码：</p>
+<pre><code class="language-php">var i = 0,
+    got = -1,
+    len = document.getElementsByTagName('script').length;
+
+while (i &lt;= len &amp;&amp; got == -1) &#123;
+    var js_url = document.getElementsByTagName('script')[i].src;
+    got = js_url.indexOf('comments-ajax.js');
+    i++;
+&#125;
+</code></pre>
+<p>在这一段代码后面添加一句：<br>
+<code>js_url = js_url.replace('aipsme.qiniudn.com','imzl.com');</code></p>
+<p>其中，<code>aipsme.qiniudn.com</code> 改为你的七牛提供的二级域名或绑定的 CDN 域名，<code>imzl.com</code>  改成你的 WordPress 站点域名。又拍云也是一样的处理逻辑。</p>
+<p>做完这些步骤以后，刷新七牛或者其他的 CDN 服务缓存，你的 WordPress 博客就可以正常使用 Ajax 评论了~</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/qiniu/index.html"> / 七牛云存储</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/qiniu-wordpress-ajax-fail-solve by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:15 GMT -->
+</html>
+
+
+
+
+
+

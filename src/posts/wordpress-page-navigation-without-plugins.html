@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-page-navigation-without-plugins by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>非插件实现 WordPress 分页导航 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="很多 WordPress 主题都没有分页导航，都需要使用插件，这样会很不方便，周良分享一下一个非常简单方法实现 WordPress 分页导航。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非插件实现 WordPress 分页导航">
+<meta property="og:url" content="wordpress-page-navigation-without-plugins.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="很多 WordPress 主题都没有分页导航，都需要使用插件，这样会很不方便，周良分享一下一个非常简单方法实现 WordPress 分页导航。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-08-23T03:32:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.519Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-page-navigation-without-plugins.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            非插件实现 WordPress 分页导航
+        </div>
+        <div class="post-meta">
+            2011-08-23 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B7%BB%E5%8A%A0%E5%8A%9F%E8%83%BD%E4%BB%A3%E7%A0%81%E8%87%B3-functions-php%EF%BC%88%E7%9A%84php%E5%BE%AA%E7%8E%AF%E5%86%85%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">一、添加功能代码至 functions.php（的php循环内）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B7%BB%E5%8A%A0%E7%BE%8E%E5%8C%96%E4%BB%A3%E7%A0%81%E8%87%B3%E4%B8%BB%E9%A2%98-style-css"><span class="toc-number">2.</span> <span class="toc-text">二、添加美化代码至主题 style.css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B7%BB%E5%8A%A0%E8%B0%83%E7%94%A8%E4%BB%A3%E7%A0%81%E8%87%B3%E4%B8%BB%E9%A2%98-index-php%E3%80%81archive-php%E3%80%81category-php%E3%80%81search-php"><span class="toc-number">3.</span> <span class="toc-text">三、添加调用代码至主题 index.php、archive.php、category.php、search.php</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>前一短时间折腾 <a href="thetime-theme.html">The time主题</a> 记把分页导航给加上去了…所以导致使用这款主题会导致网站不能翻页，只能显示第一页的几篇文章。部分朋友选择使用插件来解决这个问题，周良今天找了一个教程，…来自木木的教程，很早很早就有的教程。</p>
+<h2 id="一、添加功能代码至-functions-php（的php循环内）">一、添加功能代码至 functions.php（的php循环内）</h2>
+<pre><code class="language-php">function par_pagenavi($range = 9) &#123;
+    global $paged,
+    $wp_query;
+    if (!$max_page) &#123;
+        $max_page = $wp_query - &gt;max_num_pages;
+    &#125;
+    if ($max_page &gt; 1) &#123;
+        if (!$paged) &#123;
+            $paged = 1;
+        &#125;
+        if ($paged != 1) &#123;
+            echo &quot;&lt;a href='&quot;.get_pagenum_link(1).&quot;' class='extend' title='跳转到首页'&gt; 返回首页 &lt;/a&gt;&quot;;
+        &#125;
+        previous_posts_link(' 上一页 ');
+        if ($max_page &gt; $range) &#123;
+            if ($paged &lt; $range) &#123;
+                for ($i = 1; $i &lt;= ($range + 1); $i++) &#123;
+                    echo &quot;&lt;a href='&quot;.get_pagenum_link($i).&quot;'&quot;;
+                    if ($i == $paged) echo &quot; class='current'&quot;;
+                    echo &quot;&gt;$i&lt;/a&gt;&quot;;
+                &#125;
+            &#125;
+            elseif($paged &gt;= ($max_page - ceil(($range / 2)))) &#123;
+                for ($i = $max_page - $range; $i &lt;= $max_page; $i++) &#123;
+                    echo &quot;&lt;a href='&quot;.get_pagenum_link($i).&quot;'&quot;;
+                    if ($i == $paged) echo &quot; class='current'&quot;;
+                    echo &quot;&gt;$i&lt;/a&gt;&quot;;
+                &#125;
+            &#125;
+            elseif($paged &gt;= $range &amp;&amp; $paged &lt; ($max_page - ceil(($range / 2)))) &#123;
+                for ($i = ($paged - ceil($range / 2)); $i &lt;= ($paged + ceil(($range / 2))); $i++) &#123;
+                    echo &quot;&lt;a href='&quot;.get_pagenum_link($i).&quot;'&quot;;
+                    if ($i == $paged) echo &quot; class='current'&quot;;
+                    echo &quot;&gt;$i&lt;/a&gt;&quot;;
+                &#125;
+            &#125;
+        &#125; else &#123;
+            for ($i = 1; $i &lt;= $max_page; $i++) &#123;
+                echo &quot;&lt;a href='&quot;.get_pagenum_link($i).&quot;'&quot;;
+                if ($i == $paged) echo &quot; class='current'&quot;;
+                echo &quot;&gt;$i&lt;/a&gt;&quot;;
+            &#125;
+        &#125;
+        next_posts_link(' 下一页 ');
+        if ($paged != $max_page) &#123;
+            echo &quot;&lt;a href='&quot;.get_pagenum_link($max_page).&quot;' class='extend' title='跳转到最后一页'&gt; 最后一页 &lt;/a&gt;&quot;;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="二、添加美化代码至主题-style-css">二、添加美化代码至主题 style.css</h2>
+<pre><code class="language-css">.page_navi&#123;width:100%;height:36px;line-height:36px;text-align:center;overflow:hidden;padding-top:1em;&#125;
+.page_navi a&#123;padding:3px 8px;margin:2px;text-decoration:none;color:#888;border:1px solid #ccf;&#125;
+.page_navi a:hover,.page_navi a.current&#123;border:1px solid #356aa0;color:#356aa0;font-weight:bolder;&#125;
+</code></pre>
+<h2 id="三、添加调用代码至主题-index-php、archive-php、category-php、search-php">三、添加调用代码至主题 index.php、archive.php、category.php、search.php</h2>
+<pre><code class="language-php">&lt;div&gt;&lt;?php par_pagenavi(9); ?&gt;&lt;/div&gt;
+</code></pre>
+<p>注：文章转载自 <a target="_blank" rel="noopener" href="http://immmmm.com/wordpress-page-navigation-without-plugins.html">木木木木木</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-page-navigation-without-plugins by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:15 GMT -->
+</html>
+
+
+
+
+
+

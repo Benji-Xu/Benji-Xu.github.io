@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/let-the-wordpress-specific-content-only-visible-to-the-administrator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>让 WordPress 的特定内容只对管理员可见 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="如果你希望在 WordPress 中显示一些内容仅对管理员可见，可以通过添加一个简单的短代码来实现。在你的主题的 functions.php 文件中添加以下代码： add_shortcode( &#39;member&#39;, &#39;member_check_shortcode&#39; ); function member_check_shortcode( $atts, $content &#x3D; null ) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让 WordPress 的特定内容只对管理员可见">
+<meta property="og:url" content="let-the-wordpress-specific-content-only-visible-to-the-administrator.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="如果你希望在 WordPress 中显示一些内容仅对管理员可见，可以通过添加一个简单的短代码来实现。在你的主题的 functions.php 文件中添加以下代码： add_shortcode( &#39;member&#39;, &#39;member_check_shortcode&#39; ); function member_check_shortcode( $atts, $content &#x3D; null ) &amp;#123;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2015-10-13T09:52:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.527Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="shortcode">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="let-the-wordpress-specific-content-only-visible-to-the-administrator.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            让 WordPress 的特定内容只对管理员可见
+        </div>
+        <div class="post-meta">
+            2015-10-13 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>如果你希望在 WordPress 中显示一些内容仅对管理员可见，可以通过添加一个简单的短代码来实现。在你的主题的 <code>functions.php</code> 文件中添加以下代码：</p>
+<pre><code class="language-php">add_shortcode( 'member', 'member_check_shortcode' );
+function member_check_shortcode( $atts, $content = null ) &#123;
+if ( is_user_logged_in() &amp;&amp; !is_null( $content ) &amp;&amp; !is_feed() )
+return $content;
+return '';
+&#125;
+</code></pre>
+<p>接下来，在撰写文章时，你可以使用如下的短代码格式来包裹需要只对管理员可见的内容：</p>
+<pre><code class="language-html">[member]你需要只对管理员可见的内容[/member]
+</code></pre>
+<p>这样，只有登录的管理员才能看到用 <code>[member]</code> 短代码包裹的内容，而其他访问者将看不到这些内容。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/shortcode/index.html"> / shortcode</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/let-the-wordpress-specific-content-only-visible-to-the-administrator by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:48 GMT -->
+</html>
+
+
+
+
+
+

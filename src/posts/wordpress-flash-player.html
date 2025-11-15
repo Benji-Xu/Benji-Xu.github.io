@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-flash-player by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 添加 Flash 播放器短代码 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="使用 WordPress 搭建个人博客，有的时候想在文章中插入一下音乐怎么办那？使用外部的JS播放器又怕它们不安全，不用怕，我们自己给 WordPress 主题添加一个 flash，怎么办那，我们可以给 WordPress 添加短代码来实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 添加 Flash 播放器短代码">
+<meta property="og:url" content="wordpress-flash-player.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="使用 WordPress 搭建个人博客，有的时候想在文章中插入一下音乐怎么办那？使用外部的JS播放器又怕它们不安全，不用怕，我们自己给 WordPress 主题添加一个 flash，怎么办那，我们可以给 WordPress 添加短代码来实现。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-08-03T13:33:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.518Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress">
+<meta property="article:tag" content="shortcode">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-flash-player.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 添加 Flash 播放器短代码
+        </div>
+        <div class="post-meta">
+            2011-08-03 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>这几天在折腾 <a target="_blank" rel="noopener" href="http://time.imzl.com/">The time 主题</a>，往里面集成了一个播放 flash 的短代码。Flash 在这里的网站中可能很少用到，基本都是土豆、优酷的视频。但有很多朋友都不会将 flash 转换为视频文件，所以没办法插入到文章（额，WordPress 的编辑器支持这样的功能, 但是不够简便）。周良在这里分享一下如何在 WordPress 文章中插入 flash：</p>
+<p>方法类似我前几天写的 <a href="wordpress-mp3.html" title="WordPress 集成 mp3 播放器">WordPress 集成 mp3 播放器</a>类似，在主题的 <code>functions.php</code> 里添加如下代码:</p>
+<pre><code class="language-php">function swf_player($atts, $content = null) &#123;
+extract(shortcode_atts(array(“width”=&gt;’480’,”height”=&gt;’360’),$atts));
+return ‘&lt;embed type=”application/x-shockwave-flash” width=”‘.$width.’” height=”‘.$height.’” src=”‘.$content.’”&gt;&lt;/embed&gt;’;
+&#125;
+add_shortcode(‘swf’,’swf_player’);
+</code></pre>
+<p>调用方法：</p>
+<pre><code class="language-php">[swf]Flash 文件地址[/swf]
+</code></pre>
+<p>在文章内输入上方的段代码，即可添加一个 Flash 播放器，该 WordPress 短代码附带两个参数, 分别是 width 和 height , 分别代表宽和高, 默认为宽 480 高 360. 如果要自定义插入的 Flash 大小可修改代码为</p>
+<pre><code class="language-php">[swf width=&quot;400&quot; height=&quot;300&quot;]Flash 文件地址[/swf]
+</code></pre>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress/index.html"> / WordPress</a>
+            
+                <a href="../tag/shortcode/index.html"> / shortcode</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-flash-player by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:19 GMT -->
+</html>
+
+
+
+
+
+

@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-multi-site-blog by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>如何使用 WordPress 搭建多站点博客 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="在以前我们可以通过 WordPress MU 来搭建多站点博客，但是后来 WP 与 WP MU 合并了，这篇文章主要讲解使用 WordPress 搭建多博客站点的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用 WordPress 搭建多站点博客">
+<meta property="og:url" content="wordpress-multi-site-blog.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="在以前我们可以通过 WordPress MU 来搭建多站点博客，但是后来 WP 与 WP MU 合并了，这篇文章主要讲解使用 WordPress 搭建多博客站点的方法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-05-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-multi-site-blog.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            如何使用 WordPress 搭建多站点博客
+        </div>
+        <div class="post-meta">
+            2012-05-30 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%AE%BE%E7%BD%AE%E8%BF%87%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">具体操作与设置过程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">需要注意的地方：</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>《WordPress搭建多站点博客》这个题目看起来或许很难理解，我来解释一下吧。多站点就是类似中国博客联盟、爱写字等网站，可以注册，每个用户可以在后台建立属于自己的独立博客。</p>
+<p>实际上用WordPress搭建多博客站点，在以前是可以使用 <a target="_blank" rel="noopener" href="http://mu.wordpress.org/">WordPress MU</a> 来实现的，不过后来 WordPress 官方把 WP MU 和 WP 合并了，周良在网上找了一下，发现与之有关的教程非常少，所以在这里写一下详细的教程。</p>
+<h2 id="具体操作与设置过程：">具体操作与设置过程：</h2>
+<ol>
+<li>
+<p>进入域名解析设置：添加一个域名 A 解析<code>*</code>（*代表域名泛解析）。<br>
+（用我的站点为例子：网站主站是 <a href="../index.html">imzl.com</a> 我就要新建一个 web 的主域名解析，然后再新建一个 * 的 A 记录解析）</p>
+</li>
+<li>
+<p>安装最新版本的 WordPress，编辑 wp-config.php，在「好了！请不要再继续编辑。请保存本文件。使用愉快！」这段话上面加入：<br>
+<code>define('WP_ALLOW_MULTISITE', true);</code></p>
+</li>
+<li>
+<p>在 wp-content 目录下创建一个 <code>blogs.dir</code> 的文件夹，权限 755（这个步骤你可以不用操作，这个文件夹的作用是存储子站点上传的媒体文件，日后会自动生成）。</p>
+</li>
+<li>
+<p>编辑 wp-config.php，删除之前第 3 步添加的那段代码，用新代码替换。</p>
+</li>
+<li>
+<p>编辑 .htaccess 文件，用新代码覆盖 .htaccess 里 <code># BEGIN WordPress</code> 和 <code># END WordPress</code> 之间的所有内容。</p>
+</li>
+</ol>
+<ul>
+<li>重新登录 WordPress 后台，点击页面右上角的「你好，某某某」，下拉菜单里是不是出现了「管理网络」？点击一下它。</li>
+<li>进入管理网络，先在设置里设置子站点语言为中文，或者你可以一直用英文的。然后你就可以创建子站了。</li>
+<li>如果开发注册，就可以成为类似中国博客联盟一样的网站了。</li>
+</ul>
+<h2 id="需要注意的地方：">需要注意的地方：</h2>
+<ol>
+<li>用 cpanel 面板的朋友请注意， WordPress ，就不要开启 CP 的 hotlin 保护，否则立马杯具。</li>
+<li>开启 WordPress 多站点模式，请使用 cpanel 面板主机、VPS 或者是独立主机，因为 DA 面板貌似不支持*泛解析。</li>
+<li>要想在子站点管理插件，必须在「管理网络——设置——菜单管理」勾选 插件这项。</li>
+<li>多站点模式使用的些插件可能会出现一些问题，这个就需要大家自己研究了哦。</li>
+</ol>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-multi-site-blog by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:34 GMT -->
+</html>
+
+
+
+
+
+

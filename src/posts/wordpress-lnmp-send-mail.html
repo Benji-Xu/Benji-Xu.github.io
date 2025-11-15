@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-lnmp-send-mail by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>解决 WordPress LNMP 一键安装包不能发送邮件问题 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="LNMP 环境里没有没有安装 sendmail 组件，只需要启动 sendmail 相关服务，配置 php.ini 文件路径就可以正常发送邮件。 1. 安装 sendmail 组件 yum install sendmail  2. 重启 php-fpm 进程 &#x2F;etc&#x2F;init.d&#x2F;php-fpm restart  如果重启出现失败，或者卡住了，建议关闭终端，重新登录后直接重启 lnmp，命令如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 WordPress LNMP 一键安装包不能发送邮件问题">
+<meta property="og:url" content="wordpress-lnmp-send-mail.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="LNMP 环境里没有没有安装 sendmail 组件，只需要启动 sendmail 相关服务，配置 php.ini 文件路径就可以正常发送邮件。 1. 安装 sendmail 组件 yum install sendmail  2. 重启 php-fpm 进程 &#x2F;etc&#x2F;init.d&#x2F;php-fpm restart  如果重启出现失败，或者卡住了，建议关闭终端，重新登录后直接重启 lnmp，命令如下">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-03-21T15:23:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.527Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="LNMP">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-lnmp-send-mail.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            解决 WordPress LNMP 一键安装包不能发送邮件问题
+        </div>
+        <div class="post-meta">
+            2017-03-21 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85-sendmail-%E7%BB%84%E4%BB%B6"><span class="toc-text">1. 安装 sendmail 组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%87%8D%E5%90%AF-php-fpm-%E8%BF%9B%E7%A8%8B"><span class="toc-text">2. 重启 php-fpm 进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A3%80%E6%B5%8B-sendmail-%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C%E6%AD%A3%E5%B8%B8"><span class="toc-text">3. 检测 sendmail 是否运行正常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE-php-ini%EF%BC%8C%E5%A1%AB%E5%86%99-sendmail-%E7%9A%84%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="toc-text">4. 配置 php.ini，填写 sendmail 的绝对路径</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>LNMP 环境里没有没有安装 sendmail 组件，只需要启动 sendmail 相关服务，配置 php.ini 文件路径就可以正常发送邮件。</p>
+<h2 id="1-安装-sendmail-组件">1. 安装 sendmail 组件</h2>
+<pre><code class="language-bash">yum install sendmail
+</code></pre>
+<h2 id="2-重启-php-fpm-进程">2. 重启 php-fpm 进程</h2>
+<pre><code class="language-bash">/etc/init.d/php-fpm restart
+</code></pre>
+<p>如果重启出现失败，或者卡住了，建议关闭终端，重新登录后直接重启 lnmp，命令如下：</p>
+<pre><code class="language-bash">/root/lnmp restart
+</code></pre>
+<h2 id="3-检测-sendmail-是否运行正常">3. 检测 sendmail 是否运行正常</h2>
+<pre><code class="language-bash">/etc/init.d/sendmail status
+</code></pre>
+<p>如果显示 <code>sendmail</code> 和 <code>sm-client</code> 都正在运行 running 就证明启动成功了。如果都是 stop，你可以试一下这些命令：</p>
+<pre><code class="language-bash">/etc/init.d/sendmail start （启动sendmail）
+/etc/init.d/sendmail stop （关闭sendmail）
+/etc/init.d/sendmail restart （重启sendmail）
+</code></pre>
+<h2 id="4-配置-php-ini，填写-sendmail-的绝对路径">4. 配置 php.ini，填写 sendmail 的绝对路径</h2>
+<p>使用命令打开编辑 <code>php.ini</code>，也可以直接用 FTP 直接进入目录找到 <code>php.ini</code> 文件下载到本地修改，效果一样。</p>
+<pre><code class="language-bash">vi /usr/local/php/etc/php.ini
+</code></pre>
+<p>输入 <code>?sendmail_path</code> 查找定位，找到下面的代码：</p>
+<pre><code class="language-bash">;sendmail_path =
+</code></pre>
+<p>按 i 进入编辑，将该行修改为：</p>
+<pre><code class="language-bash">sendmail_path = /usr/sbin/sendmail -t -i
+</code></pre>
+<p>按 Esc 键退出编辑，输入 <code>:wq</code> 保存退出</p>
+<p>最后再重启一下 LNMP 就可以了。测试，邮件发送成功。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/lnmp/index.html"> / LNMP</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-lnmp-send-mail by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:48 GMT -->
+</html>
+
+
+
+
+
+

@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-redis-cache-to-accelerate by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 使用 Redis 缓存来进行站点加速 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="Redis 是一个高级的 key-value 存储系统，类似  memcached，所有内容都存在内存中，因此每秒钟可以超过 10 万次 GET 操作。  我下面提出的解决方案是在 Redis 中缓存所有输出的 HTML 内容而无需再让 WordPress 重复执行页面脚本。这里使用 Redis 代替 Varnish 设置简单，而且可能更快。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 使用 Redis 缓存来进行站点加速">
+<meta property="og:url" content="wordpress-redis-cache-to-accelerate.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="Redis 是一个高级的 key-value 存储系统，类似  memcached，所有内容都存在内存中，因此每秒钟可以超过 10 万次 GET 操作。  我下面提出的解决方案是在 Redis 中缓存所有输出的 HTML 内容而无需再让 WordPress 重复执行页面脚本。这里使用 Redis 代替 Varnish 设置简单，而且可能更快。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2014/03/wordpress-redis-cache-to-accelerate.png">
+<meta property="article:published_time" content="2014-03-30T04:38:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.522Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2014/03/wordpress-redis-cache-to-accelerate.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-redis-cache-to-accelerate.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 使用 Redis 缓存来进行站点加速
+        </div>
+        <div class="post-meta">
+            2014-03-30 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Redis"><span class="toc-number">1.</span> <span class="toc-text">安装 Redis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Predis-%E4%BD%9C%E4%B8%BA-Redis-%E7%9A%84-PHP-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.</span> <span class="toc-text">使用 Predis 作为 Redis 的 PHP 客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E7%BC%93%E5%AD%98%E7%9A%84-PHP-%E8%84%9A%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">前端缓存的 PHP 脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">性能测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">5.</span> <span class="toc-text">其他建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE-wp-admin"><span class="toc-number">6.</span> <span class="toc-text">访问 wp-admin</span></a></li></ol>
+                </div>
+            </div>
+
+            <p><a target="_blank" rel="noopener" href="http://redis.io/">Redis</a> 是一个高级的 key-value 存储系统，类似 memcached，所有内容都存在内存中，因此每秒钟可以超过 10 万次 GET 操作。</p>
+<p>我下面提出的解决方案是在 Redis 中缓存所有输出的 HTML 内容而无需再让 WordPress 重复执行页面脚本。这里使用 Redis 代替 <a target="_blank" rel="noopener" href="http://www.oschina.net/p/varnish">Varnish</a> 设置更简单，速度更快。</p>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2014/03/wordpress-redis-cache-to-accelerate.png" alt="WordPress 使用 Redis 缓存来进行站点加速"></p>
+<h2 id="安装-Redis">安装 Redis</h2>
+<p>如果你使用的是 Debian 或者衍生的操作系统可使用如下命令安装 Redis：<br>
+<code>apt-get install redis-server</code></p>
+<h2 id="使用-Predis-作为-Redis-的-PHP-客户端">使用 Predis 作为 Redis 的 PHP 客户端</h2>
+<p>你需要一个客户端开发包以便 PHP 可以连接到 Redis 服务上。</p>
+<p>这里我推荐 <a target="_blank" rel="noopener" href="https://github.com/nrk/predis">Predis</a>。上传 <a target="_blank" rel="noopener" href="http://uploads.staticjw.com/ji/jim/predis.php">predis.php</a> 到 WordPress 的根目录。</p>
+<h2 id="前端缓存的-PHP-脚本">前端缓存的 PHP 脚本</h2>
+<ol>
+<li>在 WordPress 的根目录创建新文件 <code>index-with-redis.php</code>，内容如下：</li>
+</ol>
+<pre><code class="language-php">&lt;?php
+$cf = 1; // 如果使用 Cloudflare，设置为 1
+$debug = 0; // 如果希望查看执行时间和缓存操作，设置为 1
+$display_powered_by_redis = 1;  // 如果希望显示 Redis 支持的消息和执行时间，设置为 1
+
+$start = microtime(); // 开始计时页面执行时间
+
+// 如果启用了 Cloudflare
+if ($cf) &#123;
+    if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) &#123;
+        $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+    &#125;
+&#125;
+
+// 来自 WordPress 的设置
+define('WP_USE_THEMES', true);
+
+// 初始化 Predis
+include(&quot;predis.php&quot;);
+$redis = new Predis\Client('');
+
+// 初始化变量
+$domain = $_SERVER['HTTP_HOST'];
+$url = &quot;http://&quot; . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$url = str_replace('?r=y', '', $url);
+$url = str_replace('?c=y', '', $url);
+$dkey = md5($domain);
+$ukey = md5($url);
+
+// 检查页面是否为评论提交
+(isset($_SERVER['HTTP_CACHE_CONTROL']) &amp;&amp; $_SERVER['HTTP_CACHE_CONTROL'] == 'max-age=0') ? $submit = 1 : $submit = 0;
+
+// 检查是否已登录到 WordPress
+$cookie = var_export($_COOKIE, true);
+$loggedin = preg_match(&quot;/wordpress_logged_in/&quot;, $cookie);
+
+// 检查页面缓存是否存在
+if ($redis-&gt;hexists($dkey, $ukey) &amp;&amp; !$loggedin &amp;&amp; !$submit &amp;&amp; !strpos($url, '/feed/')) &#123;
+
+    echo $redis-&gt;hget($dkey, $ukey);
+    $cached = 1;
+    $msg = 'this is a cache';
+
+// 如果提交了评论或发出清除页面缓存请求，删除页面缓存
+&#125; else if ($submit || substr($_SERVER['REQUEST_URI'], -4) == '?r=y') &#123;
+
+    require('./wp-blog-header.php');
+    $redis-&gt;hdel($dkey, $ukey);
+    $msg = 'cache of page deleted';
+
+// 如果登录用户发出清除整个缓存的请求，删除整个缓存
+&#125; else if ($loggedin &amp;&amp; substr($_SERVER['REQUEST_URI'], -4) == '?c=y') &#123;
+
+    require('./wp-blog-header.php');
+    if ($redis-&gt;exists($dkey)) &#123;
+        $redis-&gt;del($dkey);
+        $msg = 'domain cache flushed';
+    &#125; else &#123;
+        $msg = 'no cache to flush';
+    &#125;
+
+// 如果已登录，不缓存任何内容
+&#125; else if ($loggedin) &#123;
+
+    require('./wp-blog-header.php');
+    $msg = 'not cached';
+
+// 缓存页面
+&#125; else &#123;
+
+    // 开启输出缓冲
+    ob_start();
+
+    require('./wp-blog-header.php');
+
+    // 获取输出缓冲区的内容
+    $html = ob_get_contents();
+
+    // 清理输出缓冲区
+    ob_end_clean();
+    echo $html;
+
+    // 仅当页面存在且不是搜索结果时，才存储到缓存
+    if (!is_404() &amp;&amp; !is_search()) &#123;
+        // 将 HTML 内容存储到 Redis 缓存
+        $redis-&gt;hset($dkey, $ukey, $html);
+        $msg = 'cache is set';
+    &#125;
+&#125;
+
+$end = microtime(); // 获取执行时间的结束时间
+
+// 如果启用了调试功能，显示消息
+if ($debug) &#123;
+    echo $msg . ': ';
+    echo t_exec($start, $end);
+&#125;
+
+if ($cached &amp;&amp; $display_powered_by_redis) &#123;
+    // 您应该将此 CSS 移动到您的 CSS 文件并更改：float:right;margin:20px 0;
+    echo &quot;&lt;style&gt;#redis_powered&#123;float:right;margin:20px 0;background:url(http://images.staticjw.com/jim/3959/redis.png) 10px no-repeat #fff;border:1px solid #D7D8DF;padding:10px;width:190px;&#125;
+    #redis_powered div&#123;width:190px;text-align:right;font:10px/11px arial,sans-serif;color:#000;&#125;&lt;/style&gt;&quot;;
+    echo &quot;&lt;a href=\&quot;http://www.aips.me/wordpress-with-redis-as-a-frontend-cache/\&quot; style=\&quot;text-decoration:none;\&quot;&gt;&lt;div id=\&quot;redis_powered\&quot;&gt;&lt;div&gt;Page generated in&lt;br/&gt; &quot; . t_exec($start, $end) . &quot; sec&lt;/div&gt;&lt;/div&gt;&lt;/a&gt;&quot;;
+&#125;
+
+// 计算时间差
+function t_exec($start, $end) &#123;
+    $t = (getmicrotime($end) - getmicrotime($start));
+    return round($t, 5);
+&#125;
+
+// 获取时间
+function getmicrotime($t) &#123;
+    list($usec, $sec) = explode(&quot; &quot;, $t);
+    return ((float)$usec + (float)$sec);
+&#125;
+
+?&gt;
+</code></pre>
+<p>你也可以在 Github 上查看 <a target="_blank" rel="noopener" href="https://gist.github.com/JimWestergren/3053250#file-index-with-redis-php">index-with-redis.php</a></p>
+<ol start="2">
+<li>
+<p>将上述代码中的 IP 地址和网站域名替换成你网站的 IP 地址和域名</p>
+</li>
+<li>
+<p>在 .htaccess 中将所有出现 <code>index.php</code> 的地方改为 <code>index-with-redis.php</code>，如果你使用的是 Nginx 则修改 nginx.conf 中的 <code>index.php</code> 为 <code>index-with-redis.php</code>（并重载 Nginx：<code>killall -s HUP nginx</code>）。</p>
+</li>
+</ol>
+<h2 id="性能测试">性能测试</h2>
+<ul>
+<li>没有 Redis 的情况下：平均首页执行 1.614 秒，文章页 0.174 秒（无任何缓存插件）</li>
+<li>使用 Redis 的情况下：平均页面执行时间 <strong>0.00256 秒</strong></li>
+</ul>
+<p>我已经在我的博客中使用了如上的方法进行加速很长时间了，一切运行良好。</p>
+<h2 id="其他建议">其他建议</h2>
+<p>本文作者的 WordPress 环境是 Nginx + PHP-FPM + APC + Cloudflare + Redis，安装在一个 VPS 中，无缓存插件。</p>
+<p>请确认使用了 gzip 压缩，可加快访问速度。</p>
+<h2 id="访问-wp-admin">访问 wp-admin</h2>
+<p>要访问 wp-admin 必须使用 <code>/wp-admin/index.php</code> 代替原来的 <code>/wp-admin/</code></p>
+<p></p>
+<p>本文其实在国内已经有很翻译过了，但我看到作者也一直在更新此文，反而国内译者都不怎么更新，我就自己去重新折腾了一遍。<br>
+英文原文：<a target="_blank" rel="noopener" href="http://www.jimwestergren.com/wordpress-with-redis-as-a-frontend-cache/">http://www.jimwestergren.com/wordpress-with-redis-as-a-frontend-cache/</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+                <a href="../tag/redis/index.html"> / Redis</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-redis-cache-to-accelerate by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:12 GMT -->
+</html>
+
+
+
+
+
+

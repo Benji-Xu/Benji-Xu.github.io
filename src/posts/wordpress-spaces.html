@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-spaces by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:19 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 写作时，如何输入空格 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="使用 WordPress 写博客，最不适应的应该是他不能输入空格，中国人习惯开头空两格，但是 WordPress 却会把它过滤掉，这里分享一下具体解决办法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 写作时，如何输入空格">
+<meta property="og:url" content="wordpress-spaces.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="使用 WordPress 写博客，最不适应的应该是他不能输入空格，中国人习惯开头空两格，但是 WordPress 却会把它过滤掉，这里分享一下具体解决办法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-07-28T11:45:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.518Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-spaces.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 写作时，如何输入空格
+        </div>
+        <div class="post-meta">
+            2011-07-28 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">2.</span> <span class="toc-text">方法二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89"><span class="toc-number">3.</span> <span class="toc-text">方法三</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>在使用 Wordpress 写文章时，很多朋友会遇到这样的困难：明明在文章每段的开头打上了空格，但最后发表出来的文章，几乎都是定格写的！今天周良教大家一个方法，可以在 WordPress 写文章时，添加空格，并且发表出来以后空格不会被和谐掉！<span id="more"></span></p>
+<h2 id="方法一">方法一</h2>
+<ol>
+<li>切换到HTML下，（可视化状态下本方法无效）；</li>
+<li>打开中文输入法（ＱＱ拼音什么的，中文输入状态即可）；</li>
+<li>shift+空格，切换到全角（ＱＱ拼音下面的太阳图标）；</li>
+<li>在想要缩进的段落前输入空格；</li>
+<li>发布、更新就可以看到效果了（此时绝对不能再切换到可视化，否则会前功尽弃的）</li>
+</ol>
+<h2 id="方法二">方法二</h2>
+<p>在 WordPress 对应主题的 <strong>style.css</strong> 文件中找到 <code>p &#123;……&#125;</code>，向<code>&#123;……&#125;</code>中加入缩进代码<code>text-indent:2em;</code>，即形式为<code>p &#123;text-indent:2em;&#125;</code>这样就可以实现首行缩进了！（这样做的缺点是每次都缩进了，不想缩进的也缩进了）</p>
+<p>但是不建议这种方法，因为当你发表文章的时候，只要是<code>&lt;p&gt;&lt;/p&gt;</code>之间的内容都空两格，比如 <code>h</code> 标签，这样就只要是一段的开头就空两格，这样就很麻烦。</p>
+<h2 id="方法三">方法三</h2>
+<p>就是在类似于 Ｗindows Live Writer 这样的本地电脑编辑器中发布博客。在WLW中发布，要实现首行缩进需要在「日志」菜单中点击「编辑日志设置」，然后选择「高级」，将「标记类型」改为「HTML」，并且保存。</p>
+<p>WLW 还是很好用的，在 Windows 7 下安装很方便，不知道其他操作系统如何。但是仍然建议用全角模式下打空格，因为这样才是标准的中文排版。</p>
+<p>PS：原本周良还为大家准备了一个方法，属于在 HTML 下添加颜色代码的方法，以前一直用，刚刚测试了一下，可以已经不能在 WordPress 3.2 下，所以不分享了。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress/index.html"> / WordPress</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-spaces by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:19 GMT -->
+</html>
+
+
+
+
+
+

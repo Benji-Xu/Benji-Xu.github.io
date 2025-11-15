@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/add-custom-favicon-with-links-page by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>为 WordPress 博客添加带 favicon 的自定义友情链接页面 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="拥有一个个性的友情链接页面会为你的博客增加不少的关注者，就比如周良的友情链接页面，会显示favicon图标，想知道是怎么完成的吗？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为 WordPress 博客添加带 favicon 的自定义友情链接页面">
+<meta property="og:url" content="add-custom-favicon-with-links-page.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="拥有一个个性的友情链接页面会为你的博客增加不少的关注者，就比如周良的友情链接页面，会显示favicon图标，想知道是怎么完成的吗？">
+<meta property="og:locale">
+<meta property="article:published_time" content="2011-11-13T12:14:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.519Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="add-custom-favicon-with-links-page.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            为 WordPress 博客添加带 favicon 的自定义友情链接页面
+        </div>
+        <div class="post-meta">
+            2011-11-13 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>很多朋友总是问周良，我的友情链接页面上的 ICO 图标是怎么显示的，周良就会把图片地址告诉他</p>
+<pre><code class="language-html">http://www.google.com/s2/favicons?domain=网站地址
+</code></pre>
+<p>今天抽空写一下如何直接创建 WordPress 友情链接带有 favicon 图标页面模版的教程，希望对大家有用。</p>
+<p>演示请看：<a href="../links/index.html">https://imzl.com/links</a></p>
+<ol>
+<li>
+<p>上传一个 16×16 大小的图片作为木有 favicon.ico 的网站默认 ico，把图片上传到所用主题的 images 目录下，这里示例中默认 ico 图片是 links_default.gif</p>
+</li>
+<li>
+<p>复制一份你主题的 <code>page.php</code>，改名为 <code>page-links.php</code></p>
+</li>
+<li>
+<p>在 page-links.php 找到文章内容输出函数 <code>&lt;?php the_content(); ?&gt;</code>，在其下面加入下面的代码，注意看代码注释：</p>
+</li>
+</ol>
+<pre><code class="language-php">&lt; div class = ”page - links” &gt;&lt;h3 &gt;页内链接&lt;/h3&gt;
+&lt;ul&gt;
+&lt;?php
+$default_ico = get_template_directory_uri().’/images/links_default.gif’; //默认 ico 图片位置
+$bookmarks = get_bookmarks(‘title_li = &amp;orderby = rand’); //全部链接随机输出
+//如果你要输出某个链接分类的链接，更改一下get_bookmarks参数即可
+//如要输出链接分类ID为5的链接 title_li=&amp;categorize=0&amp;category=5&amp;orderby=rand
+if (!empty($bookmarks)) &#123;
+    foreach($bookmarks as $bookmark) &#123;
+        echo‘ &lt; li &gt; &lt;img src = ”‘,
+        $bookmark - &gt;link_url,
+        ‘/favicon.ico”onerror = ”javascript: this.src = \’’,
+        $default_ico,
+        ‘\’” / &gt;&lt;a href = ”‘,
+        $bookmark-&gt;link_url,
+        ‘“title = ”‘,
+        $bookmark-&gt;link_description,
+        ‘“target = ”_blank”&gt; ’,
+        $bookmark-&gt;link_name,
+        ‘ &lt;/a&gt;&lt;/li&gt; ’;
+    &#125;
+&#125;?&gt;&lt;/ul&gt;
+&lt;/div &gt;
+</code></pre>
+<ol start="4">
+<li>为了好看点，你可以给 page-links 这个 Class 定义一下样式，下面是我的主题所用样式，可以参考一下：</li>
+</ol>
+<pre><code class="language-css">.page-links&#123;overflow:hidden;margin:0 0 24px;padding:0;&#125;
+.page-links h3&#123;border-bottom:1px solid #bfbebe;text-align:center;margin:0;&#125;
+.page-links ul&#123;margin:0;padding:5px 0 0 0;&#125;
+.page-links ul li&#123;float:left;width:150px;line-height:16px;height:16px;margin:5px 5px 0;padding:0;list-style-type:none;&#125;
+.page-links ul li:hover&#123;background:#f2f2f2;&#125;
+.page-links ul li img&#123;width:16px;height:16px;margin:0 5px -2px 0;padding:0;border:none;&#125;
+</code></pre>
+<ol start="5">
+<li>WordPress 后台建立一个页面，使用 links 为页面模板即可。</li>
+</ol>
+<p>注：ICO 图标最好上传到网站更目录，这样便于谷歌收入。在 Opera 下 ICO 图标也最好上传到网站更目录，本站友情链接页面使用的是谷歌自带的 ICO 图标，在文章开头已经给出地址。</p>
+<p>如果您想了解关于本文代码的原理，可以阅读<a target="_blank" rel="noopener" href="http://www.qiqiboy.com/2009/11/30/non-javascript-intelligently-beautifying-links-page-favicon.html">这篇文章</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/add-custom-favicon-with-links-page by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:49 GMT -->
+</html>
+
+
+
+
+
+

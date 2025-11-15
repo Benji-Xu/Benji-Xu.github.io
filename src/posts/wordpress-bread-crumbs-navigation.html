@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-bread-crumbs-navigation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>非插件为 WordPress 博客添加面包屑导航 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="为 WordPress 博客添加面包屑导航，不仅能让用户了解目前所处位置，还可以最快速度的返回到上一级页面，减少了不必要的点击和操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非插件为 WordPress 博客添加面包屑导航">
+<meta property="og:url" content="wordpress-bread-crumbs-navigation.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="为 WordPress 博客添加面包屑导航，不仅能让用户了解目前所处位置，还可以最快速度的返回到上一级页面，减少了不必要的点击和操作。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2013-01-20T07:33:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-bread-crumbs-navigation.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            非插件为 WordPress 博客添加面包屑导航
+        </div>
+        <div class="post-meta">
+            2013-01-20 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#function-php-%E4%B8%AD%E6%B7%BB%E5%8A%A0%E9%80%BB%E8%BE%91%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">function.php 中添加逻辑代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E9%9D%A2%E5%8C%85%E5%B1%91%E5%AF%BC%E8%88%AA"><span class="toc-number">2.</span> <span class="toc-text">读取面包屑导航</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>实际上一直想给周良博客添加一个<a href="wordpress-bread-crumbs-navigation.html">面包屑导航</a>，这样不仅有利于大家访问博客，对搜索引擎也比较不错。但是由于这个学习事情比较多，很多定下来的事情都没有去做，就连博客我也是很少更新。现在寒假了，我应该是有大把的时间可以去做我想做但一直没时间做的事情了。</p>
+<p>面包屑导航，这个概念来自童话故事「汉赛尔和格莱特」，当汉赛尔和格莱特穿过森林时，不小心迷路了，但是他们发现在沿途走过的地方都撒下了面包屑，让这些面包屑来帮助他们找到回家的路，所以面包屑导航的作用是告诉访问者他们目前在网站中的位置以及如何返回。</p>
+<p>可以说面包屑导航的作用非常的巨大，它让用户了解目前所处位置，以及当前页面在整个网站中的位置。但周良觉得，面包屑导航最大的作用就是可以最快速度的返回到上一级页面，减少了不必要的点击和操作。考虑了半天，没找到什么地方适合放导航，所以就先把我整理出来的代码公布。</p>
+<h2 id="function-php-中添加逻辑代码">function.php 中添加逻辑代码</h2>
+<p>首先，编辑主题的 function.php，在里面加入下面的代码：</p>
+<pre><code class="language-php">function get_breadcrumbs() &#123;
+    global $wp_query;
+    if (!is_home()) &#123;
+        // Start the UL
+        echo‘ &lt; ul &gt; ’;
+        // Add the Home link
+        echo‘ &lt; a href = ”‘.get_settings(‘home’).’” &gt; ’.首页.’ &lt; /a&gt;’;
+if ( is_category() )
+&#123;
+$catTitle = single_cat_title( “”, false );
+$cat = get_cat_ID( $catTitle );
+echo “ » “. get_category_parents( $cat, TRUE, “ » “ ) ;
+&#125;
+elseif ( is_archive() &amp;&amp; !is_category() )
+&#123;
+echo “» Archives”;
+&#125;
+elseif ( is_search() ) &#123;
+echo “» Search Results”;
+&#125;
+elseif ( is_404() )
+&#123;
+echo “» 404 Not Found”;
+&#125;
+elseif ( is_single() )
+&#123;
+$category = get_the_category();
+$category_id = get_cat_ID( $category[0]-&gt;cat_name );
+echo ‘» ‘. get_category_parents( $category_id, TRUE, “ » “ );
+echo the_title(‘’,’’, FALSE);
+&#125;
+elseif ( is_page() )
+&#123;
+$post = $wp_query-&gt;get_queried_object();
+if ( $post-&gt;post_parent == 0 )&#123;
+echo “&lt;li&gt; » “.the_title(‘’,’’, FALSE).”&lt;/li &gt; ”;
+    &#125; else &#123;
+        $title = the_title(‘’, ’’, FALSE);
+        $ancestors = array_reverse(get_post_ancestors($post - &gt;ID));
+        array_push($ancestors, $post - &gt;ID);
+        foreach($ancestors as $ancestor) &#123;
+            if ($ancestor != end($ancestors)) &#123;
+                echo‘ &lt; li &gt; » &lt; a href = ”‘.get_permalink($ancestor).’” &gt; ’.strip_tags(apply_filters(‘single_post_title’, get_the_title($ancestor))).’ &lt; /a&gt;&lt;/li &gt; ’;
+            &#125; else &#123;
+                echo‘ &lt; li &gt; »‘.strip_tags(apply_filters(‘single_post_title’, get_the_title($ancestor))).’ &lt; /li&gt;’;
+&#125;
+&#125;
+&#125;
+&#125;
+/ / End the UL echo“ &lt; /ul&gt;”;
+&#125;
+&#125;
+</code></pre>
+<h2 id="读取面包屑导航">读取面包屑导航</h2>
+<p>修改完了function.php 文件后，只需要把下面的代码黏贴到你要显示导航的地方即可。</p>
+<pre><code class="language-php">&lt;?php
+if (function_exists(‘get_breadcrumbs’))&#123;
+get_breadcrumbs();
+&#125;
+?&gt;
+</code></pre>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-bread-crumbs-navigation by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:23 GMT -->
+</html>
+
+
+
+
+
+

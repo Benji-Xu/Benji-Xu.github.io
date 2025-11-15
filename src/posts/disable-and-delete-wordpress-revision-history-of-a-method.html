@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/disable-and-delete-wordpress-revision-history-of-a-method by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 技巧：删除并禁用历史修订功能 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="历史修订这个功能好像是从Wordpress 2.6以后加入到Wordpress的，一般来说对博客毫无用处，会造成数据库特别庞大，浪费资源，所以还是把它禁用掉吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 技巧：删除并禁用历史修订功能">
+<meta property="og:url" content="disable-and-delete-wordpress-revision-history-of-a-method.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="历史修订这个功能好像是从Wordpress 2.6以后加入到Wordpress的，一般来说对博客毫无用处，会造成数据库特别庞大，浪费资源，所以还是把它禁用掉吧。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/qiniu/3217/image/9f647765d50d9edb6cd4e9e2d8e024de.jpg">
+<meta property="article:published_time" content="2012-03-10T03:26:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/qiniu/3217/image/9f647765d50d9edb6cd4e9e2d8e024de.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="disable-and-delete-wordpress-revision-history-of-a-method.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 技巧：删除并禁用历史修订功能
+        </div>
+        <div class="post-meta">
+            2012-03-10 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%A6%81%E7%94%A8-WordPress-%E6%96%87%E7%AB%A0%E4%BF%AE%E8%AE%A2%E5%8E%86%E5%8F%B2%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">1.禁用 WordPress 文章修订历史功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A0%E9%99%A4-WordPress-%E5%B7%B2%E6%9C%89%E7%9A%84%E6%96%87%E7%AB%A0%E4%BF%AE%E8%AE%A2%E8%AE%B0%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">2.删除 WordPress 已有的文章修订记录</span></a></li></ol>
+                </div>
+            </div>
+
+            <p><img src="../cdn.imzl.com/qiniu/3217/image/9f647765d50d9edb6cd4e9e2d8e024de.jpg" alt="WordPress 技巧：删除并禁用历史修订功能"></p>
+<p>历史修订这个功能好像是从Wordpress 2.6以后加入到Wordpress的，个人不太喜欢「历史修订」这个名词，所以管这个功能叫「编辑历史」，但个人认为这一功能对多数个人博客毫无用处，有点鸡肋的意思，食之无味弃之可惜。并且「历史修订」是将你的编辑历史写入数据库的，会造成数据库特别庞大，有点浪费资源，所以周良这里写一下禁用并删除 WordPress 历史修订的方法，不过这方面的<a href="../tag/wordpress-skill/index.html">教程</a>网上一大片一大片的。</p>
+<h2 id="1-禁用-WordPress-文章修订历史功能">1.禁用 WordPress 文章修订历史功能</h2>
+<p>打开 Wordpress 根目录下的 wp-config.php 文件，添加下面的代码即可：</p>
+<pre><code class="language-php">define('WP_POST_REVISIONS', false);
+</code></pre>
+<h2 id="2-删除-WordPress-已有的文章修订记录">2.删除 WordPress 已有的文章修订记录</h2>
+<p>上面也说过，WordPress 文章的修订记录，都是被写入了数据库，所以我们需要删除MySQL数据库中有关的语句！SQL 如下（直接删除即可）：</p>
+<pre><code class="language-php">DELETE FROM wp_postmeta WHERE post_id IN (SELECT id FROM wp_posts WHERE post_type = 'revision');
+DELETE FROM wp_term_relationships WHERE object_id IN (SELECT id FROM wp_posts WHERE post_type='revision');
+DELETE FROM wp_posts WHERE post_type='revision';
+</code></pre>
+<p>OK，搞定了，操作完上面的两部，以后在 WordPress 写文，将不会产生历史修订，所以数据库也不会变的庞大！</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/disable-and-delete-wordpress-revision-history-of-a-method by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:39 GMT -->
+</html>
+
+
+
+
+
+

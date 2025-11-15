@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wpml-wordpress-plugin-to-achieve-multi-language-web-site by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:49 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WPML 插件实现 WordPress 多语言网站 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="目前来说 WPML 是一个最强大的 WordPress 多语言插件 ，可以让我们轻松地实现 WordPress 网站的多语言，而且插件的设置十分简单。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WPML 插件实现 WordPress 多语言网站">
+<meta property="og:url" content="wpml-wordpress-plugin-to-achieve-multi-language-web-site.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="目前来说 WPML 是一个最强大的 WordPress 多语言插件 ，可以让我们轻松地实现 WordPress 网站的多语言，而且插件的设置十分简单。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2011/10/translation-dashboard.png">
+<meta property="article:published_time" content="2011-10-29T01:37:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.518Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2011/10/translation-dashboard.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wpml-wordpress-plugin-to-achieve-multi-language-web-site.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WPML 插件实现 WordPress 多语言网站
+        </div>
+        <div class="post-meta">
+            2011-10-29 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WPML%E6%8F%92%E4%BB%B6%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">WPML插件特点：</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>今天给大家推荐一个插件：WPML，是一个最强大的 WordPress 多语言插件 ，可以让我们轻松地实现 WordPress 网站的多语言，而且插件的设置十分简单。</p>
+<h2 id="WPML插件特点：">WPML插件特点：</h2>
+<ol>
+<li>支持三种方式区别不同的语言版本</li>
+</ol>
+<ul>
+<li>在不同目录中使用不同语言（简体中文、英语等）</li>
+<li>各语言使用不同的域</li>
+<li>语言名称添加为参数</li>
+</ul>
+<ol start="2">
+<li>
+<p>实现插件和主题的本地化</p>
+</li>
+<li>
+<p>可以实现评论翻译</p>
+</li>
+<li>
+<p>提供专业的翻译（收费）</p>
+</li>
+<li>
+<p>自由添加支持的语言</p>
+</li>
+</ol>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2011/10/translation-dashboard.png" alt="WPML 插件实现 WordPress 多语言网站"></p>
+<p>WPML 提供两种方式翻译内容：</p>
+<ol>
+<li>手动，通过点击「+」图标</li>
+<li>使用WPML的翻译管理模块</li>
+</ol>
+<p>WPML插件下载：<a target="_blank" rel="noopener" href="http://wpml.org/documentation/getting-started-guide" title="https://wpml.org/documentation/getting-started-guide">https://wpml.org/documentation/getting-started-guide</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wpml-wordpress-plugin-to-achieve-multi-language-web-site by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:50 GMT -->
+</html>
+
+
+
+
+
+

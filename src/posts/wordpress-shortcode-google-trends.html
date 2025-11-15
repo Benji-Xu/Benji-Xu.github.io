@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-shortcode-google-trends by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 使用短代码插入 Google 趋势图 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="Google 趋势是一个提供指定关键词流行度查询的服务，Google 趋势会分析一部分 Google 网络搜索以计算用户输入的字词被搜索的次数，并将其与 Google 上随时间推移的搜索总量相比较。然后 Google 用图表向用户显示结果，即按线性比例绘制的搜索量图表。 本文主要就是给大家提供一个可以通过 shortcode（短代码）直接把 Google 趋势图插入到 WordPress 站点页面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 使用短代码插入 Google 趋势图">
+<meta property="og:url" content="wordpress-shortcode-google-trends.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="Google 趋势是一个提供指定关键词流行度查询的服务，Google 趋势会分析一部分 Google 网络搜索以计算用户输入的字词被搜索的次数，并将其与 Google 上随时间推移的搜索总量相比较。然后 Google 用图表向用户显示结果，即按线性比例绘制的搜索量图表。 本文主要就是给大家提供一个可以通过 shortcode（短代码）直接把 Google 趋势图插入到 WordPress 站点页面">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-04-01T13:55:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.522Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="shortcode">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-shortcode-google-trends.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 使用短代码插入 Google 趋势图
+        </div>
+        <div class="post-meta">
+            2014-04-01 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">代码安装方法：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E7%9F%AD%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">调用短代码</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>Google 趋势是一个提供指定关键词流行度查询的服务，Google 趋势会分析一部分 Google 网络搜索以计算用户输入的字词被搜索的次数，并将其与 Google 上随时间推移的搜索总量相比较。然后 Google 用图表向用户显示结果，即按线性比例绘制的搜索量图表。</p>
+<p>本文主要就是给大家提供一个可以通过 shortcode（短代码）直接把 Google 趋势图插入到 WordPress 站点页面或者文章中的方法。</p>
+<p>我们可以通过以下代码实现：</p>
+<pre><code class="language-php">&lt;?php
+/*
+Plugin Name: WordPress 短代码插入 Google 趋势图
+Plugin URI: https://imzl.com/wordpress-shortcode-google-trends.html
+Description: WordPress 使用短代码插入 Google 趋势图
+Version: 0.1
+Author: Len Chou
+Author URI: https://imzl.com/
+*/
+
+function wps_trend($atts) &#123;
+    // 解析短代码的属性，并设置默认值
+    extract(shortcode_atts(array(
+        'w' =&gt; '500',   // 宽度
+        'h' =&gt; '330',   // 高度
+        'q' =&gt; '',      // 查询关键词
+        'geo' =&gt; 'US',  // 地理位置
+    ), $atts));
+
+    // 输入格式处理
+    $h = (int)$h;
+    $w = (int)$w;
+    $q = esc_attr($q);
+    $geo = esc_attr($geo);
+
+    ob_start(); // 开启输出缓冲
+    ?&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;http://www.google.com/trends/embed.js?hl=en-US&amp;q=&lt;?php echo $q; ?&gt;&amp;geo=&lt;?php echo $geo; ?&gt;&amp;cmpt=q&amp;content=1&amp;cid=TIMESERIES_GRAPH_0&amp;export=5&amp;w=&lt;?php echo $w; ?&gt;&amp;h=&lt;?php echo $h; ?&gt;&quot;&gt;&lt;/script&gt;
+    &lt;?php
+    return ob_get_clean(); // 获取并返回缓冲区内容
+&#125;
+
+add_shortcode(&quot;trends&quot;, &quot;wps_trend&quot;); // 添加短代码
+?&gt;
+
+</code></pre>
+<h2 id="代码安装方法：">代码安装方法：</h2>
+<p>把这段代码另存为 <code>.php</code> 文件，上传到 <code>wp-content/plugins</code> 目录下，然后在后台启用这个插件。如果不想以插件的形式使用，可以把这段代码黏贴到你当前 WordPress 主题的 <code>functions.php</code> 中（黏贴到 functions.php 中时，请一定要去掉本代码第一行的 <code>&lt;?php</code>，不然会导致网站崩溃）。</p>
+<h2 id="调用短代码">调用短代码</h2>
+<p>然后你就可以使用短代码插入GOOGLE趋势图表了。代码如下</p>
+<pre><code>[trends h=&quot;450&quot; w=&quot;500&quot; q=&quot;wordpress主题+wordpress插件&quot; geo=&quot;CN&quot;]
+</code></pre>
+<p>上面代码就是要显示关于 WordPress 主题和插件在中国地区的图表，图表的高度为450，宽度为500。如果想要自定义高度和宽度，可以在代码中标注出的地方自行修改。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/shortcode/index.html"> / shortcode</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-shortcode-google-trends by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:12 GMT -->
+</html>
+
+
+
+
+
+

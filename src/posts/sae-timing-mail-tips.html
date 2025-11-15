@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/sae-timing-mail-tips.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>基于新浪 SAE 平台的定时手机短信提示功能 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="上个学期寝室扣分比较严重，主要的原因是寝室大部分都是我在搞卫生，然后中午我又不喜欢去寝室，所以折腾个方法，每天中午提醒我回寝室。在崔凯那里看到了一个基于新浪 Sina App Engine 平台的邮件提示功能，感觉可以拿来折腾一下，稍微修改一下，即可满足周良的需求。 具体操作步骤如下：   写一个 fnms.php 负责发邮件到 139 邮箱，139 邮箱内设置开启手机短信通知功能   在新浪SA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于新浪 SAE 平台的定时手机短信提示功能">
+<meta property="og:url" content="sae-timing-mail-tips.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="上个学期寝室扣分比较严重，主要的原因是寝室大部分都是我在搞卫生，然后中午我又不喜欢去寝室，所以折腾个方法，每天中午提醒我回寝室。在崔凯那里看到了一个基于新浪 Sina App Engine 平台的邮件提示功能，感觉可以拿来折腾一下，稍微修改一下，即可满足周良的需求。 具体操作步骤如下：   写一个 fnms.php 负责发邮件到 139 邮箱，139 邮箱内设置开启手机短信通知功能   在新浪SA">
+<meta property="og:locale">
+<meta property="article:published_time" content="2012-06-30T23:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="折腾">
+<meta property="article:tag" content="SAE">
+<meta property="article:tag" content="短信提醒">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="sae-timing-mail-tips.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            基于新浪 SAE 平台的定时手机短信提示功能
+        </div>
+        <div class="post-meta">
+            2012-07-01 ｜ 
+            
+                <a href="../categories/experimentation/index.html"># 折腾</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>上个学期寝室扣分比较严重，主要的原因是寝室大部分都是我在搞卫生，然后中午我又不喜欢去寝室，所以折腾个方法，每天中午提醒我回寝室。在崔凯那里看到了一个基于新浪 Sina App Engine 平台的邮件提示功能，感觉可以拿来折腾一下，稍微修改一下，即可满足周良的需求。</p>
+<p>具体操作步骤如下：</p>
+<ol>
+<li>
+<p>写一个 <code>fnms.php</code> 负责发邮件到 139 邮箱，139 邮箱内设置开启手机短信通知功能</p>
+</li>
+<li>
+<p>在<a href="sina-free-web-space.html">新浪SAE中</a>部署 cron 任务定时执行 fnms.php</p>
+</li>
+<li>
+<p>fnms.php 可以这样写：</p>
+</li>
+</ol>
+<pre><code class="language-php">&lt;?php
+$mail = new SaeMail();
+$ret = $mail-&gt;quickSend( '收件人@139.com' , '嗯，时间到了' , '回寝室打扫卫生吧！苦逼的周良' , '发件人@sina.cn' , '密码' , 'smtp.sina.cn' , 25 ); // 指定smtp和端口
+
+//发送失败时输出错误码和错误信息
+if ($ret === false)
+var_dump($mail-&gt;errno(), $mail-&gt;errmsg());
+?&gt;
+[/cce_php]
+
+cron设置如下：
+[cce_php]
+cron:
+- description: 打扫卫生
+url: fnms.php
+schedule: every Sunday of month 12.00
+timezone: jiaxing
+</code></pre>
+<p>这款<a href="sae-timing-mail-tips.html">基于新浪SAE平台的定时邮箱、手机短信提示功能</a>，还可以搞一些定时发送邮件、生日祝福，定时提醒备忘录等工作，有需要的朋友可以自己折腾一下。</p>
+<p>最大优点是目前免费，不占自己服务器资源。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/experimentation/index.html"> / 折腾</a>
+            
+                <a href="../tag/SAE/index-2.html"> / SAE</a>
+            
+                <a href="../tag/sms-reminder/index.html"> / 短信提醒</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/sae-timing-mail-tips.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:31 GMT -->
+</html>
+
+
+
+
+
+

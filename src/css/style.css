@@ -1,0 +1,926 @@
+﻿@charset "utf-8";
+
+:root
+{
+    --font-color-0: #4CBB17;
+    --font-color-1: #252525;
+    --font-color-2: #333;
+    --font-color-3: #aaa;
+    --bg-color-1: #eee;
+    --line-1: #eee;
+    --line-2: #ddd;
+}
+p
+{
+    word-wrap: break-word;
+    /* white-space: pre-wrap; */
+}
+
+body
+{
+    font-family: "Montserrat", "SF UI Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: 0.6px;
+    color: var(--font-color-2);
+    /* background: #111; */
+}
+a
+{
+    text-decoration: none;
+    color: var(--font-color-3);
+}
+
+.paper
+{
+    /* padding: 4vw; */
+}
+.paper-main
+{
+    width: 100%;
+    /* max-width: 880px; */
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 8vw 24px;
+    background: #fff;
+    border-radius: 24px;
+    background: #fff;
+}
+
+.header
+{
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line-1);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+/* .logo */
+/* { */
+    /* font-size: 2rem; */
+    /* font-weight: 600; */
+    /* color: var(--font-color-1); */
+    /* margin-bottom: 23px; */
+    /* flex: 0 0 100%; */
+/* } */
+
+.logo {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color-1);
+    margin-bottom: 23px;
+    /* 移除 flex: 0 0 100%; 或者将其移至媒体查询内 */
+}
+
+@media (min-width: 768px) {
+    .logo {
+        /* 仅在屏幕宽度大于或等于768px时应用 */
+        flex: 0 0 100%;
+    }
+}
+
+.nav
+{
+    margin: 0 0 4px;
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.nav li
+{
+    padding: 2px 0;
+    margin-right: 24px;
+}
+.nav li:last-of-type
+{
+    margin-right: 0;
+}
+.nav li a
+{
+    color: var(--font-color-1);
+    opacity: .7;
+    transition: opacity ease-in-out .5s;
+}
+.nav li a:hover
+{
+    opacity: 1;
+    transition: opacity ease-in-out .5s;
+}
+
+.post-header
+{
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.post-header .logo
+{
+    font-size: 2rem;
+}
+.post-header .go-home
+{
+    display: block;
+    padding: 10px 20px 8px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+    margin: 8px 0;
+    transition: background ease-in-out .5s;
+}
+.post-header .go-home:hover
+{
+    background: var(--bg-color-1);
+    transition: background ease-in-out .5s;
+}
+.post-header .go-home svg
+{
+    transform: translateX(0);
+    transition: transform ease-in-out .5s;
+}
+.post-header .go-home:hover svg
+{
+    transform: translateX(-4px);
+    transition: transform ease-in-out .5s;
+}
+
+.post-list
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.post
+{
+    width: 100%;
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+    border-bottom: 1px dashed var(--line-2);
+}
+.post-title
+{
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+.post-title:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+.post-except
+{
+    word-break: break-all;
+    margin-bottom: 12px;
+}
+.read-more
+{
+    padding: 0 4px;
+    color: var(--font-color-0);   
+}
+.read-more:before,
+.read-more:after
+{
+    display: inline-block;
+    transition: transform ease-in-out .5s;
+}
+.read-more:before
+{
+    content: "{ ";
+}
+.read-more:after
+{
+    content: " }";
+}
+.read-more:hover:before
+{
+    transform: translateX(-4px);
+    transition: transform ease-in-out .25s;
+}
+.read-more:hover:after
+{
+    transform: translateX(4px);
+    transition: transform ease-in-out .25s;
+}
+.post-date
+{
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+}
+
+.paginator
+{
+    font-size: 0.875rem;
+    width: 100%;
+    margin: 0 auto 24px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.paginator *
+{
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.paginator .space
+{
+    display: block;
+    padding: 8px 16px;
+    border-radius: 18px;
+    background: #fff;
+    border: none;
+}
+.paginator a
+{
+    margin: 4px;
+    color: var(--font-color-2);
+    transition: color ease-in-out .5s;
+}
+.paginator a:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+.paginator .current
+{
+    color: var(--font-color-0);
+    border: 1px solid var(--font-color-0);
+}
+
+.footer
+{
+    padding: 24px 0;
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+}
+.footer span
+{
+    text-align: center;
+    margin-bottom: 8px;
+}
+.footer a
+{
+    color: var(--font-color-3);
+    transition: color ease-in-out .5s;
+}
+.footer a:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+.post-main
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.post-main-title
+{
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--font-color-1);
+}
+.post-meta
+{
+    font-size: 0.875rem;
+    color: var(--font-color-3);
+    flex: 0 0 100%;
+    margin-bottom: 15px;
+}
+
+.archive
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: normal;
+}
+.archive li
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 12px 0;
+}
+.archive li:nth-child(odd)
+{
+    background: #fafafa;
+}
+.archive li:nth-child(even)
+{
+    background: #fff;
+}
+.archive li span
+{
+    width: 108px;
+    color: var(--font-color-2);
+}
+.archive-main
+{
+    flex: 0 1 calc( 100% - 108px );
+}
+.archive-title
+{
+    color: var(--font-color-1);
+    /*transition: color ease-in-out .5s;*/
+}
+.archive-title:hover
+{
+    color: var(--font-color-0);
+    transition: color ease-in-out .5s;
+}
+
+/* 文章分类 */
+.tags {
+    margin-bottom: 32px;
+}
+
+.tags a {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 1em;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 28px;
+    background-color:#000;
+    color: #fff;
+    text-decoration: none
+}
+
+.tags a+a {
+    margin-left: .2em
+}
+
+.tags .new {
+    --color: #3778FF;
+    color: #fff
+}
+
+.tags .update {
+    --color: #E016C4;
+    color: #fff
+}
+
+.tags .fix,.tags .bugfix {
+    --color: #4CBB17;
+    color: #fff
+}
+
+/* 汉堡菜单 */
+.header {
+    display: flex;
+    justify-content: space-between; /* 确保子元素分布在容器两端 */
+    align-items: flex-start; /* 修改为flex-start以满足特定布局需求 */
+}
+
+.hamburger {
+    background-color: transparent; /* 透明背景 */
+    color: rgba(0, 0, 0, 0.505); /* 黑色图标 */
+    border: none; /* 无边框 */
+    cursor: pointer; /* 指针光标 */
+    font-size: 30px; /* 图标大小放大一倍 */
+    display: none; /* 默认隐藏，避免在PC端显示 */
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    height: 11px; /* 调整以确保按钮高度适中 */
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; /* 在移动端显示汉堡菜单图标 */
+    }
+
+    .nav {
+        display: none; /* 默认隐藏菜单项 */
+        flex-direction: column; /* 菜单项垂直排列 */
+        width: 100%; /* 确保菜单项在展开时占满整个宽度 */
+    }
+
+    .nav.active {
+        display: flex; /* 点击汉堡菜单后显示菜单项 */
+    }
+}
+
+/* toc */
+.toc-container {
+    display: none; /* 默认隐藏 TOC */
+  }
+  
+  .toc-container {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 300px;
+    z-index: 1000;
+    border-radius: 8px;
+    border: 1px solid rgb(238, 238, 238);
+    padding: 10px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    max-height: 80vh;
+    overflow-y: auto;
+    background: transparent; /* 默认背景透明，在PC端不可见 */
+}
+
+@media screen and (max-width: 768px) {
+    .toc-container {
+        background: rgb(245, 245, 245); /* 在移动端可见 */
+    }
+}
+
+  
+  .toc-toggle {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .toc-toggle-icon {
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  
+  .toc-content {
+    display: block; /* 默认展开 */
+  }
+  
+  .toc-container .toc-item {
+    list-style: none;
+    padding-left: 20px;
+    text-indent: -20px;
+    color: #000; /* 目录文字使用黑色 */
+  }
+  
+  .toc-container .toc-item:before {
+
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  
+  .toc-container .toc-item-active {
+    background-color: rgb(224 0 0 / 30%); /* 高亮色块 */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .toc-container {
+      position: relative;
+      right: auto;
+      top: auto;
+      width: 100%;
+      margin-bottom: 20px;
+      border: none;
+      box-shadow: none;
+    }
+  
+    .toc-content {
+      display: none; /* 移动端默认折叠 */
+    }
+  }
+  
+  .toc-container a {
+    color: #000 !important; /* 强制将 TOC 目录的文字颜色设为黑色 */
+  }
+  
+  .toc-container .toc-item-active a {
+    color: #000 !important; /* 高亮时链接也保持黑色 */
+  }
+
+/* Projects 板块 */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .project-block {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .project-block:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .project-block strong {
+    color: #000;
+    font-weight: bold;
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 4px; /* 缩小标题和描述之间的间距 */
+    line-height: 1.2; /* 设置标题的行间距 */
+  }
+  
+  .project-block .description {
+    color: #777;
+    font-size: 1em;
+    line-height: 1.2; /* 设置描述的行间距 */
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 每行固定显示4个产品 */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .stack-item {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    color: #333;
+    text-decoration: none; /* 移除链接下划线 */
+    transition: background-color 0.3s ease;
+  }
+  
+  .stack-item:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .stack-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .stack-item strong {
+    display: block;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  
+  .stack-item .description {
+    color: #777;
+    font-size: 1em;
+    line-height: 1.2;
+  }
+  
+  /* 适配移动端 */
+  @media (max-width: 768px) {
+    .stack-grid {
+      grid-template-columns: repeat(2, 1fr); /* 在移动端一行显示两个产品 */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .stack-grid {
+      grid-template-columns: 1fr; /* 在非常窄的屏幕上，一行显示一个产品 */
+    }
+  }
+
+  
+/* stack App list */
+
+  .product-list {
+    margin-top: 20px;
+  }
+  
+  .product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    text-decoration: none;
+    color: #333 !important; /* 强制文本颜色 */
+    background-color: #f5f5f5; /* 背景颜色与页面其他部分保持一致 */
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-item:hover {
+    background-color: #e0e0e0; /* 悬停时的背景颜色 */
+  }
+  
+  .product-icon {
+    width: 70px; /* 增加图片大小 */
+    height: 70px;
+    margin-right: 20px;
+    border-radius: 8px;
+    border: none !important; /* 禁止描边 */
+    padding: 0 !important;
+    box-sizing: content-box !important;
+  }
+  
+  .product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .product-title {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    color: #000 !important; /* 强制标题颜色为黑色 */
+    margin: 0px !important; /* 强制覆盖全局 margin 设置 */
+  }
+  
+  .product-details .description {
+    font-size: 1em;
+    color: #555 !important; /* 强制描述文字颜色为灰色 */
+    margin: 0px !important; /* 强制覆盖全局 margin 设置 */
+  }
+  
+  .tags {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: flex-end; /* 右对齐 */
+  }
+  
+  .tag {
+    background-color: #444; /* 标签背景色 */
+    color: #fff; /* 标签文字颜色 */
+    padding: 2px 6px; /* 缩小标签大小 */
+    border-radius: 4px;
+    font-size: 0.8em; /* 减小字体大小 */
+    margin-left: 8px; /* 标签间距 */
+  }
+  
+  .separator {
+    height: 1px;
+    background-color: #f5f5f5; /* 灰色分隔符 */
+    margin: 15px 0;
+  }
+  
+  /* 适配移动端 */
+  @media (max-width: 768px) {
+    .tags {
+      display: none; /* 在移动端隐藏标签 */
+    }
+  }
+
+/* About 职业经历列表样式 */
+.career-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.career-list li {
+    margin-bottom: 2em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.career-list .year-range {
+    font-size: 14px;
+    color: #888888;
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.career-list strong {
+    color: #111111;
+    font-size: 18px;
+}
+
+.career-list div {
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.6;
+}
+
+.career-list div strong {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.career-list a {
+    color: #4CBB17;
+    text-decoration: none;
+}
+
+.career-list a:hover {
+    text-decoration: none;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    .career-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .career-list .year-range {
+        width: auto;
+        margin-bottom: 0.5em;
+    }
+
+    .career-list div {
+        font-size: 16px;
+    }
+}
+
+
+/* 社交媒体图标样式 */
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a img,
+.social-icons .email-icon img,
+.social-icons .wechat-icon img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.social-icons a:hover img,
+.social-icons .email-icon img:hover,
+.social-icons .wechat-icon img:hover {
+  transform: scale(1.2);
+}
+
+#toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+}
+
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  width: auto;
+  max-width: 300px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #888;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content img {
+  display: block;
+  margin: 0 auto; /* Ensures the image is centered */
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Modal for Mobile */
+@media screen and (max-width: 600px) {
+  .modal-content {
+      width: 90%;
+      margin-top: 30%;
+  }
+}
+
+/* 归档页面 */
+.custom-archive-list {
+  margin-top: 20px;
+}
+
+.custom-archive-year {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 40px; /* 每个年份的间距 */
+  opacity: 0.2; /* 设置年份的透明度 */
+}
+
+.custom-archive {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-archive-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px; /* 每篇文章的间距 */
+}
+
+.custom-archive-title a {
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold; /* 设置标题加粗 */
+}
+
+.custom-archive-title a:hover {
+  text-decoration: underline; /* 鼠标悬停效果 */
+}
+
+.custom-archive-date {
+  color: #b0b0b0; /* 日期的颜色 */
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+
+

@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-scheduled-maintenance by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>解决 WordPress 长时间处于「正在执行例行维护，请一分钟后回来」状态问题 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="原来 WordPress 在升级程序、主题和插件时，会切换到维护模式。这个时候访问网站前台会显示「正在执行例行维护，请一分钟后回来」，如果升级顺利几秒左右就会恢复正常。但遇到网络不佳等特殊情况会导致升级中断，WordPress 就会一直停留在维护模式，不论前台还是后台，都一直显示「正在执行例行维护，请一分钟后回来」。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 WordPress 长时间处于「正在执行例行维护，请一分钟后回来」状态问题">
+<meta property="og:url" content="wordpress-scheduled-maintenance.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="原来 WordPress 在升级程序、主题和插件时，会切换到维护模式。这个时候访问网站前台会显示「正在执行例行维护，请一分钟后回来」，如果升级顺利几秒左右就会恢复正常。但遇到网络不佳等特殊情况会导致升级中断，WordPress 就会一直停留在维护模式，不论前台还是后台，都一直显示「正在执行例行维护，请一分钟后回来」。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-31T14:54:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.528Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-scheduled-maintenance.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            解决 WordPress 长时间处于「正在执行例行维护，请一分钟后回来」状态问题
+        </div>
+        <div class="post-meta">
+            2020-07-31 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%E5%91%A2"><span class="toc-number">1.</span> <span class="toc-text">如何解决这个问题呢</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>今天给个人博客升级插件的时，遇到个问题：前后台一直停留在空白页面并显示「正在执行例行维护，请一分钟后回来」，一脸懵逼。</p>
+<p>原来 WordPress 在升级程序、主题和插件时，会切换到维护模式。这个时候访问网站前台会显示「正在执行例行维护，请一分钟后回来」，如果升级顺利几秒左右就会恢复正常。但遇到网络不佳等特殊情况会导致升级中断，WordPress 就会一直停留在维护模式，不论前台还是后台，都一直显示「正在执行例行维护，请一分钟后回来」。</p>
+<h2 id="如何解决这个问题呢">如何解决这个问题呢</h2>
+<p>删除网站根目录下的 <code>.maintenance</code> 文件。</p>
+<p><code>.maintenance</code> 是个隐藏文件，通过 FTP 登陆一般看不到，建议 SSH 登录。可按如下步骤处理：</p>
+<ol>
+<li><code>cd /home/xxx/xxx</code> 进入对应出问题的 WordPress 网站根目录；</li>
+<li><code>ls -a</code> 列出当前目录含隐藏文件的所有文件，看看有没有 <code>.maintenance</code>，有的话执行删除；</li>
+<li><code>rm -rf .maintenance</code> 回车删除，问题解决。</li>
+</ol>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-scheduled-maintenance by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:42 GMT -->
+</html>
+
+
+
+
+
+

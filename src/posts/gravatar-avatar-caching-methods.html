@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/gravatar-avatar-caching-methods by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress Gravatar 头像缓存的几种方法 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="Wordpress 等主流博客系统，基本都是采用 Gravatar 头像。但是毕竟是国外网站，有的时候访问会不通畅，所以把 WordPress 评论头像给缓存到本地，就是一件很重要的事情。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress Gravatar 头像缓存的几种方法">
+<meta property="og:url" content="gravatar-avatar-caching-methods.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="Wordpress 等主流博客系统，基本都是采用 Gravatar 头像。但是毕竟是国外网站，有的时候访问会不通畅，所以把 WordPress 评论头像给缓存到本地，就是一件很重要的事情。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2011/08/gravatar-china.png">
+<meta property="article:published_time" content="2011-08-14T12:30:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.518Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta property="article:tag" content="Gravatar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2011/08/gravatar-china.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="gravatar-avatar-caching-methods.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress Gravatar 头像缓存的几种方法
+        </div>
+        <div class="post-meta">
+            2011-08-14 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%8F%92%E4%BB%B6%E7%BC%93%E5%AD%98-Gravatar-%E5%A4%B4%E5%83%8F"><span class="toc-number">1.</span> <span class="toc-text">一、使用插件缓存 Gravatar 头像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B61%EF%BC%9AGravatar-China"><span class="toc-number">1.1.</span> <span class="toc-text">插件1：Gravatar China</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B62%EF%BC%9AWP-Gravatar-Mini-Cache"><span class="toc-number">1.2.</span> <span class="toc-text">插件2：WP Gravatar Mini Cache</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E4%BB%B63%EF%BC%9AGravatar-Local-Cache"><span class="toc-number">1.3.</span> <span class="toc-text">插件3：Gravatar Local Cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-Gravatar-%E5%A4%B4%E5%83%8F%E7%BC%93%E5%AD%98"><span class="toc-number">2.</span> <span class="toc-text">二、使用代码实现 Gravatar 头像缓存</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>Gravatar，全称是「Globally Recognized Avatar」，Wordpress 等主流博客系统，基本都是采用 Gravatar 头像。</p>
+<p>最近周良穿梭与各个博客之间，发现很多博客的 Gravatar 评论头像无法显示，貌似是被墙了，不知道大家有没有遇到这种情况，周良这里已经惨不忍睹了…</p>
+<p>所以，本文将提供几个缓存 Gravatar 头像的方法，这样不仅可以防止头像被墙，也可以提高自己网站的载入速度。</p>
+<h2 id="一、使用插件缓存-Gravatar-头像">一、使用插件缓存 Gravatar 头像</h2>
+<h3 id="插件1：Gravatar-China">插件1：<a target="_blank" rel="noopener" href="https://wordpress.org/extend/plugins/gravatar-china/">Gravatar China</a></h3>
+<p>（下面列举了此插件的一些功能，并附上后台设置截图）</p>
+<ul>
+<li>Gravatar 头像防墙补丁：替换 Gravatar 头像能正常访问的地址；</li>
+<li>Gravatar 本地缓存：对特殊的网络环境下给头像进行本地缓存；</li>
+<li>自定义设置缓存过期时间；</li>
+</ul>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2011/08/gravatar-china.png" alt="wp-recentcomments 插件" title="wp-recentcomments 插件"></p>
+<p></p>
+<h3 id="插件2：WP-Gravatar-Mini-Cache">插件2：<a target="_blank" rel="noopener" href="https://wordpress.org/extend/plugins/wp-gravatar-mini-cache/">WP Gravatar Mini Cache</a></h3>
+<ul>
+<li>迷你 Gravatar 头像缓存插件；</li>
+<li>可以将 Gravatar 头像缓存至本地，以加快加载速度，使其不受 Gravatar 服务器连接速度的影响；</li>
+</ul>
+<blockquote>这两个插件都是国内高手写的头像缓存插件，当然都是中文的。周良没有使用这2个插件，前者的后台设置比后者丰富，后者完全是傻瓜型，安装启用后即可看到效果！</blockquote>
+ 
+<h3 id="插件3：Gravatar-Local-Cache">插件3：<a target="_blank" rel="noopener" href="https://wordpress.org/extend/plugins/gravatarlocalcache/">Gravatar Local Cache</a></h3>
+<ul>
+<li>纯英文操作</li>
+<li>一键完成头像缓存</li>
+</ul>
+<p>周良使用的是 gravatarlocalcache 插件，后台很简单，无需改动什么，直接点击<code>Update Options »</code> 即可</p>
+<p>这个应该比 WP Gravatar Mini Cache 简单多了，适合懒人或者Wordpress新手…</p>
+<h2 id="二、使用代码实现-Gravatar-头像缓存">二、使用代码实现 Gravatar 头像缓存</h2>
+<p>这个方法是周良无意间在网上看到的，据说效果不错。如果您愿意花几分钟操作的话，那么就接着看下去吧。</p>
+<ol>
+<li>先在网站 <code>wp-content</code> 的同级目录建立资料夹: <code>/avatar</code> 权限:<code>755</code>, 这是准备 gravatar 缓存的路径</li>
+<li>准备一张适合你模板尺寸的默认头像, 名为&quot;default.jpg&quot; 放在此路径</li>
+<li>找到原来的 <code>comments.php</code> 或是在 <code>functions.php</code> 里的<code> function mytheme_comment($comment, $args, $depth)</code> 会有一段类似这样的语句:<code>&lt;?php echo get_avatar($comment,$size=’50′,$default=’&lt;path_to_url&gt;’ ); ?&gt;</code> 替换成:</li>
+</ol>
+<pre><code class="language-php">&lt;?php
+$p = ‘avatar/’;
+$f = md5(strtolower($comment-&gt;comment_author_email));
+$a = $p . $f .’.jpg’;
+$e = ABSPATH . $a;
+if (!is_file($e))&#123; //当头像不存在就更新
+$d = get_bloginfo(‘url’). ‘/avatar/default.jpg’;
+$s = ’50′;
+$r = get_option(‘avatar_rating’);
+$g = ‘https://www.gravatar.com/avatar/’.$f.’.jpg?s=’.$s.’&amp;d=’.$d.’&amp;r=’.$r;
+copy($g, $e);
+if ( filesize($e) == 0 )&#123; copy($d, $e); &#125;
+&#125;;
+?&gt;
+&lt;img src=’&lt;?php echo $a ?&gt;’ alt=” /&gt;
+</code></pre>
+<p>对一些主题，这样做之后，可能会使头像没法显示。</p>
+<p>这时只要简单的把 <code>$p = ‘avatar/’</code>改成 <code>$p = ‘/avatar/’</code></p>
+<p>上述修改代码的方法，仅仅对文章页面的评论有效.</p>
+<p>如果您使用了 wp-recentcomments 插件，或是 WordPress thread comment，想知道他们如何缓存头像到本地。可以看看下面的两篇文章。</p>
+<p><a target="_blank" rel="noopener" href="https://wange.im/cache-gravatar.html">万戈：缓存 Gravatar 头像至本地服务器</a>——提供了WordPress thread comment解决头像缓存的办法。</p>
+<p><a target="_blank" rel="noopener" href="http://www.whisperer.name/2009/09/cache-gravatar/">whisperer：全面启用gravatar头像缓存</a>——提供了wp-recentcomments头像启用缓存的方法。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+                <a href="../tag/gravatar/index.html"> / Gravatar</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/gravatar-avatar-caching-methods by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:17 GMT -->
+</html>
+
+
+
+
+
+

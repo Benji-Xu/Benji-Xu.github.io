@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/disabling-hcaptcha by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>如何绕过烦人的 hCaptcha 验证 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="了解 hCaptcha 的绕过方法：如何简化人机验证过程并避免频繁、无意义的图像验证。立即阅读，轻松绕过 hCaptcha 验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何绕过烦人的 hCaptcha 验证">
+<meta property="og:url" content="disabling-hcaptcha.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="了解 hCaptcha 的绕过方法：如何简化人机验证过程并避免频繁、无意义的图像验证。立即阅读，轻松绕过 hCaptcha 验证">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-05-16T20:15:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.528Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="技巧">
+<meta property="article:tag" content="hcaptcha">
+<meta property="article:tag" content="验证码">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="disabling-hcaptcha.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            如何绕过烦人的 hCaptcha 验证
+        </div>
+        <div class="post-meta">
+            2023-05-17 ｜ 
+            
+                <a href="../categories/experimentation/index.html"># 折腾</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-hCaptcha%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是 hCaptcha？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E6%97%A0%E9%9A%9C%E7%A2%8D%E6%9C%8D%E5%8A%A1%EF%BC%8C%E7%BB%95%E8%BF%87-hCaptcha-%E9%AA%8C%E8%AF%81"><span class="toc-number">2.</span> <span class="toc-text">通过无障碍服务，绕过 hCaptcha 验证</span></a></li></ol>
+                </div>
+            </div>
+
+            <h2 id="什么是-hCaptcha？">什么是 hCaptcha？</h2>
+<p>hCaptcha 是一种人类验证服务，类似于 Google reCAPTCHA。它旨在识别并区分人类用户和机器人，并帮助防止常见的 Web 自动化攻击，如 DoS、恶意机器人攻击和无节制的 Web 爬取。</p>
+<p>从我自己的体验来说，hCaptcha 对机器人有没有拦截我不清楚，但对正常人类来了极大的不便。我们想个办法，绕过 hCaptcha 及其频繁、无意义的图像验证：</p>
+<h2 id="通过无障碍服务，绕过-hCaptcha-验证">通过无障碍服务，绕过 hCaptcha 验证</h2>
+<ol>
+<li>
+<p>通过 <a target="_blank" rel="noopener" href="https://dashboard.hcaptcha.com/signup?type=accessibility">这个链接</a> 注册无障碍服务，请填写真实可用的邮箱地址；</p>
+</li>
+<li>
+<p>使用邮箱收件，通过邮件中的「Get Accessibility Cookie」按钮打开链接，请注意链接应该是如下例子这样：<br>
+<code>https://accounts.hcaptcha.com/verify_email/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code></p>
+</li>
+<li>
+<p>通过链接获取 hCaptcha Cookie</p>
+</li>
+</ol>
+<ul>
+<li>点击按钮将会跳转到 hCaptcha 的设置页面</li>
+<li>点击「Set Cookie」按钮，等按钮下方出现一行字「Cookie set.」时就完成了</li>
+</ul>
+<p>当下一次再遇到 hCaptcha 只需要点击验证框即可，不用再进行烦人的图片验证了</p>
+<p>【注】hCaptcha 官方其实也对无障碍服务做了说明<a target="_blank" rel="noopener" href="https://www.hcaptcha.com/accessibility">具体请查阅这里</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/skill/index.html"> / 技巧</a>
+            
+                <a href="../tag/hcaptcha/index.html"> / hcaptcha</a>
+            
+                <a href="../tag/captcha/index.html"> / 验证码</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/disabling-hcaptcha by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:07:09 GMT -->
+</html>
+
+
+
+
+
+

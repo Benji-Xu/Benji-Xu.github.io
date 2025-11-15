@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-image-imitation-hotlinking-are-several-ways by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 图片防盗链的几种方法 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress 博客图片被盗链，一直是大家头痛的问题。为了防止网站被图片流量拖垮，所以一定要设置防盗链。这里分享几个小技巧，希望对大家有用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 图片防盗链的几种方法">
+<meta property="og:url" content="wordpress-image-imitation-hotlinking-are-several-ways.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress 博客图片被盗链，一直是大家头痛的问题。为了防止网站被图片流量拖垮，所以一定要设置防盗链。这里分享几个小技巧，希望对大家有用。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2012/02/WordPress-Hotlink-protection-plugin.jpg">
+<meta property="article:published_time" content="2012-02-03T13:15:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.520Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2012/02/WordPress-Hotlink-protection-plugin.jpg">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-image-imitation-hotlinking-are-several-ways.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 图片防盗链的几种方法
+        </div>
+        <div class="post-meta">
+            2012-02-03 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-htaccess%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">方法一：修改主机根目录下的.htaccess文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8WordPress-Hotlink-protection-plugin-%E6%8F%92%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">方法二：使用WordPress Hotlink protection plugin 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%EF%BC%9AWindows-%E4%B8%BB%E6%9C%BA%E5%90%8E%E5%8F%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">方法三：Windows 主机后台设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%9B%9B%EF%BC%9A%E9%80%9A%E8%BF%87-cPanel-%E9%9D%A2%E6%9D%BF%E6%9D%A5%E8%AE%BE%E7%BD%AE%E9%98%B2%E7%9B%97%E9%93%BE"><span class="toc-number">4.</span> <span class="toc-text">方法四：通过 cPanel 面板来设置防盗链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%94%EF%BC%9A%E5%AF%B9%E5%9B%BE%E7%89%87%E6%B7%BB%E5%8A%A0%E6%B0%B4%E5%8D%B0"><span class="toc-number">5.</span> <span class="toc-text">方法五：对图片添加水印</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%85%AD%EF%BC%9A%E5%B9%B2%E8%84%86%E4%B8%8D%E5%9C%A8-WordPress-%E5%8D%9A%E5%AE%A2%E4%B8%BB%E6%9C%BA%E5%86%85%E6%94%BE%E5%9B%BE%E7%89%87"><span class="toc-number">6.</span> <span class="toc-text">方法六：干脆不在 WordPress 博客主机内放图片</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>一般来说，博客圈内的主机每个月流量限制差不多为 15G 到 25G。如果你的博客每个月流量输出特别多的话，那么说明你的博客人气很不错，或者是使用了大量内链图片或 Mp3。不过也不排除你的图片或者 Mp3 被盗链的。曾经有个朋友，他的主机里面上传了一个MP3文件，短短两天，15G流量被消耗光。</p>
+<p>周良手上有一个PS教程网站，因为糖果相册事件之后，不准备使用外链图片了，图片多了，自然输出流量也会多，为了防止网站被图片拖垮，所以要设置一下图片防盗链。</p>
+<h2 id="方法一：修改主机根目录下的-htaccess文件">方法一：修改主机根目录下的.htaccess文件</h2>
+<p>一般的 WordPress 博客使用的都是 Linux 主机，所以可以通过 FTP 进入网站根目录，找到 .htaccess 文件。在其中加入</p>
+<pre><code class="language-php">RewriteEngine on
+RewriteCond %&#123;HTTP_REFERER&#125; !^$ [NC]
+RewriteCond %&#123;HTTP_REFERER&#125; !imzl.com [NC]
+RewriteRule .(png|jpg)$ /nophoto.png [R,NC,L]
+</code></pre>
+<p>如果你想让其他的一些网站可以使用你的图片，你可以在<br>
+<code>RewriteCond %&#123;HTTP_REFERER&#125; !imzl.com [NC]</code> 后面加上你需要的域名，比如<br>
+<code>RewriteCond %&#123;HTTP_REFERER&#125; !imzl.com,blog.imzl.com,tool.imzl.com[NC]</code></p>
+<p>一般都是添加 FEED 订阅网址、百度、Google什么的。<br>
+最后一句中的 nophoto.png 文件就是替换被盗链的图片，建议这个图片越小越好，可以弄个大大的红叉，写上拒绝盗链。</p>
+<p>**友情提示：**不建议同时禁止 <code>gif|jpg|png</code> 这三种图片文件，比如你已经禁止了png，但是却用了 nophoto.png 来替换盗链图片，这样肯定会出问题。如果你想同时禁止这三种类型，可以使用以下面这句替换：</p>
+<pre><code>RewriteRule .(gif|png|jpg)$ 图片绝对地址（需要加上http://） [R,NC,L]
+</code></pre>
+<p>OK，利用.htaccess文件进行图片防盗链已经完成。同样的不仅可以对图片防盗链，添加一下文件后缀名，<br>
+即可对其他的文件进行防盗链设置。</p>
+<h2 id="方法二：使用WordPress-Hotlink-protection-plugin-插件">方法二：使用WordPress Hotlink protection plugin 插件</h2>
+<p><a target="_blank" rel="noopener" href="http://wordpress.org/extend/plugins/wordpress-automatic-image-hotlink-protection/">下载WordPress Hotlink protection plugin插件</a><br>
+安装插件后，可以进入插件设置页面。</p>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2012/02/WordPress-Hotlink-protection-plugin.jpg" alt="WordPress 图片防盗链的几种方法"></p>
+<p>你可以在该插件后台设定要保护图片的路径，比如 <code>wp-content/uploads</code>,如果改路径下的图片被盗链，盗链的网页上将用右边的警告图片替代原来的图片，当然该警告图也可以在插件后台设置。</p>
+<h2 id="方法三：Windows-主机后台设置">方法三：Windows 主机后台设置</h2>
+<p>如果您是 windows 主机的话，可以直接登入主机后台，设置图片防盗链，因为周良目前没有 windows 主机，所以就不演示了。</p>
+<h2 id="方法四：通过-cPanel-面板来设置防盗链">方法四：通过 cPanel 面板来设置防盗链</h2>
+<p>如果你使用的 Linux 主机是 cPanel 面板的话，你可以在面板中设置。</p>
+<ol>
+<li>
+<p>登陆 cPanel 后，点击安全 -&gt; HotLink 保护。这个功能是保护防止其他网站直接链接到你网站上的文件，<br>
+通过设置就可以起到图片防盗链的作用。</p>
+</li>
+<li>
+<p>默认可能是禁用的，你需要点击“启用”按钮将它启用。</p>
+</li>
+<li>
+<p>接着进行 HotLink 保护配置，其中「允许访问的 URL」这里一般要填写上属于你自己的站点网址，也就是你想让哪些站点可以引用你的图片的地址。</p>
+</li>
+</ol>
+<p>4.「阻止直接访问下列扩展名」填写你网站上所用的图片扩展名，用英文逗号隔开，例如：jpg,jpeg,gif,png,bmp。</p>
+<p>5.「Url 重新定向到」你可以设置一副你自己的版权图片，当有人非法引用你的图片时就会默认显示这张图片来警告<br>
+他。直接输入图片的地址即可。</p>
+<ol start="6">
+<li>上面的设置完成后，最后点击“提交”即可，这时你可以自己在别的网站上引用下站点的图片测试一下，看看效果。</li>
+</ol>
+<h2 id="方法五：对图片添加水印">方法五：对图片添加水印</h2>
+<p>这个方法吧，很多朋友都在使用，不过还是有很多童鞋连添加水印的图片都会盗链。</p>
+<h2 id="方法六：干脆不在-WordPress-博客主机内放图片">方法六：干脆不在 WordPress 博客主机内放图片</h2>
+<p>额，最牛逼的一个方法，直接不在博客里面加入图片，或者使用外链图片。不过这个就跑题了，算是我和大家开的一个小玩笑。</p>
+<p>OK，教程到这里全部结束了，如果大家还有什好的方法，欢迎给我留言告诉我哦，我会在第一时间把你的方法加上，另外这种教程百度和谷歌已经很多了，这些都不是我原创的方法，只是总结一下。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-image-imitation-hotlinking-are-several-ways by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:39 GMT -->
+</html>
+
+
+
+
+
+

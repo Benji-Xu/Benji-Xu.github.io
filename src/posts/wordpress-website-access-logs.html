@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-website-access-logs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>为 WordPress 生成网站访问日志 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="对于一个网站来说，分析站点访问日志是非常重要的一件事。但是经常去服务器后台查询网站的访问日志太麻烦，而且很多vps都不带有访问日志这个功能。在这里周良给大家分享一个小技巧，可以为 WordPress 生成网站访问日志。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为 WordPress 生成网站访问日志">
+<meta property="og:url" content="wordpress-website-access-logs.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="对于一个网站来说，分析站点访问日志是非常重要的一件事。但是经常去服务器后台查询网站的访问日志太麻烦，而且很多vps都不带有访问日志这个功能。在这里周良给大家分享一个小技巧，可以为 WordPress 生成网站访问日志。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-01-25T14:14:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.523Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-website-access-logs.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            为 WordPress 生成网站访问日志
+        </div>
+        <div class="post-meta">
+            2014-01-25 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>对于一个网站来说，分析站点访问日志是非常重要的一件事。但是经常去服务器后台查询网站的访问日志太麻烦，而且很多vps都不带有访问日志这个功能。在这里周良给大家分享一个小技巧，可以为 WordPress 生成网站访问日志，日志内容还是可以自定义的，这样就可以省去每次都要登录主机后台查询。</p>
+<p>把下面的代码添加到主题的 <code>function.php</code> 文件中即可：</p>
+<pre><code class="language-php">make_log_file();
+
+function make_log_file() &#123;
+    // log 文件名
+    $filename = 'mylogs.txt';
+
+    // 去除 rc-ajax 评论以及 cron 机制访问记录
+    if (strstr($_SERVER[&quot;REQUEST_URI&quot;], &quot;rc-ajax&quot;) == false
+        &amp;&amp; strstr($_SERVER[&quot;REQUEST_URI&quot;], &quot;wp-cron.php&quot;) == false) &#123;
+
+        $word = date('mdHis', $_SERVER['REQUEST_TIME'] + 3600 * 8) . &quot; &quot;;
+        // 访问页面
+        $word .= $_SERVER[&quot;REQUEST_URI&quot;] . &quot; &quot;;
+        // 协议
+        $word .= $_SERVER['SERVER_PROTOCOL'] . &quot; &quot;;
+        // 方法, POST OR GET
+        $word .= $_SERVER['REQUEST_METHOD'] . &quot; &quot;;
+        //$word .= $_SERVER['HTTP_ACCEPT'] . &quot; &quot;;
+        // 获得浏览器信息
+        $word .= getbrowser() . &quot; &quot;;
+        // 传递参数
+        $word .= &quot;[&quot; . $_SERVER['QUERY_STRING'] . &quot;] &quot;;
+        // 跳转地址
+        $word .= $_SERVER['HTTP_REFERER'] . &quot; &quot;;
+        // 获取IP
+        $word .= getIP() . &quot; &quot;;
+        $word .= &quot;\n&quot;;
+
+        $fh = fopen($filename, &quot;a&quot;);
+        fwrite($fh, $word);
+        fclose($fh);
+    &#125;
+&#125;
+
+// 获取IP地址，网上现成代码
+function getIP() &#123;
+    if (getenv('HTTP_CLIENT_IP')) &#123;
+        $ip = getenv('HTTP_CLIENT_IP');
+    &#125; else if (getenv('HTTP_X_FORWARDED_FOR')) &#123;
+        $ip = getenv('HTTP_X_FORWARDED_FOR');
+    &#125; else if (getenv('REMOTE_ADDR')) &#123;
+        $ip = getenv('REMOTE_ADDR');
+    &#125; else &#123;
+        $ip = $_SERVER['REMOTE_ADDR'];
+    &#125;
+    return $ip;
+&#125;
+
+// 获取浏览器信息，移动端，平板电脑数据还未加上。
+function getbrowser() &#123;
+    $Agent = $_SERVER['HTTP_USER_AGENT'];
+    $browser = '';
+    $browserver = '';
+
+    if (ereg('Mozilla', $Agent) &amp;&amp; ereg('Chrome', $Agent)) &#123;
+        $temp = explode('(', $Agent);
+        $Part = $temp[2];
+        $temp = explode('/', $Part);
+        $browserver = $temp[1];
+        $temp = explode(' ', $browserver);
+        $browserver = $temp[0];
+        $browser = 'Chrome';
+    &#125;
+
+    if (ereg('Mozilla', $Agent) &amp;&amp; ereg('Firefox', $Agent)) &#123;
+        $temp = explode('(', $Agent);
+        $Part = $temp[1];
+        $temp = explode('/', $Part);
+        $browserver = $temp[2];
+        $temp = explode(' ', $browserver);
+        $browserver = $temp[0];
+        $browser = 'Firefox';
+    &#125;
+
+    if (ereg('Mozilla', $Agent) &amp;&amp; ereg('Opera', $Agent)) &#123;
+        $temp = explode('(', $Agent);
+        $Part = $temp[1];
+        $temp = explode(')', $Part);
+        $browserver = $temp[1];
+        $temp = explode(' ', $browserver);
+        $browserver = $temp[2];
+        $browser = 'Opera';
+    &#125;
+
+    if (ereg('Mozilla', $Agent) &amp;&amp; ereg('MSIE', $Agent)) &#123;
+        $temp = explode('(', $Agent);
+        $Part = $temp[1];
+        $temp = explode(';', $Part);
+        $Part = $temp[1];
+        $temp = explode(' ', $Part);
+        $browserver = $temp[2];
+        $browser = 'Internet Explorer';
+    &#125;
+
+    if ($browser != '') &#123;
+        $browseinfo = $browser . ' ' . $browserver;
+    &#125; else &#123;
+        $browseinfo = $_SERVER['HTTP_USER_AGENT'];
+    &#125;
+    
+    return $browseinfo;
+&#125;
+
+</code></pre>
+<p>ok，在你的站点根目录上就会生成 <code>mylogs.txt</code> 这个文件，通过 <code>https://imzl.com/mylogs.txt</code> 可以直接访问。这样生成的网站日志会比 CNZZ 等第三方统计工具生成的日志精准的多，你可以通过日志得知哪些人访问哪些文件，哪些蜘蛛爬行过了等等信息。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-website-access-logs by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:13 GMT -->
+</html>
+
+
+
+
+
+

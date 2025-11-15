@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wpjam-thumbnail by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 高级缩略图插件：WPJAM Thumbnail - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="我们知道 WordPress 默认就有特色图片的功能，我们可以在撰写文章的时候设置一个缩略图，然后使用 wp_post_thumbnail 函数调用它，但是这个功能使用起来比较麻烦，因为需要每篇文章都要设置特色图片。然而 WPJAM Thumbnail 这款插件可以让 WordPress 缩略图功能用起来更方便，听我慢慢道来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 高级缩略图插件：WPJAM Thumbnail">
+<meta property="og:url" content="wpjam-thumbnail.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="我们知道 WordPress 默认就有特色图片的功能，我们可以在撰写文章的时候设置一个缩略图，然后使用 wp_post_thumbnail 函数调用它，但是这个功能使用起来比较麻烦，因为需要每篇文章都要设置特色图片。然而 WPJAM Thumbnail 这款插件可以让 WordPress 缩略图功能用起来更方便，听我慢慢道来。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2013/12/wpjam-term-thumbnail.png">
+<meta property="article:published_time" content="2013-12-15T08:36:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.521Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 插件">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wpjam-thumbnail.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 高级缩略图插件：WPJAM Thumbnail
+        </div>
+        <div class="post-meta">
+            2013-12-15 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WPJAM-Thumbnail-%E8%AE%BE%E7%BD%AE%E7%BC%A9%E7%95%A5%E5%9B%BE%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">WPJAM Thumbnail 设置缩略图的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WPJAM-Thumbnail-%E5%9B%BE%E7%89%87%E8%A3%81%E5%89%AA%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">WPJAM Thumbnail 图片裁剪方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WPJAM-Thumbnail-%E7%9A%84%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">WPJAM Thumbnail 的函数接口</span></a></li></ol>
+                </div>
+            </div>
+
+            <p><img src="../cdn.imzl.com/wp-content/uploads/2013/07/wordpress-category.png" alt=""></p>
+<p>好友 @我爱水煮鱼 最近又出了一款插件，名字叫做 WPJAM Thumbnail。我们知道 WordPress 默认就有特色图片的功能，我们可以在撰写文章的时候设置一个缩略图，然后使用 <code>wp_post_thumbnail</code> 函数调用它，但是这个功能使用起来比较麻烦，因为需要每篇文章都要设置特色图片。然而 WPJAM Thumbnail 这款插件可以让 WordPress 缩略图功能用起来更方便，听我慢慢道来。</p>
+<h2 id="WPJAM-Thumbnail-设置缩略图的方式">WPJAM Thumbnail 设置缩略图的方式</h2>
+<p>WPJAM Thumbnail 这个插件通过以下顺序查找一篇文章的缩略图：</p>
+<ul>
+<li>首先是否设置了文章自己本身的特色图片。</li>
+<li>如果没有，就检查下这篇文章的标签是否有特色图片。</li>
+<li>如果没有，就检查下这篇文章是否有图片，有就获取第一张。</li>
+<li>如果还是没有，就检查下这篇文章所在的分类是否有特色图片。</li>
+</ul>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2013/12/wpjam-term-thumbnail.png" alt=""></p>
+<p>这样就最大的保证了所有的文章都有缩略图，并且对于一类的文章只需设置一次即可，比如一些标签的文章，只需要到该标签编辑页面设置下该标签的特色图片（如上图），就可以将所有该类的文章都设置了缩略图，非常方便。</p>
+<h2 id="WPJAM-Thumbnail-图片裁剪方式">WPJAM Thumbnail 图片裁剪方式</h2>
+<ul>
+<li>默认是使用 timthumb.php 这个最佳 PHP 图片裁剪脚本来裁剪，它会根据传递进去的图片长和宽生成适应的图片。你可以需要将插件下面的 include/cache 目录设置为可写。</li>
+<li>如果你安装了<a target="_blank" rel="noopener" href="http://blog.wpjam.com/project/wpjam-qiniutek/">七牛镜像存储插件</a>，这个插件会使用七牛的 API 进行裁剪，完全在七牛的 CDN 上实现缩略图裁剪，速度和效率都更是一流。并且如果获取的缩略图不是本站，还会将图片保存到本站，然后镜像到七牛。</li>
+</ul>
+<h2 id="WPJAM-Thumbnail-的函数接口">WPJAM Thumbnail 的函数接口</h2>
+<p>因为完全是不同的获取缩略图和裁剪方式，所以 WPJAM Thumbnail 提供的函数接口和默认的缩略图函数接口有很大的不同了。所以这个插件也提供了丰富的函数接口让你面对各种情况：</p>
+<ul>
+<li><code>wpjam_has_post_thumbnail()</code>：判断当前文章是否有缩略图，必须在主循环里面使用。</li>
+<li><code>wpjam_post_thumbnail($size=’thumbnail’, $crop=1,$class=”wp-post-image”)</code>输出当前文章的缩略图，它有三个参数：<code>$size</code> 缩略图的大小，这个参数可以是字符串，比如 thumbnail, medium, large 就是你在 WordPress 后台 &gt; 设置 &gt; 多媒体里面定义的尺寸，也可以是具体宽和高的数组，比如 array(150,150)。<code>$crop</code> 缩略图是否裁剪还是缩略，默认裁剪。<code>$class</code> 输出的 img 标签的 class 值，默认是 wp-post-image。</li>
+<li><code>wpjam_get_post_thumbnail($post=null, $size=’thumbnail’, $crop=1, $class=”wp-post-image”)</code>：<br>
+获取文章的缩略图，它的参数相比 wpjam_post_thumbnail 多了 $post。默认为 null 就是全局变量定义的，如果在主循环中使用，就是当前文章。</li>
+<li><code> wpjam_get_post_thumbnail_src($post=null, $size=’thumbnail’, $crop=1)</code>:获取文章缩略图的地址，已经定义尺寸之后的地址。</li>
+<li><code>wpjam_get_post_thumbnail_uri($post=null)</code>：获取文章的缩略图原始地址，就是图片还未裁剪的地址。</li>
+</ul>
+<p>最后：这是一款付费插件哈，购买地址：<a target="_blank" rel="noopener" href="http://wpjam.net/item/wpjam-thumbnail/?ref=xiaowu">http://wpjam.net/item/wpjam-thumbnail/</a></p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-plugins/index.html"> / WordPress 插件</a>
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wpjam-thumbnail by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:14 GMT -->
+</html>
+
+
+
+
+
+

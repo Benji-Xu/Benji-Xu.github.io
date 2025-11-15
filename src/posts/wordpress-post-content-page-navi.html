@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-post-content-page-navi by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>无插件实现 WordPress 单篇文章分页 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="分享一个WordPress技巧，不使用插件，实现WordPress单篇文章分页，对长文章类型的 WordPress 站点很是有用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无插件实现 WordPress 单篇文章分页">
+<meta property="og:url" content="wordpress-post-content-page-navi.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="分享一个WordPress技巧，不使用插件，实现WordPress单篇文章分页，对长文章类型的 WordPress 站点很是有用。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.inzl.com/wp-content/uploads/2011/10/pages.png">
+<meta property="article:published_time" content="2011-10-01T04:57:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.519Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta property="article:tag" content="WordPress 提速">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.inzl.com/wp-content/uploads/2011/10/pages.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-post-content-page-navi.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            无插件实现 WordPress 单篇文章分页
+        </div>
+        <div class="post-meta">
+            2011-10-01 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>记得周良很久以前折腾的视觉天城教程网站，主要是一个设计教程网站，用的也是 WordPress。说到教程网站，文章当然会有很多图片，往往一篇文章就长到一个恐怖的程度，并且打开很慢，所以给网站添加一个分页的功能是当务之急！</p>
+<p>在网上找了一些教程进行试验，主要都是使用 WordPress 自带隐藏的文章内容分页功能。</p>
+<p>下面我们将说下如何显示 WordPress（我只在 WordPress 3.1.1 下面测试过）隐藏的文章内容分页功能：</p>
+<ol>
+<li>找到 <code>wp-includes/js/quicktags.js</code>，在其中找到下面这个代码：</li>
+</ol>
+<pre><code class="language-php">edButtons[edButtons.length]=new edButton(“ed_more”,”more”,”&lt;!–more–&gt;”,””,”t”,-1);
+</code></pre>
+<p>在这个代码的后面加上如下代码：</p>
+<pre><code class="language-php">edButtons[edButtons.length]=new edButton(“ed_next”,”page”,”&lt;!–nextpage–&gt;”,”&quot;,”p”,-1);
+</code></pre>
+<p>注：是“<code>ed_next</code>”，不是“<code>ed_netx</code>”。是“<code>–nextpage–</code>”，不是“<code>–netxpage–</code>”，网上很多教程都是拼写错误。</p>
+<ol start="2">
+<li>继续在 <code>wp-includes/js/quicktags.js</code> 中找到如下代码：</li>
+</ol>
+<pre><code class="language-php">j.Buttons[j.Buttons.length]=new edButton(a+”_more”,”more”,”&lt;!–more–&gt;”,”&quot;,”t”,-1);
+</code></pre>
+<p>在后面加上如下代码：</p>
+<pre><code class="language-php">j.Buttons[j.Buttons.length]=new edButton(a+”_next”,”page”,”&lt;!–nextpage–&gt;”,”&quot;,”p”,-1);
+</code></pre>
+<p>保存 <code>wp-includes/js/quicktags.js</code></p>
+<ol start="3">
+<li>找到 <code>wp-includes/js/quicktags.dev.js</code> ，找到下面代码</li>
+</ol>
+<pre><code class="language-php">/* edButtons[edButtons.length] = new edButton(‘ed_next’ ,’page’ ,’&lt;!–nextpage–&gt;’ ,” ,’p’ ,-1 ); */
+</code></pre>
+<p>将其注释符号去掉，如下：</p>
+<pre><code class="language-php">edButtons[edButtons.length] = new edButton(‘ed_next’ ,’page’ ,’&lt;!–nextpage–&gt;’ ,” ,’p’ ,-1 );
+</code></pre>
+<ol start="4">
+<li>找到 wp-admin/includes/post.php ，找到下面代码：</li>
+</ol>
+<pre><code class="language-php">‘link’, ‘unlink’, ‘wp_more’,
+</code></pre>
+<p>在后面添加以下代码：</p>
+<pre><code class="language-php">‘wp_page’,
+</code></pre>
+<p>好了，WordPress 3.1.1 隐藏的文章内容分页功能现在已经显示出来了。如图：（此图标和 more 图标相似）<br>
+<img src="../cdn.inzl.com/wp-content/uploads/2011/10/pages.png" alt=""></p>
+<p>下面我们还要往当前主题目录下 <code>single.php</code> 里面添加分页函数，找到代码：</p>
+<pre><code class="language-php">&lt;?php the_content(); ?&gt;
+</code></pre>
+<p>在下面添加分页函数：</p>
+<pre><code class="language-php">&lt;?php wp_link_pages(‘before=&amp;after=&amp;next_or_number=number&amp;pagelink=第%页’); ?&gt;
+</code></pre>
+<p>现在你可以添加一个长篇文章来测试效果了。当然了如果你会 CSS，你还可以美化一下效果。 关于函数 <code>wp_link_pages</code> 的用法可以查看 WordPress 官网：<a target="_blank" rel="noopener" href="http://codex.wordpress.org/Template_Tags/wp_link_pages">http://codex.wordpress.org/Template_Tags/wp_link_pages</a></p>
+<p>此分页功能对搜索引擎不够友好，所以我们还得改造。此方法参照：<a target="_blank" rel="noopener" href="http://wordpress.org.cn/thread-61875-1-1.html">http://wordpress.org.cn/thread-61875-1-1.html</a></p>
+<ol>
+<li>我们找到当前主题目录下的 <code>header.php</code> ，在<code>&lt;/head&gt;</code>之间加上如下代码：</li>
+</ol>
+<pre><code class="language-php">&lt;?php if ( is_singular() )&#123; ?&gt; &lt;link rel=”canonical” href=”&lt;?php the_permalink(); ?&gt;” /&gt; &lt;?php &#125; ?&gt;
+</code></pre>
+<ol start="2">
+<li>找到当前主题目录下的 <code>header.php</code>，在输出 description 元标记的代码后添加：</li>
+</ol>
+<pre><code class="language-php">&lt;?php if (get_query_var(‘paged’)) &#123; //判断是否为首页 echo ‘第’; echo get_query_var(‘paged’); //页码 echo ‘页’; &#125;?&gt;
+</code></pre>
+<p>此方法可能有些问题，我没有发现有任何改变。</p>
+<ol start="3">
+<li>避免feed输出也被分页，找到 <code>wp-includes/query.php</code> ，找到代码：</li>
+</ol>
+<pre><code class="language-php">if ( strpos( $content, ‘&lt;!–nextpage–&gt;’ ) ) &#123;
+</code></pre>
+<p>改为：</p>
+<pre><code class="language-php">if ( strpos( $content, ‘&lt;!–nextpage–&gt;’ ) &amp;&amp; (!is_feed()) ) &#123;
+</code></pre>
+<p>改造基本完成，有什么问题提出来，大家可以交流下。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+                <a href="../tag/wordpress-speed/index.html"> / WordPress 提速</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-post-content-page-navi by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:12 GMT -->
+</html>
+
+
+
+
+
+

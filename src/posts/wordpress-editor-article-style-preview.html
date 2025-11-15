@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/wordpress-editor-article-style-preview by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 后台编辑器实现文章样式直接预览 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="在WordPress 3.0以后，有一个新的实用功能：可以更改默认后台编辑器（TinyMCE）的样式，实现在后台可视化编辑器模式下直接预览日志内容的 编排，并且与发表后的文章浏览样式保持一致 ，不需要转到前台查看日志编辑情况。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 后台编辑器实现文章样式直接预览">
+<meta property="og:url" content="wordpress-editor-article-style-preview.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="在WordPress 3.0以后，有一个新的实用功能：可以更改默认后台编辑器（TinyMCE）的样式，实现在后台可视化编辑器模式下直接预览日志内容的 编排，并且与发表后的文章浏览样式保持一致 ，不需要转到前台查看日志编辑情况。">
+<meta property="og:locale">
+<meta property="og:image" content="../cdn.imzl.com/wp-content/uploads/2011/09/20110917225835.png">
+<meta property="article:published_time" content="2011-09-17T14:33:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.518Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="../cdn.imzl.com/wp-content/uploads/2011/09/20110917225835.png">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="wordpress-editor-article-style-preview.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 后台编辑器实现文章样式直接预览
+        </div>
+        <div class="post-meta">
+            2011-09-17 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  
+                </div>
+            </div>
+
+            <p>刚刚 <a target="_blank" rel="noopener" href="http://ongakuer.com/">@良心</a> 同学更新了一下 Deve 主题，添加了一个「文章编辑器应用主题样式」选项。周良好奇了一下，所以拆分了一下 Deve 的更新包：</p>
+<p>原来在 WordPress 3.0 以后，有一个新的实用功能：可以更改默认后台编辑器（TinyMCE）的样式，实现在后台可视化编辑器模式下直接预览日志内容的 编排，并且与发表后的文章浏览样式保持一致 ，不需要转到前台查看日志编辑情况。WordPress 3.21默认主题 Twenty Eleven 已集成了该功能，默认主题 Twenty Eleven 功能强大，集成了众多 WordPress 新功能，到目前为止，我还是没用过比这主题更强的的。</p>
+<p>下面来说一下应该如何操作。PS：感谢 <a target="_blank" rel="noopener" href="http://ongakuer.com/">@良心</a> 同学的指导</p>
+<p>打开默认主题 Twenty Eleven 的 <code>functions.php</code>（函数模版），会看到一句加了明确注释的代码：</p>
+<pre><code class="language-php">// This theme styles the visual editor with editor-style.css to match the theme style.
+add_editor_style();
+</code></pre>
+<p>注释的中文大概意思为：可视化编辑器与主题 editor-style.css 风格相匹配。<br>
+关键就是这句。周良就不用什么主题做示范了，直接上方法！</p>
+<p>1、新建一个名称为：<code>editor-style.css</code> 的文件，将下面样式复制进去，并放到主题css目录中。</p>
+<pre><code class="language-css">body &#123;
+    font: 13px‘Microsoft YaHei’,
+    微软雅黑,
+    Arial,
+    Lucida Grande,
+    Tahoma,
+    sans - serif;
+    color: #000;
+    text - shadow: 0px 1px 0px#d1d1d1;
+    width: 700px;
+&#125;
+ul li &#123;
+    list - style: square inside;
+    line - height: 24px;
+&#125;
+h1 &#123;
+    font - size: 18px;
+    line - height: 185 % ;
+&#125;
+h2 &#123;
+    font - size: 16px;
+    line - height: 185 % ;
+&#125;
+h3 &#123;
+    font - size: 14px;
+    line - height: 185 % ;
+&#125;
+ul,
+ol,
+dd,
+pre,
+hr &#123;
+    margin: 0 0 10px 0;
+&#125;
+p &#123;
+    line - height: 185 % ;
+    text - indent: 2em;
+    margin: 0 0 10px 0;
+&#125;
+blockquote &#123;
+    width: 660px;
+    color: #4e6384;
+    line - height: 23px;
+    margin: 5px auto 5px auto;
+    padding: 10px;
+    clear: both;
+    border: 1px solid#ccc;
+&#125;
+code &#123;
+    width: 660px;
+    font: 12px / 17px tahoma,
+    arial,
+    sans - serif;
+    color: #4e6384;
+    display: block;
+    margin: 5px auto 5px auto;
+    padding: 10px;
+    border - left: 3px solid#8391A7;
+    border - right: 1px solid#8391A7;
+    border - top: 1px solid#8391A7;
+    border - bottom: 1px solid#8391A7;
+&#125;
+blockquote td &#123;
+    border - bottom: 1px solid#ccc;
+    padding: 2px;
+&#125;
+/ 图文混排 /img.centered &#123;
+    display: block;
+    margin - left: auto;
+    margin - right: auto;
+    margin - bottom: 10px;
+&#125;
+img.alignnone &#123;
+    margin: 0 0 10px 0;
+    display: inline;
+&#125;
+img.alignright &#123;
+    margin: 0 0 10px 10px;
+    display: inline;
+&#125;
+img.alignleft &#123;
+    margin: 0 10px 10px 0;
+    display: inline;
+&#125;.aligncenter &#123;
+    display: block;
+    margin - left: auto;
+    margin - right: auto;
+    margin - bottom: 10px;
+&#125;.alignright &#123;
+    float: rightright;
+    margin: 0 0 10px 10px;
+&#125;.alignleft &#123;
+    float: left;
+    margin: 0 10px 10px 0;
+&#125;
+</code></pre>
+<p>2、打开主题的functions.php模版文件，加入一句：</p>
+<pre><code class="language-php">//后台预览
+add_editor_style(‘/css/editor-style.css’);
+</code></pre>
+<p>这里的 <code>/css/editor-style.css</code> 代表的是 <code>editor-style.css</code> 文件在主题中的地址，如果你的主题中没有 css 这个文件夹，您可以直接把editor-style.css 文件拖到主题目录中，在 <code>functions.php</code> 中就不需要把 <code>/css</code> 这个文件夹加进去了。</p>
+<p>到目前文章，基本都已经完成咯~~~~</p>
+<p>下图是周良博客的后台文章编辑器截图：</p>
+<p><img src="../cdn.imzl.com/wp-content/uploads/2011/09/20110917225835.png" alt=""></p>
+<p>但由于后台的编辑器与发表后的文章（前台）出于不同的样式框架中，在您修改主题的时候，只需要将主题 style.css 中与正文相关的样式复制出来，并去掉具体的选择器即可，比如我上面的样式代码，也可以参考默认主题 Twenty Eleven 中的 editor-style.css，关键是要设置body的宽度与您的主题正文部分相同。</p>
+<p>如果您看了此文，修改主题的时候有困难，可以给周良留言，或者在谷歌搜索一下类似的教程。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/wordpress-editor-article-style-preview by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:09:13 GMT -->
+</html>
+
+
+
+
+
+

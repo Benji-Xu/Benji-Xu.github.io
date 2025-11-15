@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="robots" content="index, follow">
+    <title>404 - 周良 Len</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y86KN4GF2G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Y86KN4GF2G');
+    </script>
+    <script defer data-domain="imzl.com" src="https://plausible.zeabur.app/js/script.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/markdown.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <meta name="generator" content="Hexo 6.3.0">
+    <link rel="alternate" href="/rss.xml" title="周良 Len" type="application/atom+xml">
+    <style>
+        .content {
+            text-align: center;
+            margin-top: 20vh;
+        }
+        .content h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+        }
+        .content a {
+            font-size: 1.5em;
+            color: red;
+            text-decoration: none;
+        }
+        .content a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 50px; /* 增加底部与内容之间的距离 */
+        }
+    </style>
+</head>
+<body>
+    <div class="paper">
+        <div class="paper-main">
+            <div class="header">
+                <div class="logo"><a href="/" title="Len"><img src="/img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+                <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+                <ul class="nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/projects">Projects</a></li>
+                    <li><a href="/archives">Archives</a></li>
+                </ul>
+                <script>
+                    function toggleMenu() {
+                        var nav = document.querySelector('.nav');
+                        var button = document.querySelector('.hamburger');
+                        nav.classList.toggle('active');
+
+                        if (button.innerHTML === "☰") {
+                            button.innerHTML = "×";
+                        } else {
+                            button.innerHTML = "☰";
+                        }
+                    }
+                </script>
+            </div>
+            
+            <div class="content">
+                <h1>404 Not Found</h1>
+                <a href="/">Go to Home</a>
+            </div>
+
+            <div class="footer">
+                <span>Copyright © 2025 本纪</span>
+                <span>
+                    <a href="/links">我的朋友</a>
+                    ·
+                    <a href="/cognitive-bias">认知偏差手册</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

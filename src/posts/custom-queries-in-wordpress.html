@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<!-- Mirrored from imzl.com/custom-queries-in-wordpress by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <!-- title -->
+  
+    
+      <title>WordPress 里的自定义查询 - 周良 Len</title>
+    
+  
+  
+  <!-- open graph -->
+  <meta name="description" content="WordPress里如何进行自定义查询？这里介绍 3 种方法：pre_get_posts Action，query_posts Function 以及 WP_Query Class。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress 里的自定义查询">
+<meta property="og:url" content="custom-queries-in-wordpress.html">
+<meta property="og:site_name" content="周良 Len">
+<meta property="og:description" content="WordPress里如何进行自定义查询？这里介绍 3 种方法：pre_get_posts Action，query_posts Function 以及 WP_Query Class。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2014-11-09T03:58:00.000Z">
+<meta property="article:modified_time" content="2025-01-26T17:08:13.522Z">
+<meta property="article:author" content="周良 Len">
+<meta property="article:tag" content="WordPress 教程">
+<meta property="article:tag" content="WordPress 技巧">
+<meta name="twitter:card" content="summary">
+  <!-- canonical -->
+  
+  <link rel="canonical" href="custom-queries-in-wordpress.html">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+  <script src="../js/analytics.js"></script>
+  <!-- CSS -->
+  
+<link rel="stylesheet" href="../css/reset.css">
+
+  
+<link rel="stylesheet" href="../css/style.css">
+
+  
+<link rel="stylesheet" href="../css/markdown.css">
+
+  
+<link rel="stylesheet" href="../css/fonts.css">
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="rss.xml" title="周良 Len" type="application/rss+xml">
+</head>
+
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                
+                    <div class="header">
+    <div class="logo"><a href="../index.html" title="Len"><img src="../img/logo.svg" alt="Len" aria-label="logo" height="20"></a></div>
+    <button class="hamburger" aria-label="菜单" onclick="toggleMenu()">☰</button>
+    
+    <ul class="nav">
+        
+        <li><a href="../index.html">首页</a></li>
+        
+        <li><a href="../about/index.html">关于</a></li>
+        
+        <li><a href="../archive/index.html">所有文章</a></li>
+        
+        <li><a href="../projects/index.html">参与项目</a></li>
+        
+        <li><a href="../hardware-wallet/index.html">硬件钱包</a></li>
+        
+        <li><a href="../stack/index.html">工具栈</a></li>
+        
+        <li><a href="../links/index.html">朋友</a></li>
+        
+    </ul>
+    <script>
+        function toggleMenu() {
+        var nav = document.querySelector('.nav');
+        var button = document.querySelector('.hamburger'); // 获取汉堡菜单按钮
+        nav.classList.toggle('active');
+        
+        // 检查当前图标是☰还是×，并切换
+        if (button.innerHTML === "☰") {
+            button.innerHTML = "×"; // 切换为×
+        } else {
+            button.innerHTML = "☰"; // 切换回☰
+        }
+    }
+    </script>
+
+</div>
+
+                
+                <div class="post-main">
+    
+        <div class="post-main-title">
+            WordPress 里的自定义查询
+        </div>
+        <div class="post-meta">
+            2014-11-09 ｜ 
+            
+                <a href="../categories/wordpress/index.html"># WordPress</a>
+            
+        </div>
+        <div class="post-md">
+
+            
+
+            <div class="toc-container">
+                <div class="toc-toggle">
+                  <span class="toc-toggle-icon">▼</span> 文章目录
+                </div>
+                <div class="toc-content">
+                  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81pre-get-posts-Action"><span class="toc-number">1.</span> <span class="toc-text">1、pre_get_posts Action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81query-posts-Function"><span class="toc-number">2.</span> <span class="toc-text">2、query_posts Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81WP-Query-Class"><span class="toc-number">3.</span> <span class="toc-text">3、WP_Query Class</span></a></li></ol>
+                </div>
+            </div>
+
+            <p>WordPress是一个非常流行的CMS以及博客平台，它有非常强大、贴心的功能。例如它会根据你当前访问的页面自动为你查询数据，访问分类页面时，会显示该分类下的最新文章；访问文章页面时，则会将文章的内容显示出来，这样固然很好很方便，但是却牺牲了灵活度。</p>
+<p>那么问题来了，WordPress 里如何进行自定义查询？</p>
+<p>在说自定义查询前，先要知道 WordPress 的主查询，即 <code>Main Query</code>。WordPress 的机制是：当检测到特定页面的访问时，会创建一个全局变量 <code>（$query）</code>，并将该页面的信息当作参数传入 <code>$query</code>，然后执行 <code>$query</code> 的查询方法，并将查询到的数据保存到 <code>$query</code> 中，这样，当你在模板文件里使用的 <code>have_posts()</code>、<code>the_post()</code> 等方法，访问的都是 <code>$query</code> 里的数据。</p>
+<p>WordPress里进行自定义查询的方法大致有3种：</p>
+<h2 id="1、pre-get-posts-Action">1、pre_get_posts Action</h2>
+<p><a target="_blank" rel="noopener" href="http://codex.wordpress.org/Plugin_API/Action_Reference/pre_get_posts">pre_get_posts</a> Action 的执行是在 <code>$query</code> 变量创建后，但在查询执行前调用的，因此你可以通过修改 <code>$query</code> 变量的参数，来改变查询的结果。该 Action 会将 <code>$query</code> 对象的引用作为参数传入该方法，因此对该对象的任何操作都会生效。该 Action 修该的是主查询，因此你可以使用该 Action 来改变主查询的内容。</p>
+<p>例如在首页的文章列表中排除某些分类的文章：</p>
+<pre><code class="language-php">function exclude_category( $query ) &#123;
+    if ( $query-&gt;is_home() &amp;&amp; $query-&gt;is_main_query() ) &#123;
+        $query-&gt;set( 'cat', '-1,-2' );
+    &#125;
+&#125;
+add_action( 'pre_get_posts', 'exclude_category' );
+</code></pre>
+<p>或者设置每页显示的文章数：</p>
+<pre><code class="language-php">function home_pagesize( $query ) &#123;
+    if ( is_admin() )
+        return;
+
+    if ( is_home() ) &#123;
+        $query--&gt;set( 'posts_per_page', 5 );
+        return;
+    &#125;
+&#125;
+add_action( 'pre_get_posts', 'home_pagesize', 1 );
+</code></pre>
+<p>这里注意到在上一个例子中我们用 <code>is_admin()</code> 来排除掉了后台的页面，原因就是该 Action 同时会对后台的查询生效。</p>
+<h2 id="2、query-posts-Function">2、query_posts Function</h2>
+<p><a target="_blank" rel="noopener" href="http://codex.wordpress.org/Function_Reference/query_posts">query_posts</a> 方法是另一种修改主查询的方法，但是更为直接，因为它会直接覆盖 <code>$query</code> 变量。WordPress 官方建议不要轻易使用该方法，而是使用 <code>pre_get_posts</code> Action 来代替，因为两者实现的功能类似，但是前者会增加页面的加载时间（需要重新查询），带来代码上的混淆等诸多弊端，所以咱们还是别自找麻烦了。</p>
+<h2 id="3、WP-Query-Class">3、WP_Query Class</h2>
+<p>前面所讲的主查询，使用的便是 <a target="_blank" rel="noopener" href="http://codex.wordpress.org/Class_Reference/WP_Query">WP_Query</a> 类，使用该类，可以实现完全的自定义查询。该类封装了一些方法，用来处理文章的查询请求。</p>
+<p>例如，你需要在文章页面的末尾显示该文章的相关文章，相关文章是和该文章同一分类下的随机的 6 篇文章。你可能需要这样写：</p>
+<pre><code class="language-php">// The Main Loop
+$post_id = get_the_ID();
+$post_category = get_the_category($post_id);
+$cat_id = $post_category-&gt;term_id;
+
+$args = array(
+	'post_status' =&gt; 'publish',
+	'orderby'       =&gt; 'rand',
+	'cat'  =&gt; $cat_id,
+	'post__not_in' =&gt; array($post_id),
+	'paged'         =&gt; 1,
+	'posts_per_page' =&gt; 6
+);
+
+$my_query = new WP_Query($args);
+
+if ( $my_query-&gt;have_posts() ) &#123;
+	$list = '&lt;ul&gt;';
+	while ( $my_query-&gt;have_posts() ) &#123;
+		$my_query-&gt;the_post();
+		$list .= sprintf('&lt;li&gt;&lt;a href=&quot;%s&quot;&gt;%s&lt;/a&gt;&lt;/li&gt;', the_permalink(), the_title());
+	&#125;
+	$list .= '&lt;/ul&gt;';
+	echo $list;
+&#125;
+wp_reset_postdata();
+// The Main Loop
+</code></pre>
+<p>这里我们先获取文章 ID，再根据 ID 获取分类，然后构造参数并创建 <code>WP_Query</code> 对象，然后调用 <code>have_posts()</code> 来遍历查询到的文章。</p>
+<p><code>WP_Query</code> 的构造参数非常之多，这里不一一举例，通过这些参数的组合，我们几乎能实现任何的自定义的查询。</p>
+<p>总的来说，如果要修改主查询，例如修改分类页面的排序方式，每页的文章数，排除某些文章等，则使用 <code>pre_get_posts Action</code>，而要进行完全的自定义查询，如侧边栏的最新文章，或者自己创建的新页面，则需要使用 <code>WP_Query</code> 类，<code>query_posts</code> 则一般不用。</p>
+
+        </div>
+    
+    <!-- tags -->
+    
+        <div class="post-meta">
+            标签：
+            
+                <a href="../tag/wordpress-tutorial/index.html"> / WordPress 教程</a>
+            
+                <a href="../tag/wordpress-skill/index.html"> / WordPress 技巧</a>
+            
+        </div>
+    
+</div>
+
+                <div class="footer">
+    <span>Copyright © 2025 本纪</span>
+    <span>
+        Powered by <a href="https://hexo.io" target="_blank" rel="noopener" target="_blank" rel="noopener">Hexo</a> with <a href="https://github.com/zhoulianglen/hexo-theme-ZenMind" target="_blank" rel="noopener" target="_blank" rel="noopener">ZenMind</a><br>
+        <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">浙ICP备20022554号</a>
+    </span>
+</div>
+
+<link rel="stylesheet" href="../css/a11y-dark.min.css">
+
+
+<script src="../js/highlight.min.js"></script>
+
+
+<script src="../js/highlightjs-line-numbers.js"></script>
+
+
+<script src="../js/toc04df.js?v=1.1.0.js"></script>
+
+
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+</script>
+
+<!-- 判断是否有注脚并加载 bigfoot -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 检查页面是否包含注脚元素
+      if (document.querySelectorAll('.footnote-ref').length > 0) {
+        // 动态加载 jQuery
+        var scriptJquery = document.createElement('script');
+        scriptJquery.src = '../cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+        scriptJquery.onload = function() {
+          // jQuery 加载完成后，加载 bigfoot.js
+          var scriptBigfoot = document.createElement('script');
+          scriptBigfoot.src = 'js/bigfoot.min.js';
+          scriptBigfoot.onload = function() {
+            // bigfoot.js 加载完成后，初始化 bigfoot
+            $.bigfoot();
+          };
+          document.body.appendChild(scriptBigfoot);
+        };
+        document.body.appendChild(scriptJquery);
+  
+        // 动态加载 bigfoot 的 CSS 文件
+        var linkBigfootCSS = document.createElement('link');
+        linkBigfootCSS.rel = 'stylesheet';
+        linkBigfootCSS.href = 'css/bigfoot-default.css'; 
+        document.head.appendChild(linkBigfootCSS);
+      }
+    });
+  </script>
+  
+            </div>
+        </div>
+    </body>
+
+<!-- Mirrored from imzl.com/custom-queries-in-wordpress by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Nov 2025 06:08:04 GMT -->
+</html>
+
+
+
+
+
+
