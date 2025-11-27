@@ -48,7 +48,7 @@ body {
     flex-direction: column;
     align-items: center; /* 水平居中 */
     justify-content: center; /* 垂直居中整块卡片区域 */
-    height: 100vh; 
+    height: 100dvh; 
     overflow: hidden; /* 完全隐藏滚动条 */
 }
 
@@ -128,7 +128,7 @@ body.dark .theme-toggle i {
     display: grid;
     width: 100%;
     max-width: 960px;
-    max-height: 100vh;
+    max-height: 100dvh;
     overflow: hidden;
     
     grid-template-columns: repeat(4, 1fr);
