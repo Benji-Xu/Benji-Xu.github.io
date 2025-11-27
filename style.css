@@ -304,7 +304,7 @@ body.dark .profile-tag:hover {
     line-height: 1;           /* 去掉额外行高中上下不对称的空隙 */
     display: inline-flex;     /* 让图标本身也用 flex 居中 */
     align-items: center;
-    transform: translateY(1px); /* 轻微下移，光学居中 */
+    justify-content: center;  /* 水平居中 */
 }
 .profile-btn.insta {
     color: #00A1D6; /* Bilibili 品牌蓝 */
