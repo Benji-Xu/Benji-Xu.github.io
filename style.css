@@ -48,8 +48,8 @@ body {
     flex-direction: column;
     align-items: center; /* 水平居中 */
     justify-content: center; /* 垂直居中整块卡片区域 */
-    min-height: 100vh; 
-    overflow-y: hidden; /* 一屏显示，不出现滚动条 */
+    height: 100vh; 
+    overflow: hidden; /* 完全隐藏滚动条 */
 }
 
 /* 背景柔和动态光斑（苹果风格） */
