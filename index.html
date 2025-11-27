@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin 的个人主页</title>
+    
+    <link rel="icon" type="image/png" href="avatar.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式">
+        <i class="fa-regular fa-moon"></i>
+    </button>
+    <div class="spacer"></div>
+
+    <div class="bento-grid">
+        
+        <div class="card profile">
+            <div class="profile-top">
+                <div class="avatar"><img src="avatar.png" alt="头像"></div>
+                <div>
+                    <h3>Benjamin Xu</h3>
+                    <p style="font-size: 16px;">i@benxu.vip</p>
+                </div>
+            </div>
+            <p>你好，我是 Benjamin，一位兴趣使然的设计爱好者，喜欢用文字、视频和代码记录生活，也在慢慢打造属于自己的小工具与内容宇宙。</p>
+            <div class="profile-tags">
+                <a href="#zodiac" class="profile-tag">星座 · 狮子座</a>
+                <a href="#mbti" class="profile-tag">MBTI · ISTP-A</a>
+                <a href="#about" class="profile-tag">...</a>
+            </div>
+            <div class="profile-actions">
+                <a href="https://space.bilibili.com/1525408234" target="_blank" class="profile-btn insta">
+                    <i class="fa-brands fa-bilibili"></i>
+                    <span>Bilibili</span>
+                </a>
+                <a href="https://github.com/Benji-Xu" target="_blank" class="profile-btn git">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+
+        <a href="https://benjixu.lofter.com" target="_blank" class="card lofter">
+            <div class="card-icon"><i class="fa-solid fa-feather-pointed"></i></div>
+            <div>
+                <h3>Lofter 博客</h3>
+                <p>benjixu.lofter.com</p>
+            </div>
+            <div class="lofter-badge">打开 ↗</div>
+        </a>
+
+        <div class="card">
+            <div class="card-icon" style="color: #34C759;"><i class="fa-solid fa-map-pin"></i></div>
+            <div>
+                <h3>所在城市</h3>
+                <p>汕头</p>
+            </div>
+        </div>
+
+        <a href="#projects" class="card">
+            <div class="card-icon" style="color: #007AFF;"><i class="fa-solid fa-list-check"></i></div>
+            <div>
+                <h3>项目</h3>
+                <p>正在推进的事情</p>
+            </div>
+        </a>
+
+        <a href="https://www.deviantart.com/steveahn/art/Ben-10-and-Generator-Rex-498104237" target="_blank" class="card photo">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4ddec490-f6bc-4f8a-82a1-82a15f096b43/d88k3ot-53920bea-2022-4323-a76e-71fe69bc3657.jpg/v1/fill/w_1024,h_576,q_75,strp/ben_10_and_generator_rex_by_steveahn_d88k3ot-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc2IiwicGF0aCI6Ii9mLzRkZGVjNDkwLWY2YmMtNGY4YS04MmExLTgyYTE1ZjA5NmI0My9kODhrM290LTUzOTIwYmVhLTIwMjItNDMyMy1hNzZlLTcxZmU2OWJjMzY1Ny5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.GxTXRPfMoj1t01-JiZ39bstDBS-qoQrWOq0PeSTL-BI" alt="照片墙">
+        </a>
+
+        <div class="card">
+            <div class="card-icon" style="color: #FF9F0A;"><i class="fa-solid fa-wrench"></i></div>
+            <div>
+                <h3>工具栈</h3>
+                <p>常用设备与软件</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon" style="color: #5856D6;"><i class="fa-solid fa-user-group"></i></div>
+            <div>
+                <h3>友链</h3>
+                <p>朋友们的个人站点</p>
+            </div>
+        </div>
+
+        <div class="card col-4 footer-card">
+            <p style="text-align: center;">
+                Designed by Benjamin &copy; 2025
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            var body = document.body;
+            var toggle = document.querySelector('.theme-toggle');
+            var stored = window.localStorage && localStorage.getItem('theme');
+            if (stored === 'dark') {
+                body.classList.add('dark');
+            }
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    var isDark = body.classList.toggle('dark');
+                    if (window.localStorage) {
+                        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    }
+                    var icon = toggle.querySelector('i');
+                    if (icon) {
+                        icon.className = isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

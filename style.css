@@ -1,0 +1,485 @@
+/* --- 核心变量系统 --- */
+:root {
+    --bg-page: #F2F2F7;
+    --bg-card: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --accent-lofter: #2C2C2E;
+    --fold-color: #E5E5EA; /* 浅色模式下的纸张背面颜色（浅灰） */
+    
+    --grid-gap: 16px;
+    --card-radius: 24px;
+    --card-padding: 24px;
+    
+    /* 【！！！关键调整变量！！！】 */
+    /* 调整这个值（如从 13vh 改为 11vh 或 15vh），控制整体下移的程度 */
+    --top-push-height: 8vh; 
+    
+    --font-h2: 20px;
+    --font-p: 15px;
+    --font-weight-bold: 600;
+    --font-weight-reg: 400;
+}
+
+/* --- 深色模式变量覆盖 */
+body.dark {
+    --bg-page: #000000;
+    --bg-card: #1C1C1E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #A1A1A6;
+    --accent-lofter: #2C2C2E; /* 保持一致或略微变亮 */
+    --fold-color: #3A3A3C;    /* 深色模式下的纸张背面颜色（深灰） */
+}
+
+/* --- 全局重置 --- */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Body 恢复简单流式布局 --- */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-page);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, sans-serif;
+    color: var(--text-primary);
+    display: flex; /* 使用 flex 方便居中网格 */
+    flex-direction: column;
+    align-items: center; /* 水平居中 */
+    justify-content: center; /* 垂直居中整块卡片区域 */
+    min-height: 100vh; 
+    overflow-y: hidden; /* 一屏显示，不出现滚动条 */
+}
+
+/* 背景柔和动态光斑（苹果风格） */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 153, 102, 0.18), transparent 55%),
+        radial-gradient(circle at 80% 30%, rgba(88, 86, 214, 0.20), transparent 55%),
+        radial-gradient(circle at 30% 80%, rgba(52, 199, 89, 0.16), transparent 55%);
+    filter: blur(28px);
+    transform: translate3d(0,0,0);
+    pointer-events: none;
+    animation: bg-orbit 40s ease-in-out infinite alternate;
+}
+body.dark::before {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255, 159, 10, 0.22), transparent 55%),
+        radial-gradient(circle at 85% 25%, rgba(10, 132, 255, 0.25), transparent 55%),
+        radial-gradient(circle at 40% 85%, rgba(48, 209, 88, 0.20), transparent 55%);
+}
+
+@keyframes bg-orbit {
+    0% {
+        transform: translate3d(-10px, 0, 0) scale(1);
+    }
+    50% {
+        transform: translate3d(10px, -8px, 0) scale(1.05);
+    }
+    100% {
+        transform: translate3d(-6px, 8px, 0) scale(1.03);
+    }
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    position: fixed;
+    bottom: 56px;  
+    right: 56px;   
+    z-index: 100;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+.theme-toggle i {
+    font-size: 18px;
+    color: #111111; /* 浅色模式下使用深色图标 */
+}
+body.dark .theme-toggle {
+    border-color: rgba(255,255,255,0.12);
+    background: rgba(28,28,30,0.9);
+}
+body.dark .theme-toggle i {
+    color: #FFFFFF; /* 深色模式下使用浅色图标，提升可读性 */
+}
+
+/* 占位元素，用于手动向下推送内容 */
+.spacer {
+    width: 100%;
+    height: 0; /* 不再用占位方式推内容，由 flex 垂直居中控制 */
+    flex-shrink: 0; /* 占位元素保留但不影响布局 */
+}
+
+/* --- Bento 网格布局 --- */
+.bento-grid {
+    display: grid;
+    width: 100%;
+    max-width: 960px;
+    
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(140px, auto); /* 允许内容撑开行高 */
+    
+    gap: var(--grid-gap);
+    padding: 0 var(--grid-gap);
+    /* 整体下移，让主体相对视口稍微再偏下一点 */
+    margin-top: 7vh;
+    margin-bottom: 0; 
+}
+
+/* --- 卡片基础样式 --- */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text-primary);
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+
+    transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.18s ease-out;
+}
+
+/* --- 卡片悬停翻页效果 (Dog-ear Effect) --- */
+
+/* 1. 设置伪元素基础样式（排除 footer 和 photo 卡片） */
+.card:not(.footer-card):not(.photo):not(.lofter)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    /* 初始状态：大小为0 */
+    border-width: 0;
+    border-style: solid;
+    
+    /* 关键原理:
+       Right边框颜色 = 页面背景色 (var(--bg-page)) -> 负责遮挡住原本的卡片直角
+       Bottom边框颜色 = 折角颜色 (var(--fold-color)) -> 负责显示翻过来的三角形
+    */
+    border-color: var(--bg-page) var(--bg-page) var(--fold-color) var(--fold-color);
+    
+    /* 给折角更明显的圆角，让效果更柔和 */
+    border-bottom-left-radius: 10px;
+    
+    /* 添加投影，增加立体感 (drop-shadow 可以紧贴三角形边缘) */
+    filter: drop-shadow(-2px 2px 3px rgba(0,0,0,0.15));
+    
+    /* 动画过渡 */
+    transition: border-width 0.25s ease-out;
+    
+    /* 确保层级在内容之上 */
+    z-index: 20;
+    
+    /* 避免干扰鼠标点击卡片链接 */
+    pointer-events: none; 
+}
+
+/* 2. 悬停时触发折角大小变化 */
+/* 排除 footer-card 与 photo 与 lofter，其他卡片（包括 profile 等）都会生效 */
+.card:not(.footer-card):not(.photo):not(.lofter):hover::before {
+    /* Top: 0
+       Right: 32px (遮挡区宽度)
+       Bottom: 32px (折角区高度)
+       Left: 0
+    */
+    border-width: 0 32px 32px 0;
+}
+
+.card:active {
+    transform: scale(0.96);
+}
+
+/* --- 统一排版规范 --- */
+.card h3 {
+    margin: 0 0 8px 0;
+    font-size: var(--font-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+.card p {
+    margin: 0;
+    font-size: var(--font-p);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-reg);
+    line-height: 1.4;
+}
+.card-icon {
+    font-size: 28px;
+    margin-bottom: auto;
+}
+.card:not(.photo):not(.social):not(.footer-card):not(.profile) {
+    height: 180px;
+}
+.card.profile {
+    grid-row: span 2;
+}
+.card.profile p {
+    line-height: 1.6;
+}
+.col-2 { grid-column: span 2; }
+.col-4 { grid-column: span 4; }
+.row-2 { grid-row: span 2; }
+
+/* --- 特殊卡片定制 --- */
+.card.profile { justify-content: flex-start; grid-column: 1 / 3; grid-row: 1 / 3; }
+.profile-top { display: flex; align-items: center; margin-bottom: 20px; }
+.profile-top h3 {
+    margin: 0 0 2px 0;  /* 名字与邮箱更贴近 */
+}
+.profile-top p {
+    line-height: 1.1;   /* 邮箱这一行本身更紧凑 */
+}
+.profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px; /* 文案到底部标签之间的距离稍微加大 */
+}
+.profile-tag {
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.04);
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1; /* 让大写字母和点号在胶囊内垂直居中 */
+    min-height: 26px;
+}
+.profile-tag:hover {
+    background: rgba(0,0,0,0.06);
+}
+body.dark .profile-tag {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.10);
+}
+body.dark .profile-tag:hover {
+    background: rgba(255,255,255,0.14);
+}
+.profile-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto; /* 把按钮推到卡片底部 */
+    padding-top: 16px; /* 与上方正文保持间距 */
+}
+.profile-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #F5F5F7;
+    color: #000;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.profile-btn i {
+    font-size: 14px;
+    line-height: 1;           /* 去掉额外行高中上下不对称的空隙 */
+    display: inline-flex;     /* 让图标本身也用 flex 居中 */
+    align-items: center;
+    transform: translateY(1px); /* 轻微下移，光学居中 */
+}
+.profile-btn.insta {
+    color: #00A1D6; /* Bilibili 品牌蓝 */
+}
+.profile-btn.git {
+    color: #000;
+}
+.profile-btn:hover {
+    background: #F0F0F5; /* 比原来更接近默认色，变化更轻 */
+    border-color: rgba(0,0,0,0.08);
+}
+.profile-btn:active {
+    transform: scale(0.97);
+}
+body.dark .profile-btn {
+    background: #2C2C2E;
+    border-color: rgba(255,255,255,0.16);
+    color: #FFFFFF;
+}
+body.dark .profile-btn.git {
+    color: #FFFFFF; /* GitHub 在深色下使用白色图标/文字 */
+}
+body.dark .profile-btn:hover {
+    background: #3A3A3C;
+    border-color: rgba(255,255,255,0.24);
+}
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-right: 16px;
+    overflow: hidden;
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.card.lofter { background-color: var(--accent-lofter); color: #FFFFFF; grid-column: 3 / 5; grid-row: 1 / 2; }
+.card.lofter h3, .card.lofter p { color: #FFFFFF; }
+.card.lofter p { opacity: 0.7; }
+.lofter-badge {
+    position: absolute;
+    bottom: var(--card-padding);
+    right: var(--card-padding);
+    background: rgba(255,255,255,0.24);
+    padding: 7px 14px;                  /* 与 .profile-tag 一致的胶囊高度感 */
+    border-radius: 999px;               /* 胶囊形 */
+    font-size: 13px;                    /* 与 .profile-tag 字号匹配 */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+.card:nth-child(3) { grid-column: 3 / 4; grid-row: 2 / 3; }
+.card:nth-child(4) { grid-column: 4 / 5; grid-row: 2 / 3; }
+.card.photo { padding: 0; height: 180px; grid-column: 1 / 3; grid-row: 3 / 4; }
+.card.social:nth-child(6) { grid-column: 3 / 4; grid-row: 3 / 4; }
+.card.social:nth-child(7) { grid-column: 4 / 5; grid-row: 3 / 4; }
+/* 图片卡片 */
+.card.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;            /* 略高于 1/3，再向上少许 */
+
+    transition: transform 0.4s ease;
+    image-rendering: auto;                    /* 明确使用平滑插值，而不是像素化 */
+    -ms-interpolation-mode: bicubic;          /* 旧版 IE 的平滑缩放（向后兼容，无副作用） */
+}
+.card.photo:hover img { transform: scale(1.05); }
+
+/* 社交卡片 */
+.card.social {
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+}
+.card.social i {
+    font-size: 48px;
+}
+
+/* --- 底部版权优化 --- */
+/* 保持原有布局位置，但彻底移除卡片视觉 */
+.card.footer-card {
+    /* 1. 视觉清除：强制背景透明、无阴影、无边框 */
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0;
+
+    /* 2. 布局调整：去掉内边距，保持 flex 居中 */
+    padding: 0;
+    height: auto;
+    margin-top: 16px; /* 稍微增加一点顶部呼吸感 */
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* 3. 文字样式 */
+    color: var(--text-secondary);
+    font-size: 12px;
+    opacity: 0.8; 
+}
+
+/* 4. 交互清除：禁止像其他卡片那样点击时缩放 */
+.card.footer-card:active {
+    transform: none !important;
+}
+.card.footer-card:hover {
+    box-shadow: none !important;
+}
+
+/* --- 桌面端整体放大：通过字体与间距放大视觉，而不是整体缩放 --- */
+@media (min-width: 1024px) {
+    :root {
+        --font-h2: 24px;   /* 标题稍大 */
+        --font-p: 16px;    /* 正文字号略大 */
+        --card-padding: 28px;
+        --grid-gap: 18px;
+    }
+    .bento-grid {
+        max-width: 1100px; /* 网格更宽一点 */
+        margin-top: 6vh;   /* 保持整体在首屏范围内 */
+    }
+
+    /* 桌面端略微放大头像卡片里的按钮字号 */
+    .profile-btn {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+    .profile-btn i {
+        font-size: 15px;
+    }
+}
+
+/* --- 响应式适配 (手机端) --- */
+@media (max-width: 768px) {
+    body {
+        justify-content: flex-start; /* 手机上从上往下滚动更自然 */
+        min-height: auto;
+        padding-top: 24px;
+        padding-bottom: 32px;
+        overflow-y: auto; /* 允许纵向滚动 */
+    }
+    .spacer { height: 0; }
+    .bento-grid {
+        grid-template-columns: 1fr; /* 单列布局，更像时间线 */
+        grid-auto-rows: minmax(140px, auto);
+        padding: 0 16px;
+        gap: 12px;
+        margin-top: 0;
+        margin-bottom: 16px; /* 移动端底部间距不需要太大 */
+    }
+    .bento-grid > .card,
+    .bento-grid > .footer-card {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+    .bento-grid > .card.photo {
+        order: 99; /* 照片卡片放到最后一项 */
+    }
+    .bento-grid > .card.footer-card {
+        order: 100; /* 版权卡片紧随照片之后 */
+    }
+    .card.profile { grid-row: auto; }
+
+    .card:not(.photo):not(.social):not(.footer-card):not(.profile) {
+        height: auto; /* 由内容决定高度，避免挤压 */
+    }
+    .card.footer-card { grid-column: span 1; }
+    .theme-toggle {
+        bottom: 24px;
+        right: 24px; /* 更好触达 */
+    }
+}
