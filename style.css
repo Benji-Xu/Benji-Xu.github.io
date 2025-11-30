@@ -48,8 +48,8 @@ body {
     flex-direction: column;
     align-items: center; /* 水平居中 */
     justify-content: center; /* 垂直居中整块卡片区域 */
-    height: 100dvh; 
-    overflow: hidden; /* 完全隐藏滚动条 */
+    min-height: 100dvh; 
+    overflow-x: hidden; /* 只隐藏横向滚动条 */
 }
 
 /* 背景柔和动态光斑（苹果风格） */
@@ -128,8 +128,6 @@ body.dark .theme-toggle i {
     display: grid;
     width: 100%;
     max-width: 960px;
-    max-height: 100dvh;
-    overflow: hidden;
     
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(140px, auto); /* 允许内容撑开行高 */
@@ -449,7 +447,7 @@ body.dark .profile-btn:hover {
 @media (max-width: 768px) {
     body {
         justify-content: flex-start; /* 手机上从上往下滚动更自然 */
-        min-height: auto;
+        min-height: 100dvh;
         padding-top: 24px;
         padding-bottom: 32px;
         overflow-y: auto; /* 允许纵向滚动 */
@@ -474,7 +472,10 @@ body.dark .profile-btn:hover {
     .bento-grid > .card.footer-card {
         order: 100; /* 版权卡片紧随照片之后 */
     }
-    .card.profile { grid-row: auto; }
+    .card.profile { 
+        grid-row: auto;
+        height: auto; /* 移动端由内容撑开高度 */
+    }
 
     .card:not(.photo):not(.social):not(.footer-card):not(.profile) {
         height: auto; /* 由内容决定高度，避免挤压 */
