@@ -30,7 +30,7 @@
             <div class="profile-tags">
                 <a href="#zodiac" class="profile-tag">星座 · 狮子座</a>
                 <a href="#mbti" class="profile-tag">MBTI · ISTP-A</a>
-                <a href="#about" class="profile-tag">...</a>
+                <a href="javascript:void(0)" id="about-trigger" class="profile-tag">...</a>
             </div>
             <div class="profile-actions">
                 <a href="https://space.bilibili.com/1525408234" target="_blank" class="profile-btn insta">
@@ -50,7 +50,7 @@
                 <h3>Lofter 博客</h3>
                 <p>benjixu.lofter.com</p>
             </div>
-            <div class="lofter-badge">打开 ↗</div>
+            <div class="lofter-badge">阅读文章</div>
         </a>
 
         <div class="card">
@@ -97,6 +97,18 @@
 
     </div>
 
+    <div id="grid-overlay" class="bento-overlay">
+        <div class="overlay-content">
+            <h3>关于 Benjamin</h3>
+            <p>这里是隐藏的详细介绍区域。</p>
+            <p>你可以在这里放置更多文字、技能条或者任何你不想直接展示在首页的内容。</p>
+            
+            <button id="overlay-close" class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
         (function () {
             var body = document.body;
@@ -115,6 +127,48 @@
                     if (icon) {
                         icon.className = isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
                     }
+                });
+            }
+
+            /* --- 打开关于页面 --- */
+            var trigger = document.getElementById('about-trigger');
+            var profileCard = document.querySelector('.card.profile');
+
+            // 打开新页面
+            if (trigger) {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault(); // 阻止链接跳转
+                    
+                    // 检测是否为本地文件系统
+                    if (window.location.protocol === 'file:') {
+                        // 本地环境：直接打开 about.html
+                        window.location.href = 'about.html';
+                    } else {
+                        // 生产环境：使用 /about 路径
+                        window.location.href = '/about';
+                    }
+                });
+            }
+            
+            // 防止点击 profile 卡片内的按钮和标签时卡片缩放
+            if (profileCard) {
+                profileCard.addEventListener('mousedown', function(e) {
+                    // 检查点击的是否是按钮、标签或其他交互元素
+                    var target = e.target;
+                    var isButton = target.closest('.profile-btn') || 
+                                   target.closest('.profile-tag') ||
+                                   target.closest('.profile-actions') ||
+                                   target.closest('.profile-tags');
+                    
+                    if (isButton) {
+                        // 添加禁用缩放的类
+                        profileCard.classList.add('no-scale');
+                    }
+                });
+                
+                profileCard.addEventListener('mouseup', function() {
+                    // 移除禁用缩放的类
+                    profileCard.classList.remove('no-scale');
                 });
             }
         })();

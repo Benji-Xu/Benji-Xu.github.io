@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于本站</title>
+    
+    <link rel="icon" type="image/png" href="https://s3.bmp.ovh/imgs/2025/11/27/1edfb1f50b494886.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .about-page {
+            width: 100%;
+            padding-top: 24px;
+            padding-bottom: 32px;
+        }
+        
+        .about-header {
+            max-width: 1100px;
+            margin: 0 auto 32px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .about-back {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+        
+        .about-back:hover {
+            opacity: 0.7;
+        }
+        
+        .about-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            line-height: 1;
+        }
+        
+        .about-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 32px auto;
+            overflow: visible;
+            position: relative;
+            
+            /* 使用 drop-shadow 代替 box-shadow */
+            /* drop-shadow 会沿着被切割后的图片边缘生成阴影，不会产生锯齿 */
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+        }
+        
+        .about-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 50%;
+        }
+        
+        .about-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .about-card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        
+        .about-card:active {
+            transform: scale(0.96);
+        }
+        
+        body.dark .about-card {
+            background-color: var(--bg-card);
+        }
+        
+        .about-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            color: var(--text-primary);
+        }
+        
+        .about-card p {
+            font-size: var(--font-p);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .card-tag {
+            font-size: var(--font-p);
+            opacity: 0.8;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .card-highlight {
+            color: #7B68EE;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        
+        .about-card.intro .card-tag {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .about-card.intro h3 {
+            margin-bottom: 12px;
+        }
+        
+        .about-card.intro p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: var(--font-p);
+            line-height: 1.6;
+            margin-top: 0;
+        }
+        
+        .about-card ul {
+            font-size: var(--font-p);
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .about-card li {
+            margin-bottom: 12px;
+        }
+        
+        .about-card a {
+            color: #00A1D6;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .about-card a:hover {
+            opacity: 0.7;
+        }
+        
+        /* 卡片布局 */
+        .about-card.intro {
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+            background: #2C2C2E;
+            color: #FFFFFF;
+        }
+        
+        .about-card.intro h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #FFFFFF;
+        }
+        
+        .about-card.intro .card-tag {
+            color: #FFFFFF;
+            opacity: 0.8;
+        }
+        
+        .about-card.intro p {
+            color: #FFFFFF;
+            opacity: 0.8;
+        }
+        
+        body.dark .about-card.intro {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), #2C2C2E;
+        }
+        
+        .about-card.info {
+            grid-column: 3 / 5;
+            grid-row: 1 / 2;
+        }
+        
+        .about-card.skills {
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+        }
+        
+        .about-card.interests {
+            grid-column: 3 / 5;
+            grid-row: 2 / 3;
+        }
+        
+        .about-card.links {
+            grid-column: 1 / 5;
+            grid-row: 3 / 4;
+        }
+        
+        .about-footer {
+            max-width: 1100px;
+            margin: 48px auto 0;
+            padding: 24px 16px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-p);
+            opacity: 0.8;
+        }
+        
+        /* 桌面端字号调整 */
+        @media (min-width: 1024px) {
+            .about-page {
+                padding-top: 6vh;
+            }
+            
+            .about-card {
+                padding: 32px;
+            }
+            
+            .about-card h3 {
+                margin-bottom: 16px;
+            }
+            
+            .about-card p {
+                font-size: 16px;
+            }
+            
+            .about-card ul {
+                font-size: 16px;
+            }
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 0 16px;
+            }
+            
+            .about-card {
+                grid-column: auto !important;
+                grid-row: auto !important;
+            }
+            
+            .about-header {
+                padding: 0 16px;
+                margin-bottom: 24px;
+            }
+            
+            .about-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式">
+        <i class="fa-regular fa-moon"></i>
+    </button>
+    
+    <div class="about-page">
+        <div class="about-header">
+            <button class="about-back" onclick="window.history.back()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1 class="about-title">关于本站</h1>
+        </div>
+        
+        <div class="about-avatar">
+            <img src="https://s3.bmp.ovh/imgs/2025/11/27/1edfb1f50b494886.png" alt="头像">
+        </div>
+        
+        <div class="about-grid">
+            <!-- 介绍卡片 -->
+            <div class="about-card intro">
+                <span class="card-tag">你好，很高兴认识你👋</span>
+                <h3>我叫 Benjamin</h3>
+                <p>一位设计爱好者，喜欢用文字、视频和代码记录生活，也在慢慢打造属于自己的小工具与内容宇宙。</p>
+            </div>
+            
+            <!-- 个人信息卡片 -->
+            <div class="about-card info">
+                <span class="card-tag">关于</span>
+                <h3>本站介绍</h3>
+                <p class="card-highlight" style="font-weight: 400;">个人作品集</p>
+            </div>
+            
+            <!-- 技能栈卡片 -->
+            <div class="about-card skills">
+                <h3>工具栈</h3>
+                <p>设计：Figma、Adobe</p>
+                <p>开发：VS Code、Git</p>
+                <p>编程：JavaScript、Python</p>
+                <p>设备：MacBook、iPad</p>
+            </div>
+            
+            <!-- 兴趣爱好卡片 -->
+            <div class="about-card interests">
+                <h3>兴趣爱好</h3>
+                <p>热爱设计、编程和创意表达。通过 Bilibili 分享视频，在 Lofter 记录生活，在 GitHub 开源项目。</p>
+            </div>
+            
+            <!-- 友链卡片 -->
+            <div class="about-card links">
+                <h3>联系方式</h3>
+                <p><a href="https://space.bilibili.com/1525408234" target="_blank"><i class="fa-brands fa-bilibili"></i> Bilibili</a> - 视频内容分享</p>
+                <p><a href="https://benjixu.lofter.com" target="_blank"><i class="fa-solid fa-feather-pointed"></i> Lofter</a> - 博客和生活记录</p>
+                <p><a href="https://github.com/Benji-Xu" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a> - 开源项目</p>
+            </div>
+        </div>
+        
+        <div class="about-footer">
+            <p>Designed by Benjamin &copy; 2025</p>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var body = document.body;
+            var toggle = document.querySelector('.theme-toggle');
+            var stored = window.localStorage && localStorage.getItem('theme');
+            if (stored === 'dark') {
+                body.classList.add('dark');
+            }
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    var isDark = body.classList.toggle('dark');
+                    if (window.localStorage) {
+                        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    }
+                    var icon = toggle.querySelector('i');
+                    if (icon) {
+                        icon.className = isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>

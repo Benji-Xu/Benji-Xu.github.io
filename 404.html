@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重定向</title>
+    <script>
+        // 获取请求的路径
+        var path = window.location.pathname;
+        
+        // 如果访问 /about，重定向到 /about.html
+        if (path === '/about' || path === '/about/') {
+            window.location.replace('/about.html');
+        }
+        // 其他 404 情况，重定向到首页
+        else {
+            window.location.replace('/');
+        }
+    </script>
+</head>
+<body>
+    <p>重定向中...</p>
+</body>
+</html>
