@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目</title>
+    
+    <link rel="icon" type="image/png" href="https://s3.bmp.ovh/imgs/2025/11/27/1edfb1f50b494886.png">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .projects-page {
+            width: 100%;
+            padding-top: 24px;
+            padding-bottom: 32px;
+        }
+        
+        .projects-header {
+            max-width: 1100px;
+            margin: 0 auto 32px;
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .projects-back {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+        
+        .projects-back:hover {
+            opacity: 0.7;
+        }
+        
+        .projects-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            line-height: 1;
+        }
+        
+        .projects-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .project-card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 28px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        
+        .project-card:active {
+            transform: scale(0.96);
+        }
+        
+        body.dark .project-card {
+            background-color: var(--bg-card);
+        }
+        
+        .project-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+            color: var(--text-primary);
+        }
+        
+        .project-card p {
+            font-size: var(--font-p);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .project-tag {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.06);
+            color: var(--text-secondary);
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        body.dark .project-tag {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.10);
+            color: var(--text-secondary);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .project-link {
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.04);
+            border: none;
+            color: #00A1D6;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .project-link:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        
+        body.dark .project-link {
+            background: rgba(255,255,255,0.06);
+        }
+        
+        body.dark .project-link:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        
+        .projects-footer {
+            max-width: 1100px;
+            margin: 48px auto 0;
+            padding: 24px 16px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-p);
+            opacity: 0.8;
+        }
+        
+        /* 桌面端字号调整 */
+        @media (min-width: 1024px) {
+            .projects-page {
+                padding-top: 6vh;
+            }
+            
+            .project-card {
+                padding: 32px;
+            }
+            
+            .project-card h3 {
+                margin-bottom: 16px;
+            }
+            
+            .project-card p {
+                font-size: 16px;
+            }
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                padding: 0 16px;
+            }
+            
+            .project-card {
+                grid-column: auto !important;
+                grid-row: auto !important;
+            }
+            
+            .projects-header {
+                padding: 0 16px;
+                margin-bottom: 24px;
+            }
+            
+            .projects-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" type="button" aria-label="切换深浅色模式">
+        <i class="fa-regular fa-moon"></i>
+    </button>
+    
+    <div class="projects-page">
+        <div class="projects-header">
+            <button class="projects-back" onclick="window.history.back()">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <h1 class="projects-title">项目</h1>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- 示例项目卡片 -->
+            <div class="project-card">
+                <h3>项目名称</h3>
+                <p>项目描述，简要说明项目的功能和特点。</p>
+                <div class="project-tags">
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">React</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link" target="_blank">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="project-link" target="_blank">
+                        <i class="fa-solid fa-link"></i> 预览
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="projects-footer">
+            <p>Designed by Benjamin &copy; 2025</p>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var body = document.body;
+            var toggle = document.querySelector('.theme-toggle');
+            var stored = window.localStorage && localStorage.getItem('theme');
+            if (stored === 'dark') {
+                body.classList.add('dark');
+            }
+            if (toggle) {
+                toggle.addEventListener('click', function () {
+                    var isDark = body.classList.toggle('dark');
+                    if (window.localStorage) {
+                        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    }
+                    var icon = toggle.querySelector('i');
+                    if (icon) {
+                        icon.className = isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon';
+                    }
+                });
+            }
+        })();
+    </script>
+
+</body>
+</html>
