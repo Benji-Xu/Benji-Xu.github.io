@@ -96,61 +96,14 @@
             overflow-wrap: break-word;
         }
         
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
-        }
-        
-        .project-tag {
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.06);
-            color: var(--text-secondary);
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        body.dark .project-tag {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.10);
-            color: var(--text-secondary);
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        
-        .project-link {
-            font-size: 14px;
-            padding: 6px 12px;
-            border-radius: 999px;
-            background: rgba(0,0,0,0.04);
-            border: none;
+        .project-card a {
             color: #00A1D6;
             text-decoration: none;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+            transition: opacity 0.2s;
         }
         
-        .project-link:hover {
-            background: rgba(0,0,0,0.08);
-        }
-        
-        body.dark .project-link {
-            background: rgba(255,255,255,0.06);
-        }
-        
-        body.dark .project-link:hover {
-            background: rgba(255,255,255,0.12);
+        .project-card a:hover {
+            opacity: 0.7;
         }
         
         .projects-footer {
@@ -224,18 +177,6 @@
             <div class="project-card">
                 <h3>项目名称</h3>
                 <p>项目描述，简要说明项目的功能和特点。</p>
-                <div class="project-tags">
-                    <span class="project-tag">JavaScript</span>
-                    <span class="project-tag">React</span>
-                </div>
-                <div class="project-links">
-                    <a href="#" class="project-link" target="_blank">
-                        <i class="fa-brands fa-github"></i> GitHub
-                    </a>
-                    <a href="#" class="project-link" target="_blank">
-                        <i class="fa-solid fa-link"></i> 预览
-                    </a>
-                </div>
             </div>
         </div>
         
